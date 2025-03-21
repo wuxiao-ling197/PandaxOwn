@@ -1,0 +1,93 @@
+app:
+  name: pandax
+  version: 1.0.0
+  
+server:
+  # debug release test
+  model: release
+  port: 7788
+  # iothub服务端口  使用的rpc端口  9000 9001 可能与minio端口冲突
+  grpc-port: 9001
+  http-port: 9002
+  tcp-port: 9003
+  cors: true
+  # 接口限流
+  rate:
+    enable: true
+    rate-num: 100
+  db-type: postgresql
+  # 是否开启数据库表初始化
+  isInitTable: false
+  excel-dir: ./resource/excel/
+  tls:
+    enable: false
+    key-file: ./resource/default.key
+    cert-file: ./resource/default.pem
+jwt:
+  key: PandaX
+  # 过期时间单位秒 7天 小时
+  expire-time: 168
+#数据上报并发识别任务数量限制
+queue:
+  queue-pool: 5 #消息队列池
+  task-num: 100 #任务队列数, 
+  ch-num: 3000  #并发执行数,同时处理多少条数据
+
+redis:
+  host: 192.168.0.30
+  password: 
+  port: 6379
+
+mysql:
+  host: 127.0.0.1:3306
+  username: root
+  password: 123456
+  db-name: pandax
+  config: charset=utf8&loc=Local&parseTime=true
+
+postgresql:
+  username: lindsay
+  password: 7292
+  host: 192.168.0.30
+  port: 5432
+  db-name: pandax05
+  max-idle-conns: 10
+  max-open-conns: 10
+
+# mini0
+oss:
+  endpoint: 192.168.0.2:49153
+  accessKey: admin123
+  secretKey: pass123456
+  bucketName: pandaxiot
+  useSSL: false
+
+taos:
+  username: "root"
+  password: "taosdata"
+  host: "192.168.0.30:6041"
+  database: "iot"
+  config: ""
+
+mqtt:
+  broker: tcp://192.168.0.30:1883
+  httpBroker: http://192.168.0.30:18083/api
+  qos: 1
+  username: admin
+  password: en197618
+
+casbin:
+  model-path: './resource/rbac_model.conf'
+
+gen:
+  # 代码生成读取的数据库名称
+  dbname: pandax_iot
+  # 代码生成是使用前端代码存放位置，需要指定到src文件夹，相对路径
+  frontpath: PandaUi/src
+
+log:
+  # 日志等级, trace, debug, info, warn, error, fatal
+  level: info
+#  file:
+#    path: ./
+#    name: panda_log.log

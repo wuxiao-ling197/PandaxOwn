@@ -1,0 +1,180 @@
+用户后端服务 Login {
+    ResUsersId: {
+        ID: 8
+    } 
+    ResUsersB: {
+        CompanyId: 1 
+        PartnerId: 9 
+        Active: true 
+        CreateDate: {String: 2025-01-16T02: 30: 07.619396Z Valid: true
+        } 
+        ActionId: {String: Valid: false
+        } 
+        CreateUid: {String: 2 Valid: true
+        } 
+        WriteUid: {String: 2 Valid: true
+        } 
+        Signature: {String:<p data-o-mail-quote="1">--<br data-o-mail-quote="1">test</p> Valid: true
+        } 
+        Share: {Bool: true Valid: true
+        } 
+        WriteDate: {String: 2025-01-16T02: 30: 07.619396Z Valid: true
+        } 
+        NestSecret: {String: Valid: false
+        } 
+        TotpSecret: {String: Valid: false
+        } 
+        TourEnabled: {Bool: false Valid: true
+        } 
+        NotificationType:email Karma: {String: 0 Valid: true
+        } 
+        RankId: {String: Valid: false
+        } 
+        NextRankId: {String: Valid: false
+        } 
+        OdoobotState: {String: Valid: false
+        } 
+        OdoobotFailed: {Bool: false Valid: false
+        }
+    } 
+    LoginO: {
+        Login:test 
+        Password: {String: Valid: false
+        }
+    }
+}
+
+用户后端服务 FindListPage &[
+    {SysUserId: {UserId: 1
+    } SysUserB: {
+            NickName:pandax 
+            Phone: 13818888888 
+            RoleId: 1 
+            Salt: 
+            Avatar: 
+            Sex: 0 
+            Email: 1@qq.com 
+            OrganizationId: 2 
+            PostId: 4 
+            RoleIds: 1 
+            PostIds: 1,4 
+            CreateBy:panda 
+            UpdateBy: 1 
+            Remark: 
+            Status: 0 
+            BaseModel: {
+                CreatedAt: 2021-12-03 09: 46: 55 +0000 +0000 
+                UpdatedAt: 2022-02-09 13: 28: 49 +0000 +0000 
+                DeletedAt: {Time: 0001-01-01 00: 00: 00 +0000 UTC Valid: false
+                }
+            }
+        } LoginM: {Username:panda Password:$2a$10$cKFFTCzGOvaIHHJY2K45Zuwt8TD6oPzYi4s5MzYIBAWCLL6ZhouP2
+        } 
+        OrganizationName:
+    } 
+    {SysUserId: {UserId: 3
+        } SysUserB: {NickName:测试用户 Phone: 18435234356 RoleId: 2 Salt: Avatar: Sex: 0 Email: 342@163.com OrganizationId: 3 PostId: 1 RoleIds: 2 PostIds: 1,
+            4 CreateBy:test UpdateBy: Remark: Status: 0 BaseModel: {CreatedAt: 2021-12-06 15: 16: 53 +0000 +0000 UpdatedAt: 2022-05-10 19: 19: 25 +0000 +0000 DeletedAt: {Time: 0001-01-01 00: 00: 00 +0000 UTC Valid: false
+                }
+            }
+        } LoginM: {Username:test Password:$2a$10$4cHTracxWJLdhMmazvbm1urKyD3v5N2AYxAFtNYh6juU39kgae73e
+        } OrganizationName:
+    } 
+    {SysUserId: {UserId: 5
+        } SysUserB: {NickName:tenant Phone: RoleId: 1 Salt: Avatar: Sex: 0 Email: OrganizationId: 3 PostId: 1 RoleIds: 1 PostIds: 1,
+            4 CreateBy:panda UpdateBy: 1 Remark: Status: 0 BaseModel: {CreatedAt: 2021-12-03 09: 46: 55 +0000 +0000 UpdatedAt: 2022-02-09 13: 28: 49 +0000 +0000 DeletedAt: {Time: 0001-01-01 00: 00: 00 +0000 UTC Valid: false
+                }
+            }
+        } LoginM: {Username:tenant Password:$2a$10$ycRsRdsrNQInLB2Ib0maOetsWZ0kFctmF6ytAErWTjOx5cWdeJMcK
+        } OrganizationName:
+    } 
+    {SysUserId: {UserId: 6
+        } SysUserB: {NickName:tt Phone: RoleId: 0 Salt: Avatar: Sex: Email: OrganizationId: 7 PostId: 0 RoleIds: 2 PostIds: CreateBy:panda UpdateBy: Remark: Status: BaseModel: {CreatedAt: 2023-09-14 14: 58: 50 +0000 +0000 UpdatedAt: 2023-09-14 14: 58: 50 +0000 +0000 DeletedAt: {Time: 0001-01-01 00: 00: 00 +0000 UTC Valid: false
+                }
+            }
+        } LoginM: {Username:fsdfsdfs Password:$2a$10$D4igypJIcjca57RQcKPFAuOf/fY77itlB9PZyYgrCsK61crZijYLS
+        } OrganizationName:
+    } 
+    {SysUserId: {UserId: 4
+        } SysUserB: {NickName:panda Phone: 18353366912 RoleId: 1 Salt: Avatar: Sex: 0 Email: 2417920382@qq.com OrganizationId: 2 PostId: 4 RoleIds: 2 PostIds: 4,
+            1 CreateBy:panda UpdateBy: Remark: Status: 0 BaseModel: {CreatedAt: 2021-12-19 15: 58: 09 +0000 +0000 UpdatedAt: 2021-12-19 16: 06: 54 +0000 +0000 DeletedAt: {Time: 0001-01-01 00: 00: 00 +0000 UTC Valid: false
+                }
+            }
+        } LoginM: {Username:admin Password:$2a$10$cKFFTCzGOvaIHHJY2K45Zuwt8TD6oPzYi4s5MzYIBAWCLL6ZhouP2
+        } OrganizationName:
+    } 
+    {SysUserId: {UserId: 8
+        } SysUserB: {NickName:统统 Phone: RoleId: 5 Salt: Avatar: Sex: 2 Email: OrganizationId: 3 PostId: 4 RoleIds: 5 PostIds: 4 CreateBy:panda UpdateBy: Remark: Status: 0 BaseModel: {CreatedAt: 2025-03-11 18: 02: 23.430153 +0000 +0000 UpdatedAt: 2025-03-11 18: 02: 23.430153 +0000 +0000 DeletedAt: {Time: 0001-01-01 00: 00: 00 +0000 UTC Valid: false
+                }
+            }
+        } LoginM: {Username:tongtong Password:$2a$10$9EY6keMRaWPVfI7NyioqSOv.rSIrz.UcmxfOE5Ox0rx.FkVQRnUYG
+        } OrganizationName:
+    }
+]
+后端获取user list=&[
+    {
+        {
+            1
+        } {pandax 13818888888 1   0 1@qq.com 2 4 1 1,
+            4 panda 1  0 {
+                2021-12-03 09: 46: 55 +0000 +0000 2022-02-09 13: 28: 49 +0000 +0000 {
+                    0001-01-01 00: 00: 00 +0000 UTC false
+                }
+            }
+        } {panda $2a$10$cKFFTCzGOvaIHHJY2K45Zuwt8TD6oPzYi4s5MzYIBAWCLL6ZhouP2
+        }
+    } {
+        {
+            3
+        } {测试用户 18435234356 2   0 342@163.com 3 1 2 1,
+            4 test   0 {
+                2021-12-06 15: 16: 53 +0000 +0000 2022-05-10 19: 19: 25 +0000 +0000 {
+                    0001-01-01 00: 00: 00 +0000 UTC false
+                }
+            }
+        } {test $2a$10$4cHTracxWJLdhMmazvbm1urKyD3v5N2AYxAFtNYh6juU39kgae73e
+        }
+    } {
+        {
+            5
+        } {tenant  1   0  3 1 1 1,
+            4 panda 1  0 {
+                2021-12-03 09: 46: 55 +0000 +0000 2022-02-09 13: 28: 49 +0000 +0000 {
+                    0001-01-01 00: 00: 00 +0000 UTC false
+                }
+            }
+        } {tenant $2a$10$ycRsRdsrNQInLB2Ib0maOetsWZ0kFctmF6ytAErWTjOx5cWdeJMcK
+        }
+    } {
+        {
+            6
+        } {tt  0     7 0 2  panda    {
+                2023-09-14 14: 58: 50 +0000 +0000 2023-09-14 14: 58: 50 +0000 +0000 {
+                    0001-01-01 00: 00: 00 +0000 UTC false
+                }
+            }
+        } {fsdfsdfs $2a$10$D4igypJIcjca57RQcKPFAuOf/fY77itlB9PZyYgrCsK61crZijYLS
+        }
+    } {
+        {
+            4
+        } {panda 18353366912 1   0 2417920382@qq.com 2 4 2 4,
+            1 panda   0 {
+                2021-12-19 15: 58: 09 +0000 +0000 2021-12-19 16: 06: 54 +0000 +0000 {
+                    0001-01-01 00: 00: 00 +0000 UTC false
+                }
+            }
+        } {admin $2a$10$cKFFTCzGOvaIHHJY2K45Zuwt8TD6oPzYi4s5MzYIBAWCLL6ZhouP2
+        }
+    } {
+        {
+            8
+        } {统统  5   2  3 4 5 4 panda   0 {
+                2025-03-11 18: 02: 23.430153 +0000 +0000 2025-03-11 18: 02: 23.430153 +0000 +0000 {
+                    0001-01-01 00: 00: 00 +0000 UTC false
+                }
+            }
+        } {tongtong $2a$10$9EY6keMRaWPVfI7NyioqSOv.rSIrz.UcmxfOE5Ox0rx.FkVQRnUYG
+        }
+    }
+] 6

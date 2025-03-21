@@ -1,0 +1,87 @@
+package api
+// ==========================================================================
+// 生成日期：{{.CreatedAt}}
+// 生成路径: apps/{{.PackageName}}/api/{{.TableName}}.go
+// 生成人：{{.FunctionAuthor}}
+// ==========================================================================
+import (
+    "github.com/PandaXGO/PandaKit/model"
+    "github.com/PandaXGO/PandaKit/restfulx"
+	"strings"
+
+	"pandax/apps/{{.PackageName}}/entity"
+	"pandax/apps/{{.PackageName}}/services"
+	"github.com/PandaXGO/PandaKit/biz"
+)
+
+type {{.ClassName}}Api struct {
+	{{.ClassName}}App services.{{.ClassName}}Model
+}
+
+// Get{{.ClassName}}List {{.FunctionName}}列表数据
+func (p *{{.ClassName}}Api) Get{{.ClassName}}List(rc *restfulx.ReqCtx) {
+    data := entity.{{.ClassName}}{}
+	pageNum := restfulx.QueryInt(rc, "pageNum", 1)
+	pageSize := restfulx.QueryInt(rc, "pageSize", 10)
+	{{- range $index, $column := .Columns -}}
+	{{- if eq $column.IsRequired "1" -}}
+	{{- if eq $column.GoType "string" }}
+    data.{{$column.GoField}} = restfulx.QueryParam(rc, "{{$column.JsonField}}")
+    {{- else if or (eq $column.GoType "int") (eq $column.GoType "int64") (eq $column.GoType "uint") (eq $column.GoType "uint64") -}}
+    data.{{$column.GoField}} = restfulx.QueryInt(rc, "{{$column.JsonField}}", 0)
+	{{- end -}}
+    {{- end -}}
+	{{- end }}
+
+	list, total,err := p.{{.ClassName}}App.FindListPage(pageNum, pageSize, data)
+    biz.ErrIsNil(err, "查询{{.TableComment}}列表失败")
+	rc.ResData = model.ResultPage{
+    	Total: total,
+    	PageNum: int64(pageNum),
+    	PageSize: int64(pageSize),
+    	Data: list,
+    }
+}
+
+// Get{{.ClassName}} 获取{{.FunctionName}}
+func (p *{{.ClassName}}Api) Get{{.ClassName}}(rc *restfulx.ReqCtx) {
+    {{ if eq .PkGoType "string" -}}
+    {{.PkJsonField}} := restfulx.PathParam(rc, "{{.PkJsonField}}")
+    data,err := p.{{.ClassName}}App.FindOne({{.PkJsonField}})
+    {{- else -}}
+    {{.PkJsonField}} := restfulx.PathParamInt(rc, "{{.PkJsonField}}")
+    data,err := p.{{.ClassName}}App.FindOne(int64({{.PkJsonField}}))
+    {{- end}}
+    biz.ErrIsNil(err, "查询{{.TableComment}}失败")
+    rc.ResData = data
+}
+
+// Insert{{.ClassName}} 添加{{.FunctionName}}
+func (p *{{.ClassName}}Api) Insert{{.ClassName}}(rc *restfulx.ReqCtx) {
+	var data entity.{{.ClassName}}
+	restfulx.BindQuery(rc, &data)
+
+	_,err := p.{{.ClassName}}App.Insert(data)
+	biz.ErrIsNil(err, "添加{{.TableComment}}失败")
+}
+
+// Update{{.ClassName}} 修改{{.FunctionName}}
+func (p *{{.ClassName}}Api) Update{{.ClassName}}(rc *restfulx.ReqCtx) {
+	var data entity.{{.ClassName}}
+	restfulx.BindQuery(rc, &data)
+
+	err := p.{{.ClassName}}App.Update(data)
+	biz.ErrIsNil(err, "修改{{.TableComment}}失败")
+}
+
+// Delete{{.ClassName}} 删除{{.FunctionName}}
+func (p *{{.ClassName}}Api) Delete{{.ClassName}}(rc *restfulx.ReqCtx) {
+	{{.PkJsonField}} := restfulx.PathParam(rc,"{{.PkJsonField}}")
+
+	{{ if eq .PkGoType "string" -}}
+    {{.PkJsonField}}s := strings.Split({{.PkJsonField}}, ",")
+    {{- else -}}
+    {{.PkJsonField}}s := utils.IdsStrToIdsIntGroup({{.PkJsonField}})
+    {{- end }}
+    biz.ErrIsNil(p.{{.ClassName}}App.Delete({{.PkJsonField}}s), "删除{{.TableComment}}失败")
+}

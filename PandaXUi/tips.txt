@@ -1,0 +1,3 @@
+通过cnpm安装依赖
+cnpm install
+cnpm run dev

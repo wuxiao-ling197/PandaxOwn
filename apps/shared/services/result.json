@@ -1,0 +1,380 @@
+登录用户Login User= &{ResUsersId: {ID: 2
+    } ResUsersB: {CompanyId: 1 PartnerId: 3 Active: true CreateDate: {String: 2024-12-23T05: 29: 22.695482Z Valid: true
+        } ActionId: {String: Valid: false
+        } CreateUid: {String: 1 Valid: true
+        } WriteUid: {String: 2 Valid: true
+        } Signature: {String:<span data-o-mail-quote="1">-- <br data-o-mail-quote="1">
+Administrator</span> Valid: true
+        } Share: {Bool: false Valid: true
+        } WriteDate: {String: 2025-02-10T06: 55: 07.286458Z Valid: true
+        } NestSecret: {String: Valid: false
+        } TotpSecret: {String: Valid: false
+        } TourEnabled: {Bool: true Valid: true
+        } NotificationType:email Karma: {String: 2500 Valid: true
+        } RankId: {String: 4 Valid: true
+        } NextRankId: {String: 5 Valid: true
+        } OdoobotState: {String:onboarding_emoji Valid: true
+        } OdoobotFailed: {Bool: false Valid: false
+        }
+    } LoginO: {Login:odoo18 Password:$pbkdf2-sha512$600000$xvj/n9M659y7t7YWYizl/A$2YVgLexC1dsO1tTou90r13u7KBbHNsMEcIuP27Syy2FWKMqVVXrDddt/ZaalrBDRFOGAp2Pu2LMGeutvvByAgg
+    }
+}
+
+获取用户ResUsersView：&[
+    {ResUsersId: {ID: 2
+        } ResUsersB: {CompanyId: 1 PartnerId: 3 Active: true CreateDate: {String: 2024-12-23T05: 29: 22.695482Z Valid: true
+            } ActionId: {String: Valid: false
+            } CreateUid: {String: 1 Valid: true
+            } WriteUid: {String: 2 Valid: true
+            } Signature: {String:<span data-o-mail-quote="1">-- <br data-o-mail-quote="1">
+Administrator</span> Valid: true
+            } Share: {Bool: false Valid: true
+            } WriteDate: {String: 2025-02-10T06: 55: 07.286458Z Valid: true
+            } NestSecret: {String: Valid: false
+            } TotpSecret: {String: Valid: false
+            } TourEnabled: {Bool: true Valid: true
+            } NotificationType:email Karma: {String: 2500 Valid: true
+            } RankId: {String: 4 Valid: true
+            } NextRankId: {String: 5 Valid: true
+            } OdoobotState: {String:onboarding_emoji Valid: true
+            } OdoobotFailed: {Bool: false Valid: false
+            }
+        } LoginO: {Login:odoo18 Password:$pbkdf2-sha512$600000$xvj/n9M659y7t7YWYizl/A$2YVgLexC1dsO1tTou90r13u7KBbHNsMEcIuP27Syy2FWKMqVVXrDddt/ZaalrBDRFOGAp2Pu2LMGeutvvByAgg
+        } HrEmployee: {Id: ResourceId: CompanyId: ResourceCalendarId: {String: Valid: false
+            } MessageMainAttachmentId: {String: Valid: false
+            } Color: {String: Valid: false
+            } DepartmentId: {String: Valid: false
+            } JobId: {String: Valid: false
+            } AddressId: {String: Valid: false
+            } WorkContactId: {String: Valid: false
+            } WorkLocationId: {String: Valid: false
+            } UserId: {String: Valid: false
+            } ParentId: {String: Valid: false
+            } CoachId: {String: Valid: false
+            } PrivateStateId: {Strin
+g: Valid: false
+            } PrivateCountryId: {String: Valid: false
+            } CountryId: {String: Valid: false
+            } Children: {String: Valid: false
+            } CountryOfBirth: {String: Valid: false
+            } BankAccountId: {String: Valid: false
+            } DistanceHomeWork: {String: Valid: false
+            } KmHomeWork: {String: Valid: false
+            } DepartureReasonId: {String: Valid: false
+            } CreateUid: {String: Valid: false
+            } WriteUid: {String: Valid: false
+            } Name: {String: Valid: false
+            } JobTitle: {String: Valid: false
+            } WorkPhone: {String: Valid: false
+            } MobilePhone: {String: Valid: false
+            } WorkEmail: {String: Valid: false
+            } PrivateStreet: {String: Valid: false
+            } PrivateStreet2: {String: Valid: false
+            } PrivateCity: {String: Valid: false
+            } PrivateZip: {String: Valid: false
+            } PrivatePhone: {String: Valid: false
+            } PrivateEmail: {String: Valid: false
+            } Lang: {String: Valid: false
+            } Gender: {String: Valid: false
+            } Marital: SpouseCompleteName: {String: Valid: false
+            } PlaceOfBirth: {String: Valid: false
+            } Ssnid: {String: Valid: false
+            } Sinid: {String: Valid: false
+            } IdentificationId: {String: Valid: false
+            } PassportId: {String: Valid: false
+            } PermitNo: {String: Valid
+: false
+            } VisaNo: {String: Valid: false
+            } Certificate: {String: Valid: false
+            } StudyField: {String: Valid: false
+            } StudySchool: {String: Valid: false
+            } EmergencyContact: {String: Valid: false
+            } EmergencyPhone: {String: Valid: false
+            } DistanceHomeWorkUnit: EmployeeType: Barcode: {String: Valid: false
+            } Pin: {String: Valid: false
+            } PrivateCarPlate: {String: Valid: false
+            } SpouseBirthdate: {String: Valid: false
+            } Birthday: {String: Valid: false
+            } VisaExpire: {String: Valid: false
+            } WorkPermitExpirationDate: {String: Valid: false
+            } DepartureDate: {String: Valid: false
+            } EmployeeProperties: {String: Valid: false
+            } AdditionalNote: {String: Valid: false
+            } Notes: {String: Valid: false
+            } DepartureDescription: {String: Valid: false
+            } Active: {Bool: false Valid: false
+            } IsFlexible: {Bool: false Valid: false
+            } IsFullyFlexible: {Bool: false Valid: false
+            } WorkPermitScheduledActivity: {Bool: false Valid: false
+            } CreateDate: {String: Valid: false
+            } WriteDate: {String: Valid: false
+            } AttendanceManagerId: {String: Valid: false
+            } LastAttendanceId: {String: Valid: false
+            } LastCheckIn: {String: Valid: false
+            } Last
+CheckOut: {String: Valid: false
+            } ContractId: {String: Valid: false
+            } LegalName: {String: Valid: false
+            } Vehicle: {String: Valid: false
+            } FirstContractDate: {String: Valid: false
+            } ContractWarning: {Bool: false Valid: false
+            } ExpenseManagerId: {String: Valid: false
+            } LeaveManagerId: {String: Valid: false
+            } HourlyCost: {String: Valid: false
+            } PersonalMobile: {String: Valid: false
+            } JoiningDate: {String: Valid: false
+            } IdExpiryDate: {String: Valid: false
+            } PassportExpiryDate: {String: Valid: false
+            } ResignDate: {String: Valid: false
+            } Resigned: {Bool: false Valid: false
+            } Fired: {Bool: false Valid: false
+            }
+        } ResGroupsName: ResUserTypeName:
+    }
+]
+
+&{ResUsersId: {ID: 2
+    } 
+    ResUsersB: {CompanyId: 1 PartnerId: 3 Active: true CreateDate: {String: 2024-10-09T03: 11: 22.119275Z Valid: true
+        } ActionId: {String: Valid: false
+        } CreateUid: {String: 1 Valid: true
+        } WriteUid: {String: 2 Valid: true
+        } Signature: {String:<span data-o-mail-quote="1">-- <br data-o-mail-quote="1">
+Administrator</span> Valid: true
+        } Share: {Bool: false Valid: true
+        } WriteDate: {String: 2024-12-20T08: 32: 44.375172Z Valid: true
+        } NestSecret: {String: Valid: false
+        } TotpSecret: {String: Valid: false
+        } TourEnabled: {Bool: true Valid: true
+        } NotificationType:email Karma: {String: 2500 Valid: true
+        } RankId: {String: 4 Valid: true
+        } NextRankId: {String: 5 Valid: true
+        } OdoobotState: {String:onboarding_emoji Valid: true
+        } OdoobotFailed: {Bool: false Valid: false
+        }
+    } 
+    LoginO: {Login:admin Password:$pbkdf2-sha512$600000$iNF6T2mt1TrHeA/hvNdaqw$tJ97op5Kq0K.uFivpSXMOaI2AHNTjhn86LTEAMD620060QQEMvVBBrG39CZUvhiqxnOhX9kP8UeDj8BXy4ug3g
+    } 
+    Employee: {Id: ResourceId: CompanyId: ResourceCalendarId: {String: Valid: false
+        } MessageMainAttachmentId: {String: Valid: false
+        } Color: {String: Valid: false
+        } DepartmentId: {String: Valid: false
+        } JobId: {String: Valid: false
+        } AddressId: {String: Valid: false
+        } WorkContactId: {String: Valid: false
+        } WorkLocationId: {String: Valid: false
+        } UserId: {String: Valid: false
+        } ParentId: {String: Valid: false
+        } CoachId: {String: Valid: false
+        } PrivateStateId: {String:
+Valid: false
+        } PrivateCountryId: {String: Valid: false
+        } CountryId: {String: Valid: false
+        } Children: {String: Valid: false
+        } CountryOfBirth: {String: Valid: false
+        } BankAccountId: {String: Valid: false
+        } DistanceHomeWork: {String: Valid: false
+        } KmHomeWork: {String: Valid: false
+        } DepartureReasonId: {String: Valid: false
+        } CreateUid: {String: Valid: false
+        } WriteUid: {String: Valid: false
+        } Name: {String: Valid: false
+        } JobTitle: {String: Valid: false
+        } WorkPhone: {String: Valid: false
+        } MobilePhone: {String: Valid: false
+        } WorkEmail: {String: Valid: false
+        } PrivateStreet: {String: Valid: false
+        } PrivateStreet2: {String: Valid: false
+        } PrivateCity: {String: Valid: false
+        } PrivateZip: {String: Valid: false
+        } PrivatePhone: {String: Valid: false
+        } PrivateEmail: {String: Valid: false
+        } Lang: {String: Valid: false
+        } Gender: {String: Valid: false
+        } Marital: SpouseCompleteName: {String: Valid: false
+        } PlaceOfBirth: {String: Valid: false
+        } Ssnid: {String: Valid: false
+        } Sinid: {String: Valid: false
+        } IdentificationId: {String: Valid: false
+        } PassportId: {String: Valid: false
+        } PermitNo: {String: Valid:fa
+lse
+        } VisaNo: {String: Valid: false
+        } Certificate: {String: Valid: false
+        } StudyField: {String: Valid: false
+        } StudySchool: {String: Valid: false
+        } EmergencyContact: {String: Valid: false
+        } EmergencyPhone: {String: Valid: false
+        } DistanceHomeWorkUnit: EmployeeType: Barcode: {String: Valid: false
+        } Pin: {String: Valid: false
+        } PrivateCarPlate: {String: Valid: false
+        } SpouseBirthdate: {String: Valid: false
+        } Birthday: {String: Valid: false
+        } VisaExpire: {String: Valid: false
+        } WorkPermitExpirationDate: {String: Valid: false
+        } DepartureDate: {String: Valid: false
+        } EmployeeProperties: {String: Valid: false
+        } AdditionalNote: {String: Valid: false
+        } Notes: {String: Valid: false
+        } DepartureDescription: {String: Valid: false
+        } Active: {String: Valid: false
+        } IsFlexible: {String: Valid: false
+        } IsFullyFlexible: {String: Valid: false
+        } WorkPermitScheduledActivity: {String: Valid: false
+        } CreateDate: {String: Valid: false
+        } WriteDate: {String: Valid: false
+        } AttendanceManagerId: {String: Valid: false
+        } LastAttendanceId: {String: Valid: false
+        } LastCheckIn: {String: Valid: false
+        } LastCheckOut: {Strin
+g: Valid: false
+        } ContractId: {String: Valid: false
+        } LegalName: {String: Valid: false
+        } Vehicle: {String: Valid: false
+        } FirstContractDate: {String: Valid: false
+        } ContractWarning: {String: Valid: false
+        } ExpenseManagerId: {String: Valid: false
+        } LeaveManagerId: {String: Valid: false
+        } HourlyCost: {String: Valid: false
+        } PersonalMobile: {String: Valid: false
+        } JoiningDate: {String: Valid: false
+        } IdExpiryDate: {String: Valid: false
+        } PassportExpiryDate: {String: Valid: false
+        } ResignDate: {String: Valid: false
+        } Resigned: {String: Valid: false
+        } Fired: {String: Valid: false
+        }
+    }
+}
+
+
+部门->员工：[
+{ID:1 CompanyId:1 ParentId:0 ManagerId:1 Color:0 MasterDepartmentId:1 CreateUid:1 WriteUid:2 CompleteName:系统管理 ParentPath:1/ Name:{"en_US": "系统管理", "zh_CN": "系统管理"} Note: Active:true CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2024-11-11T03:09:22.277274Z 
+    Employees:[
+        {ID:1 ResourceId:1 CompanyId:1 ResourceCalendarId:2 MessageMainAttachmentId:1330 Color:0 DepartmentId:1 JobId:8 AddressId:1 WorkContactId:3 WorkLocationId:0 UserId:2 ParentId:1 CoachId:1 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:1 WriteUid:2 Name:Administrator JobTitle:医务秘书 WorkPhone:15528434045 MobilePhone: WorkEmail:wlzyl4136@qq.com PrivateStreet: PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail:admin@example.com Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: Stu
+dySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode:041993077282 Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2025-03-14T05:52:15.806112Z AttendanceManagerId:0 LastAttendanceId:157 LastCheckIn:2024-12-07T10:03:56Z LastCheckOut: ContractId:1 LegalName:Administrator Vehicle: FirstContractDate:2024-12-10T00:00:00Z ContractWarning:true ExpenseManagerId:2 LeaveManagerId:2 HourlyCost:0.0 PersonalMobile: JoiningDate:2024-12-10T00:00:00Z IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} 
+        {ID:2 ResourceId:2 CompanyId:1 ResourceCalendarId:0 MessageMainAttachmentId:0 Color:0 DepartmentId:1 JobId:3 AddressId:1 WorkContactId:8 WorkLocationId:0 UserId:0 ParentId:1 CoachId:1 PrivateStateId:0 Priva
+teCountryId:233 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:Michael Williams JobTitle:Chief Executive Officer WorkPhone:(555)-768-6230 MobilePhone:(555)-768-6235 WorkEmail:williams@mycompany.example.com PrivateStreet:349-943 Miania St. PrivateStreet2: PrivateCity:Williston PrivateZip:58198 PrivatePhone:+1 555-555-5757 PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate:master StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode:123 Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:true IsFullyFlexible:true WorkPermitScheduledActivity:false CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-12T06:12:58.240661Z At
+tendanceManagerId:0 LastAttendanceId:156 LastCheckIn:2024-11-29T09:24:39Z LastCheckOut: ContractId:0 LegalName:Michael Williams Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:2 HourlyCost:0.0 PersonalMobile:+1 555-555-5757 JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} {ID:11 ResourceId:11 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:1 JobId:0 AddressId:1 WorkContactId:24 WorkLocationId:0 UserId:0 ParentId:1 CoachId:1 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:pandax系统管理 JobTitle: WorkPhone: MobilePhone: WorkEmail: PrivateStreet: PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: Emergenc
+yContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-14T07:18:59.252086Z WriteDate:2025-03-14T07:18:59.252086Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:pandax系统管理 Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:2 LeaveManagerId:2 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} {ID:7 ResourceId:7 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:1 JobId:0 AddressId:1 WorkContactId:11 WorkLocationId:0 UserId:7 ParentId:0 CoachId:0 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWor
+k:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:cadmin JobTitle: WorkPhone: MobilePhone: WorkEmail:lindsay4134@outlook.com PrivateStreet: PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-14T04:28:31.867775Z WriteDate:2025-03-14T04:28:31.867775Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:cadmin Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 PersonalMobi
+le: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false}]} 
+{ID:3 CompanyId:1 ParentId:0 ManagerId:2 Color:5 MasterDepartmentId:3 CreateUid:2 WriteUid:2 CompleteName:Management ParentPath:3/ Name:{"en_US": "Management", "zh_CN": "管理"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:08:01.960423Z 
+    Employees:[
+        {ID:10 ResourceId:10 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:3 JobId:0 AddressId:1 WorkContactId:0 WorkLocationId:0 UserId:0 ParentId:2 CoachId:2 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:pandax JobTitle: WorkPhone: MobilePhone: WorkEmail: PrivateStreet: PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: St
+udySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-14T07:18:36.632588Z WriteDate:2025-03-14T07:18:36.632588Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:pandax Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} 
+        {ID:14 ResourceId:14 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:3 JobId:0 AddressId:1 WorkContactId:30 WorkLocationId:0 UserId:0 ParentId:0 CoachId:0 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 Distan
+ceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:结构体传参测试 JobTitle: WorkPhone: MobilePhone: WorkEmail:3372425446@qq.com PrivateStreet: PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-14T09:45:37.608954Z WriteDate:2025-03-14T09:45:37.608954Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:结构体传参测试 Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManager
+Id:0 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} 
+        {ID:15 ResourceId:15 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:3 JobId:0 AddressId:1 WorkContactId:31 WorkLocationId:0 UserId:0 ParentId:0 CoachId:0 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:策策 JobTitle: WorkPhone: MobilePhone: WorkEmail: PrivateStreet: PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes:
+DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-14T10:20:36.909713Z WriteDate:2025-03-14T10:20:36.909713Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:策策 Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false}]} 
+{ID:2 CompanyId:1 ParentId:0 ManagerId:0 Color:10 MasterDepartmentId:2 CreateUid:2 WriteUid:2 CompleteName:Research & Development ParentPath:2/ Name:{"en_US": "Research & Development", "zh_CN": "研究和发展"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-10-09T06:26:32.393177Z 
+    Employees:[
+        {ID:3 ResourceId:3 CompanyId:1 ResourceCalendarId:2 MessageMainAttachmentId:0 Color:0 DepartmentId:2 JobId:1 AddressId:1 WorkContactId:7 WorkLocationId:0 UserId:0 ParentId:2 CoachId:2 PrivateStateId:0 PrivateCountryId
+:233 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:3 CreateUid:2 WriteUid:2 Name:Emma Granger JobTitle:Consultant WorkPhone:(555)-768-6230 MobilePhone:(555)-768-6235 WorkEmail:granger@mycompany.example.com PrivateStreet:361-7936 Feugiat St. PrivateStreet2: PrivateCity:Williston PrivateZip:58521 PrivatePhone:+1 555-555-5757 PrivateEmail: Lang: Gender: Marital:married SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate:master StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode:456 Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate:2024-12-10T00:00:00Z EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:false IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T07:05:13.811893Z Atten
+danceManagerId:0 LastAttendanceId:155 LastCheckIn:2024-11-29T09:24:32Z LastCheckOut:2024-11-29T09:24:33Z ContractId:0 LegalName:Emma Granger Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.0 PersonalMobile:+1 555-555-5757 JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} {ID:4 ResourceId:4 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:2 JobId:2 AddressId:1 WorkContactId:9 WorkLocationId:0 UserId:12 ParentId:2 CoachId:2 PrivateStateId:0 PrivateCountryId:233 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:Simon Jones JobTitle:Experienced Developer WorkPhone:(555)-768-6230 MobilePhone:(555)-768-6235 WorkEmail:jones@mycompany.example.com PrivateStreet:349-943 Miania St. PrivateStreet2: PrivateCity:Williston PrivateZip:58198 PrivatePhone:+1 555-555-5757 PrivateEmail: Lang: Gender: Marital:single SpouseComplet
+eName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate:master StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin:789 PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:21:19.327952Z AttendanceManagerId:0 LastAttendanceId:7 LastCheckIn:2024-10-08T10:59:54.925724Z LastCheckOut:2024-10-08T15:57:25.925724Z ContractId:0 LegalName:Simon Jones Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.0 PersonalMobile:+1 555-555-5757 JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} 
+        {ID:36 ResourceId:36 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 Depar
+tmentId:2 JobId:8 AddressId:1 WorkContactId:60 WorkLocationId:0 UserId:42 ParentId:2 CoachId:2 PrivateStateId:0 PrivateCountryId:233 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:测测修改 JobTitle: WorkPhone:15555555555 MobilePhone: WorkEmail:3372425446@qq.com PrivateStreet:60 PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-17T07:13:13.841117Z WriteDate:2025-03-18T06:24:27.65
+841Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:测测结构体 Vehicle: FirstContractDate: ContractWarning:false ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} {ID:9 ResourceId:9 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:2 JobId:0 AddressId:1 WorkContactId:22 WorkLocationId:0 UserId:0 ParentId:0 CoachId:0 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:lindsay JobTitle: WorkPhone: MobilePhone: WorkEmail:lindsay4134@outlook.com PrivateStreet: PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: Emergency
+Phone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-14T05:52:47.938612Z WriteDate:2025-03-14T05:52:47.938612Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:lindsay Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} 
+        {ID:35 ResourceId:35 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:2 JobId:0 AddressId:1 WorkContactId:55 WorkLocationId:0 UserId:37 ParentId:0 CoachId:0 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureR
+easonId:0 CreateUid:2 WriteUid:2 Name:测测结构体传参 JobTitle: WorkPhone: MobilePhone: WorkEmail:lindsay4134@outlook.com PrivateStreet:55 PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-17T07:03:46.761503Z WriteDate:2025-03-17T07:03:46.761503Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:测测结构体传参 Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 Persona
+lMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} 
+        {ID:29 ResourceId:29 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:2 JobId:0 AddressId:1 WorkContactId:49 WorkLocationId:0 UserId:33 ParentId:0 CoachId:0 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:object_test JobTitle: WorkPhone: MobilePhone: WorkEmail: PrivateStreet:49 PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription
+: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-17T02:40:22.374986Z WriteDate:2025-03-17T02:40:22.374986Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:object_test Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} {ID:28 ResourceId:28 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:2 JobId:0 AddressId:1 WorkContactId:48 WorkLocationId:0 UserId:32 ParentId:0 CoachId:0 PrivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:create JobTitle: WorkPhone: MobilePhone: WorkEmail: PrivateStreet:48 PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceO
+fBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-17T02:27:51.132655Z WriteDate:2025-03-17T02:27:51.132655Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:create Vehicle: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false} 
+        {ID:8 ResourceId:8 CompanyId:1 ResourceCalendarId:1 MessageMainAttachmentId:0 Color:0 DepartmentId:2 JobId:0 AddressId:1 WorkContactId:21 WorkLocationId:0 UserId:24 ParentId:0 CoachId:0 Pr
+ivateStateId:0 PrivateCountryId:0 CountryId:0 Children:0 CountryOfBirth:0 BankAccountId:0 DistanceHomeWork:0 KmHomeWork:0 DepartureReasonId:0 CreateUid:2 WriteUid:2 Name:MailTest JobTitle: WorkPhone: MobilePhone: WorkEmail:patient6720@tbird.com PrivateStreet:21 PrivateStreet2: PrivateCity: PrivateZip: PrivatePhone: PrivateEmail: Lang: Gender: Marital:single SpouseCompleteName: PlaceOfBirth: Ssnid: Sinid: IdentificationId: PassportId: PermitNo: VisaNo: Certificate: StudyField: StudySchool: EmergencyContact: EmergencyPhone: DistanceHomeWorkUnit:kilometers EmployeeType:employee Barcode: Pin: PrivateCarPlate: SpouseBirthdate: Birthday: VisaExpire: WorkPermitExpirationDate: DepartureDate: EmployeeProperties: AdditionalNote: Notes: DepartureDescription: Active:true IsFlexible:false IsFullyFlexible:false WorkPermitScheduledActivity:false CreateDate:2025-03-14T04:31:21.85492Z WriteDate:2025-03-14T04:31:21.85492Z AttendanceManagerId:0 LastAttendanceId:0 LastCheckIn: LastCheckOut: ContractId:0 LegalName:MailTest Vehicl
+e: FirstContractDate: ContractWarning:true ExpenseManagerId:0 LeaveManagerId:0 HourlyCost:0.00 PersonalMobile: JoiningDate: IdExpiryDate: PassportExpiryDate: ResignDate: Resigned:false Fired:false}]}]
+
+
+公司->部门：&{
+    ResCompanyB:
+    {ID:1 Name:总部 ParentId:0 Email:wlzyl4136@qq.com Phone:+1 555-555-5556 Active:true} PartnerId:1 CurrencyId:1 Sequence:0 CreateDate:2024-10-09T03:11:21.185362Z ParentPath:1/ PaperformatId:1 ExternalReportLayoutId:0 CreateUid:0 WriteUid:2 Mobile: Font:Lato PrimaryColor: SecondaryColor: LayoutBackground:Blank ReportHeader: ReportFooter: CompanyDetails: UsesDefaultLogo:true WriteDate:2025-03-17T02:46:06.544206Z LogoWeb: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 NomenclatureId:1 ResourceCalendarId:1 AliasDomainId:1 AliasDomainName:qq.com EmailPrimaryColor:#000000 EmailSecondaryColor:#875A7B PartnerGid:0 IapEnrichAutoDone:true SnailmailColor:true SnailmailCover:false SnailmailDuplex:false PaymentOnboardingPaymentMethod: FiscalyearLastDay:31 TransferAccountId:84 DefaultCashDifferenceIncomeAccountId:82 DefaultCashDifferenceExpenseAccountId:83 AccountJournalSuspenseAccountId:79 AccountJournalEarlyPayDiscountGainAccountId:81 AccountJournalEarlyPayDiscountLossAccountId:80 AccountSaleTaxId:1 AccountPurchaseTaxId:4 CurrencyExchangeJournalId:4 IncomeCurrencyExchangeAccountId:27 ExpenseCurrencyExchangeAccountId:38 IncotermId:0 BatchPaymentSequenceId:1 AccountOpeningMoveId:0 AccountDefaultPosReceivableAccountId:3 ExpenseAccrualAccountId:0 RevenueAccrualAccountId:0 AutomaticEntryDefaultJournalId:0 AccountFiscalCountryId:48 TaxCashBasisJournalId:5 AccountCashBasisBaseAccountId:0 AccountDiscountIncomeAllocationId:0 AccountDisco
+untExpenseAllocationId:0 FiscalyearLastMonth:12 ChartTemplate:cn BankAccountCodePrefix:1002 CashAccountCodePrefix:1001 TransferAccountCodePrefix:1012 TaxCalculationRoundingMethod:round_per_line TermsType:html QuickEditMode: AccountPriceInclude:tax_included FiscalyearLockDate: TaxLockDate: SaleLockDate: PurchaseLockDate: HardLockDate: AccountOpeningDate:2024-01-01T00:00:00Z InvoiceTerms: InvoiceTermsHtml:{"en_US": "\n            <h1>STANDARD TERMS AND CONDITIONS OF SALE</h1>\n            <p>You should update this document to reflect your T&amp;C.</p>\n            <p>Below text serves as a suggestion and doesn’t engage Odoo S.A. responsibility.</p>\n            <ol>\n                <li>\n                    The client explicitly waives its own standard terms and conditions, even if these were drawn up after these standard terms and conditions of sale. In order to be valid, any derogation must be expressly agreed to in advance in writing.\n                </li>\n                <li>\n                    Our i
+nvoices are payable within 21 working days, unless another payment timeframe is indicated on either the invoice or the order. In the event of non-payment by the due date, My Company reserves the right to request a fixed interest payment amounting to 10% of the sum remaining due. My Company will be authorized to suspend any provision of services without prior warning in the event of late payment.\n                </li>\n                <li>\n                    If a payment is still outstanding more than sixty (60) days after the due payment date, My Company reserves the right to call on the services of a debt recovery company. All legal expenses will be payable by the client.\n                </li>\n                <li>\n                    Certain countries apply withholding at source on the amount of invoices, in accordance with their internal legislation. Any withholding at source will be paid by the client to the tax authorities. Under no circumstances can My Company become involved in costs related to a
+country's legislation. The amount of the invoice will therefore be due to My Company in its entirety and does not include any costs relating to the legislation of the country in which the client is located.\n                </li>\n                <li>\n                    My Company undertakes to do its best to supply performant services in due time in accordance with the agreed timeframes. However, none of its obligations can be considered as being an obligation to achieve results. My Company cannot under any circumstances, be required by the client to appear as a third party in the context of any claim for damages filed against the client by an end consumer.\n                </li>\n                <li>\n                    In order for it to be admissible, My Company must be notified of any claim by means of a letter sent by recorded delivery to its registered office within 8 days of the delivery of the goods or the provision of the services.\n                </li>\n                <li>\n
+ All our contractual relations will be governed exclusively by China law.\n                </li>\n            </ol>\n        "} ExpectsChartOfAccounts:true AngloSaxonAccounting:false QrCode:false DisplayInvoiceAmountTotalWords:false DisplayInvoiceTaxCompanyCurrency:true AccountUseCreditLimit:false TaxExigibility:false AccountStorno:false CheckAccountAuditTrail:false AutopostBills:true HrPresenceControlEmailAmount:0 HrPresenceControlIpList: EmployeePropertiesDefinition: HrPresenceControlLogin:true HrPresenceControlEmail:false HrPresenceControlIp:false HrPresenceControlAttendance:true OvertimeCompanyThreshold:0 OvertimeEmployeeThreshold:0 AttendanceKioskDelay:10 AttendanceKioskMode:barcode_manual AttendanceBarcodeSource:front AttendanceKioskKey:9d32f4d6fe9147a0a21650142847fd53 AttendanceOvertimeValidation:no_validation HrAttendanceDisplayOvertime:false AttendanceKioskUsePin:false AttendanceFromSystray:true AutoCheckOut:false AbsenceManagement:false AutoCheckOutTolerance:2 ContractExpirationNoticePeriod:7 WorkPe
+rmitExpirationNoticePeriod:60 ExpenseJournalId:0 ExpenseOutstandingAccountId:0 CandidatePropertiesDefinition: JobPropertiesDefinition: ProjectTimeModeId:4 TimesheetEncodeUomId:4 InternalProjectId:1 LeaveTimesheetTaskId:3 SocialTwitter: SocialFacebook: SocialGithub: SocialLinkedin: SocialYoutube: SocialInstagram: SocialTiktok: InternalTransitLocationId:13 StockMailConfirmationTemplateId:22 AnnualInventoryDay:31 AnnualInventoryMonth:12 StockMoveEmailValidation:false AccountProductionWipAccountId:0 AccountProductionWipOverheadAccountId:0 StockSmsConfirmationTemplateId:1 StockMoveSmsValidation:true HasReceivedWarningStockSms:false SecurityLead:0 PoLock:edit PoDoubleValidation:one_step PoDoubleValidationAmount:5000 PoLead:0 DaysToPurchase:0 WebsiteId:1 QuotationValidityDays:30 SaleDiscountProductId:0 SaleOnboardingPaymentMethod: PortalConfirmationSign:true PortalConfirmationPay:false PrepaymentPercent:1 SaleOrderTemplateId:0 
+Departments:[
+    {ID:1 CompanyId:1 ParentId:0 ManagerId:1 Color:0 MasterDepartmentId:1 CreateUid:1 WriteUid:2 CompleteName:系统管理 ParentPath:1/ Name:{"en_US": "系统管理", "zh_CN": "系统管理"} Note: Active:true CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2024-11-11T03:09:22.277274Z Employees:[]} 
+    {ID:2 CompanyId:1 ParentId:0 ManagerId:0 Color:10 MasterDepartmentId:2 CreateUid:2 WriteUid:2 CompleteName:Research & Development ParentPath:2/ Name:{"en_US": "Research & Development", "zh_CN": "研究和发展"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-10-09T06:26:32.393177Z Employees:[]} 
+    {ID:3 CompanyId:1 ParentId:0 ManagerId:2 Color:5 MasterDepartmentId:3 CreateUid:2 WriteUid:2 CompleteName:Management ParentPath:3/ Name:{"en_US": "Management", "zh_CN": "管理"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:08:01.960423Z 
+Employees:[]}]}
+
+常见公司信息->部门：&{
+    ResCompanyB:
+    {ID:1 Name:总部 ParentId:0 Email:wlzyl4136@qq.com Phone:+1 555-555-5556 Active:true} 
+    Departments:[
+        {ID:1 CompanyId:1 ParentId:0 ManagerId:1 Color:0 MasterDepartmentId:1 CreateUid:1 WriteUid:2 CompleteName:系统管理 ParentPath:1/ Name:{"en_US": "系统管理", "zh_CN": "系统管理"} Note: Active:true CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2024-11-11T03:09:22.277274Z Employees:[]} 
+        {ID:2 CompanyId:1 ParentId:0 ManagerId:0 Color:10 MasterDepartmentId:2 CreateUid:2 WriteUid:2 CompleteName:Research & Development ParentPath:2/ Name:{"en_US": "Research & Development", "zh_CN": "研究和发展"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-10-09T06:26:32.393177Z Employees:[]} 
+        {ID:3 CompanyId:1 ParentId:0 ManagerId:2 Color:5 MasterDepartmentId:3 CreateUid:2 WriteUid:2 CompleteName:Management ParentPath:3/ Name:{"en_US": "Management", "zh_CN": "管理"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:0
+8:01.960423Z Employees:[]}]}
+
+FindList=&[{
+    ResCompanyB:{ID:1 Name:总部 ParentId:0 Email:wlzyl4136@qq.com Phone:+1 555-555-5556 Active:true} 
+    Departments:[
+        {ID:1 CompanyId:1 ParentId:0 ManagerId:1 Color:0 MasterDepartmentId:1 CreateUid:1 WriteUid:2 CompleteName:系统管理 ParentPath:1/ Name:{"en_US": "系统管理", "zh_CN": "系统管理"} Note: Active:true CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2024-11-11T03:09:22.277274Z Employees:[]} 
+        {ID:3 CompanyId:1 ParentId:0 ManagerId:2 Color:5 MasterDepartmentId:3 CreateUid:2 WriteUid:2 CompleteName:Management ParentPath:3/ Name:{"en_US": "Management", "zh_CN": "管理"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:08:01.960423Z Employees:[]} 
+        {ID:2 CompanyId:1 ParentId:0 ManagerId:0 Color:10 MasterDepartmentId:2 CreateUid:2 WriteUid:2 CompleteName:Research & Development ParentPath:2/ Name:{"en_US": "Research & Development", "zh_CN": "研究和发展"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-10-09T06:26:32.393177Z Employ
+ees:[]}]} {
+    ResCompanyB:{ID:1 Name:总部 ParentId:0 Email:wlzyl4136@qq.com Phone:+1 555-555-5556 Active:true} 
+    Departments:[
+        {ID:1 CompanyId:1 ParentId:0 ManagerId:1 Color:0 MasterDepartmentId:1 CreateUid:1 WriteUid:2 CompleteName:系统管理 ParentPath:1/ Name:{"en_US": "系统管理", "zh_CN": "系统管理"} Note: Active:true CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2024-11-11T03:09:22.277274Z Employees:[]} 
+        {ID:3 CompanyId:1 ParentId:0 ManagerId:2 Color:5 MasterDepartmentId:3 CreateUid:2 WriteUid:2 CompleteName:Management ParentPath:3/ Name:{"en_US": "Management", "zh_CN": "管理"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:08:01.960423Z Employees:[]} 
+        {ID:2 CompanyId:1 ParentId:0 ManagerId:0 Color:10 MasterDepartmentId:2 CreateUid:2 WriteUid:2 CompleteName:Research & Development ParentPath:2/ Name:{"en_US": "Research & Development", "zh_CN": "研究和发展"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-10-09T06:26:32.393177Z Employe
+es:[]}]} {
+    ResCompanyB:{ID:1 Name:总部 ParentId:0 Email:wlzyl4136@qq.com Phone:+1 555-555-5556 Active:true} 
+    Departments:[
+        {ID:1 CompanyId:1 ParentId:0 ManagerId:1 Color:0 MasterDepartmentId:1 CreateUid:1 WriteUid:2 CompleteName:系统管理 ParentPath:1/ Name:{"en_US": "系统管理", "zh_CN": "系统管理"} Note: Active:true CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2024-11-11T03:09:22.277274Z Employees:[]} 
+        {ID:3 CompanyId:1 ParentId:0 ManagerId:2 Color:5 MasterDepartmentId:3 CreateUid:2 WriteUid:2 CompleteName:Management ParentPath:3/ Name:{"en_US": "Management", "zh_CN": "管理"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:08:01.960423Z Employees:[]} 
+        {ID:2 CompanyId:1 ParentId:0 ManagerId:0 Color:10 MasterDepartmentId:2 CreateUid:2 WriteUid:2 CompleteName:Research & Development ParentPath:2/ Name:{"en_US": "Research & Development", "zh_CN": "研究和发展"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-10-09T06:26:32.393177Z Employee
+s:[]}]} {
+    ResCompanyB:{ID:2 Name:一级子公司 ParentId:0 Email: Phone: Active:true} 
+    Departments:[
+        {ID:10 CompanyId:2 ParentId:0 ManagerId:0 Color:0 MasterDepartmentId:10 CreateUid:2 WriteUid:2 CompleteName:子公司管理部 ParentPath:10/ Name:{"en_US": "子公司管理部", "zh_CN": "子公司管理部"} Note: Active:true CreateDate:2025-03-19T05:18:40.161385Z WriteDate:2025-03-19T05:18:40.161385Z Employees:[]}]}]
+
+
+
+// 组织树处理结果
+&[{
+    ResCompanyB:
+        {ID:1 Name: ParentId:0 Email: Phone: Active:false} 
+    Departments:[
+        {ID:1 CompanyId:1 ParentId:0 ManagerId:1 Color:0 MasterDepartmentId:1 CreateUid:1 WriteUid:2 CompleteName:系统管理 ParentPath:1/ Name:{"en_US": "系统管理", "zh_CN": "系统管理"} Note: Active:true CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2024-11-11T03:09:22.277274Z Employees:[] Children:[]} 
+        {ID:3 CompanyId:1 ParentId:0 ManagerId:2 Color:5 MasterDepartmentId:3 CreateUid:2 WriteUid:2 CompleteName:Management ParentPath:3/ Name:{"en_US": "Management", "zh_CN": "管理"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:08:01.960423Z Employees:[] Children:[]} 
+        {ID:2 CompanyId:1 ParentId:0 ManagerId:0 Color:10 MasterDepartmentId:2 CreateUid:2 WriteUid:2 CompleteName:研究||发展 ParentPath:2/ Name:{"en_US": "Research & Development", "zh_CN": "研究和发展"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2025-03-19T06:06:32.073276Z Employees:[] Children:[]} 
+        {ID:22 CompanyId:1 ParentId:0 ManagerId:0 Color:0 MasterDepartmentId:22 CreateUid:2 WriteUid:2 CompleteName:后端测试 ParentPath:22/ Name:{"en_US": "后端测试"} Note: Active:true CreateDate:2025-03-19T07:00:46.466526Z WriteDate:2025-03-19T07:00:46.466526Z Employees:[] Children:[]} 
+        {ID:23 CompanyId:1 ParentId:1 ManagerId:0 Color:0 MasterDepartmentId:1 CreateUid:2 WriteUid:2 CompleteName:系统管理 / 统统 ParentPath:1/23/ Name:{"en_US": "统统", "zh_CN": "统统"} Note: Active:true CreateDate:2025-03-19T07:05:29.840439Z WriteDate:2025-03-19T07:05:29.840439Z Employees:[] Children:[]}
+    ]} 
+{
+    ResCompanyB:
+        {ID:2 Name: ParentId:0 Email: Phone: Active:false} 
+    Departments:[
+        {ID:10 CompanyId:2 ParentId:0 ManagerId:0 Color:0 MasterDepartmentId:10 CreateUid:2 WriteUid:2 CompleteName:子公司管理部 ParentPath:10/ Name:{"en_US": "子公司管理部", "zh_CN": "子公司管理部"} Note: Active:false CreateDate:2025-03-19T05:18:40.161385Z WriteDate:2025-03-19T05:18:40.161385Z Employees:[] Children:[]}
+    ]
+}]
+取出结果中的ResCompanyB数据：{ID:1 Name:总部 ParentId:0 Email:wlzyl4136@qq.com Phone:+1 555-555-5556 Active:true}
+取出结果中的Departments数据：[
+    {ID:1 CompanyId:1 ParentId:0 ManagerId:1 Color:0 MasterDepartmentId:1 CreateUid:1 WriteUid:2 CompleteName:系统管理 ParentPath:1/ Name:{"en_US": "系统管理", "zh_CN": "系统管理"} Note: Active:true CreateDate:2024-10-09T06:10:50.623733Z WriteDate:2024-11-11T03:09:22.277274Z Employees:[] Children:[]} 
+    {ID:3 CompanyId:1 ParentId:0 ManagerId:2 Color:5 MasterDepartmentId:3 CreateUid:2 WriteUid:2 CompleteName:Management ParentPath:3/ Name:{"en_US": "Management", "zh_CN": "管理"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2024-12-10T08:08:01.960423Z Employees:[] Children:[]} 
+    {ID:2 CompanyId:1 ParentId:0 ManagerId:0 Color:10 MasterDepartmentId:2 CreateUid:2 WriteUid:2 CompleteName:研究||发展 ParentPath:2/ Name:{"en_US": "Research & Development", "zh_CN": "研究和发展"} Note: Active:true CreateDate:2024-10-09T06:26:32.393177Z WriteDate:2025-03-19T06:06:32.073276Z Employees:[] Children:[]} 
+    {ID:22 CompanyId:1 ParentId:0 ManagerId:0 Color:0 MasterDepartmentId:22 CreateUid:2 WriteUid:2 CompleteName:后端测试 ParentPath:22/ Name:{"en_US": "后端测试"} Note: Active:true CreateDate:2025-03-19T07:00:46.466526Z WriteDate:2025-03-19T07:00:46.466526Z Employees:[] Children:[]} 
+    {ID:23 CompanyId:1 ParentId:1 ManagerId:0 Color:0 MasterDepartmentId:1 CreateUid:2 WriteUid:2 CompleteName:系统管理 / 统统 ParentPath:1/23/ Name:{"en_US": "统统", "zh_CN": "统统"} Note: Active:true CreateDate:2025-03-19T07:05:29.840439Z WriteDate:2025-03-19T07:05:29.840439Z Employees:[] Children:[]}
+]
+取出结果中的ResCompanyB数据：{ID:2 Name:一级子公司 ParentId:0 Email: Phone: Active:true}
+取出结果中的Departments数据：[
+    {ID:10 CompanyId:2 ParentId:0 ManagerId:0 Color:0 MasterDepartmentId:10 CreateUid:2 WriteUid:2 CompleteName:子公司管理部 ParentPath:10/ Name:{"en_US": "子公司管理部", "zh_CN": "子公司管理部"} Note: Active:true CreateDate:2025-03-19T05:18:40.161385Z WriteDate:2025-03-19T05:18:40.161385Z Employees:[] Children:[]}
+]

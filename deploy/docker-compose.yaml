@@ -1,0 +1,79 @@
+version: '3.2'
+services:
+  redis:
+    image: redis:7.0.12
+    container_name: redis
+    restart: always
+    command: redis-server /etc/redis/redis.conf --requirepass pandax --appendonly yes
+    volumes:
+      - "./redis/data:/data"
+      - "./redis/logs:/logs"
+    ports:
+      - 6379:6379
+  tdengine:
+    image: tdengine/tdengine:3.0.4.2
+    container_name: tdengine-server
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./taos/data:/var/lib/taos
+      - ./taos/logs:/var/log/taos
+    ports:
+      - 6030:6030
+      - 6041:6041
+      - 6030-6040:6030-6040/udp
+  emqx:
+    image: emqx/emqx:5.1.0
+    restart: always
+    container_name: emqx-server
+    ports:
+      - 1883:1883
+      - 8083:8083
+      - 8084:8084
+      - 8883:8883
+      - 18083:18083
+  mysql:
+    image: mysql:8.0.23
+    container_name: mysql-server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pandax
+      MYSQL_DATABASE: pandax_iot
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  pandax:
+    image: ccr.ccs.tencentyun.com/pandax/pandax:v0.1
+    container_name: pandax
+    restart: always
+    depends_on:
+      - mysql-server
+      - emqx-server
+      - tdengine-server
+      - redis
+    ports:
+      - "7788:7788"
+      - "9001:9001"
+      - "9002:9002"
+      - "9003:9003"
+      - "9003:9003/udp"
+  pandax-web:
+    image: ccr.ccs.tencentyun.com/pandax/pandaxweb:v0.1
+    container_name: pandax-web
+    restart: always
+    ports:
+      - "7789:7789"
+  pandax-screen:
+    image: ccr.ccs.tencentyun.com/pandax/pandaxscreen:v0.1
+    container_name: pandax-screen
+    restart: always
+    ports:
+      - "7790:7790"
+  pandax-rule:
+    image: ccr.ccs.tencentyun.com/pandax/pandaxrule:v0.1
+    container_name: pandax-rule
+    restart: always
+    ports:
+      - "7791:7791"
