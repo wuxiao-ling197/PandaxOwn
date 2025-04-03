@@ -1,17 +1,20 @@
 package initialize
 
 import (
-	"github.com/emicklei/go-restful/v3"
+	"log"
 	"net/http"
 	"pandax/apps/job/jobs"
 	ruleRouter "pandax/apps/rule/router"
 	"pandax/pkg/global"
 	"pandax/pkg/transport"
 
+	"github.com/emicklei/go-restful/v3"
+
 	devRouter "pandax/apps/develop/router"
 	deviceRouter "pandax/apps/device/router"
 	jobRouter "pandax/apps/job/router"
 	logRouter "pandax/apps/log/router"
+	sharedRouter "pandax/apps/shared/router"
 	sysRouter "pandax/apps/system/router"
 	"pandax/pkg/middleware"
 )
@@ -19,7 +22,9 @@ import (
 func InitRouter() *transport.HttpServer {
 	// server配置
 	serverConfig := global.Conf.Server
-	server := transport.NewHttpServer(serverConfig.GetPort())
+	// log.Printf("初始化路由：%+v\n", serverConfig.GetPort())
+	server := transport.NewHttpServer(serverConfig.GetPort()) //设置http 服务器地址
+	log.Println("后端服务", server.Addr)
 
 	container := server.Container
 	// 防止XSS
@@ -44,14 +49,18 @@ func InitRouter() *transport.HttpServer {
 	// 设置路由组
 	{
 		sysRouter.InitSystemRouter(container)
-		sysRouter.InitOrganizationRouter(container)
+		// sysRouter.InitOrganizationRouter(container)
 		sysRouter.InitConfigRouter(container)
 		sysRouter.InitApiRouter(container)
 		sysRouter.InitDictRouter(container)
 		sysRouter.InitMenuRouter(container)
 		sysRouter.InitRoleRouter(container)
-		sysRouter.InitPostRouter(container)
-		sysRouter.InitUserRouter(container)
+		// sysRouter.InitPostRouter(container)
+		// sysRouter.InitUserRouter(container)
+		sharedRouter.InitResUserRouter(container) //初始化共享用户的路由
+		sharedRouter.InitHrJobRouter(container)
+		sharedRouter.InitHeDepartmentRouter(container)
+
 		sysRouter.InitNoticeRouter(container)
 		//本地图片上传接口
 		sysRouter.InitUploadRouter(container)

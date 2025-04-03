@@ -88,7 +88,7 @@ func InitVaultConfig(config map[string]interface{}) *Config {
 	}
 
 	// log.Print(vc.App)
-	// log.Print(vc.Server)
+	// log.Printf("server=%+v", vc.Server)
 	// log.Print(vc.Casbin)
 	// log.Print(vc.Postgresql)
 	// log.Print(vc.Redis)

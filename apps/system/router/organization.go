@@ -1,17 +1,20 @@
 package router
 
 import (
-	"github.com/PandaXGO/PandaKit/restfulx"
 	"pandax/apps/system/api"
 	"pandax/apps/system/api/vo"
 	"pandax/apps/system/entity"
 	"pandax/apps/system/services"
 
+	"github.com/PandaXGO/PandaKit/restfulx"
+
 	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 	"github.com/emicklei/go-restful/v3"
 )
 
+// 初始化路由
 func InitOrganizationRouter(container *restful.Container) {
+	// 创建api处理实例，注入服务
 	s := &api.OrganizationApi{
 		OrganizationApp: services.SysOrganizationModelDao,
 		RoleApp:         services.SysRoleModelDao,

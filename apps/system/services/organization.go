@@ -128,6 +128,7 @@ func (m *sysOrganizationModelImpl) Delete(organizationIds []int64) error {
 	return global.Db.Table(m.table).Delete(&entity.SysOrganization{}, "organization_id in (?)", organizationIds).Error
 }
 
+// 只遍历SysOrganization数组，其中包含children
 func (m *sysOrganizationModelImpl) SelectOrganization(data entity.SysOrganization) ([]entity.SysOrganization, error) {
 	list, err := m.FindList(data)
 	if err != nil {
@@ -188,12 +189,13 @@ func (m *sysOrganizationModelImpl) SelectOrganizationIds(data entity.SysOrganiza
 	return dl, nil
 }
 
+// SysOrganization中只存在自己的子级部门
 func Digui(organizationlist *[]entity.SysOrganization, menu entity.SysOrganization) entity.SysOrganization {
 	list := *organizationlist
 
-	min := make([]entity.SysOrganization, 0)
+	min := make([]entity.SysOrganization, 0) //组织列表，接收
+	// 遍历传入的组织列表
 	for j := 0; j < len(list); j++ {
-
 		if menu.OrganizationId != list[j].ParentId {
 			continue
 		}
@@ -216,6 +218,7 @@ func Digui(organizationlist *[]entity.SysOrganization, menu entity.SysOrganizati
 	menu.Children = min
 	return menu
 }
+
 func DiguiOrganizationLable(organizationlist *[]entity.SysOrganization, organization entity.OrganizationLable) entity.OrganizationLable {
 	list := *organizationlist
 
@@ -225,7 +228,7 @@ func DiguiOrganizationLable(organizationlist *[]entity.SysOrganization, organiza
 		if organization.OrganizationId != list[j].ParentId {
 			continue
 		}
-		mi := entity.OrganizationLable{list[j].OrganizationId, list[j].OrganizationName, []entity.OrganizationLable{}}
+		mi := entity.OrganizationLable{OrganizationId: list[j].OrganizationId, OrganizationName: list[j].OrganizationName, Children: []entity.OrganizationLable{}}
 		ms := DiguiOrganizationLable(organizationlist, mi)
 		min = append(min, ms)
 
@@ -242,7 +245,7 @@ func DiguiOrganizationId(organizationlist *[]entity.SysOrganization, organizatio
 			continue
 		}
 		min = append(min, list[j].OrganizationId)
-		mi := entity.OrganizationLable{list[j].OrganizationId, list[j].OrganizationName, []entity.OrganizationLable{}}
+		mi := entity.OrganizationLable{OrganizationId: list[j].OrganizationId, OrganizationName: list[j].OrganizationName, Children: []entity.OrganizationLable{}}
 		id := DiguiOrganizationId(organizationlist, mi)
 		min = append(min, id...)
 	}

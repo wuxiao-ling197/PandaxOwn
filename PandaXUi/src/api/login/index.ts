@@ -13,8 +13,50 @@ export function captcha() {
 	});
 }
 
+export function getTotp() {
+	return request({
+		url: '/system/user/getTotp',
+		method: 'get',
+	})
+}
+
+// 验证totp
+export function valideTotp(params: object) {
+	return request({
+		url: '/system/user/valideTotp',
+		method: 'post',
+		data: params
+	});
+}
+
+// 激活totp
+export function totpEnableone(params: object) {
+	return request({
+		url: '/system/user/enableTotp',
+		method: 'post',
+		data: params
+	});
+}
+
+// 激活totp
+export function totpReset(params: object) {
+	return request({
+		url: '/system/user/resetTotp',
+		method: 'post',
+		data: params
+	});
+}
+
+// export function getLoginUser(params: object) {
+// 	return request({
+// 		url: '/system/user/getLoginUser',
+// 		method: 'post',
+// 		data: params,
+// 	})
+// }
+
 /**
- * 用户登录
+ * 用户登录路由
  * @param params 要传的参数值
  * @returns 返回接口数据
  */

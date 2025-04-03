@@ -195,6 +195,7 @@ func (HrEmployee) TableName() string {
 
 // 主员工数据 外加关联用户的登录名和状态
 type EmployeeWithUser struct {
+	// LoginO
 	HrEmployee
 	UserName       string `gorm:"references:username" json:"username,omitempty"` //查询时指定别名为 username，因此需要定义column
 	UserActive     bool   `gorm:"references:user_active" json:"user_active,omitempty"`

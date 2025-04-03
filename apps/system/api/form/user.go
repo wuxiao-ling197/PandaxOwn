@@ -15,6 +15,8 @@ type Login struct {
 	Password  string `json:"password"`  // 密码
 	Captcha   string `json:"captcha"`   // 验证码
 	CaptchaId string `json:"captchaId"` // 验证码ID
+	Passcode  string `json:"passcode"`  // totp认证码
+	// Totpwizard entity.AuthTotpWizard
 }
 
 // Modify password structure

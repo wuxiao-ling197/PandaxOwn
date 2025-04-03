@@ -1,4 +1,5 @@
 import request from '@/utils/request';
+import { pa } from 'element-plus/es/locale';
 
 
 // 查询用户列表
@@ -72,10 +73,28 @@ export function addUser(data: any) {
 	})
 }
 
+// 新增员工
+export function addEmployee(data: any) {
+	return request({
+		url: '/system/user/employee',
+		method: 'post',
+		data: data
+	})
+}
+
 // 修改用户
 export function updateUser(data:any) {
 	return request({
 		url: '/system/user',
+		method: 'put',
+		data: data
+	})
+}
+
+// 修改员工
+export function updateEmployee(data:any) {
+	return request({
+		url: '/system/user/employee',
 		method: 'put',
 		data: data
 	})
@@ -89,6 +108,62 @@ export function updateUserPwd(data:any) {
 		data: data
 	})
 }
+
+// 创建TOTP记录
+// export function createTotp(userId: any) {
+// 	return request({
+// 	  url: '/auth/totp/enable/'+ userId,
+// 	  method: 'get'
+// 	})
+//   }
+
+// 启用用户TOTP cg
+export function enableTotp(params: any) {
+	const id = params.value.id
+	const data = {
+		name:params.value.login,
+		password:params.password
+	}
+	console.log("前端api=%T %v",id,data);
+	return request({
+	  url: '/system/user/totp/enable/'+ id,
+	  method: 'get',
+	  params: data
+	})
+  }
+  
+  // 关闭用户TOTP
+  export function closeTotp(userId: any) {
+	return request({
+	  url: '/system/user/totp/disable/'+ userId,
+	  method: 'delete'
+	})
+  }
+  
+  // 用户密码重置 cg
+  export function resetUserPwd(data: any) {
+	return request({
+	  url: '/system/user/resetPwd',
+	  method: 'put',
+	  data: data
+	})
+  }
+
+  // 查询部门下拉树结构
+export function deptTreeSelect() {
+	return request({
+	  url: '/system/user/deptTree',
+	  method: 'get'
+	})
+  }
+  
+  // 查询公司下拉树结构
+  export function compTreeSelect() {
+	return request({
+	  url: '/system/user/compTree',
+	  method: 'get'
+	})
+  }
 
 
 // 导出

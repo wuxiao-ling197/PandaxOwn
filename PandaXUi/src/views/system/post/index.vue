@@ -8,38 +8,32 @@
           :inline="true"
           label-width="68px"
       >
-        <el-form-item label="岗位编码" prop="postCode">
+        <el-form-item label="岗位编码" prop="id">
           <el-input
               placeholder="请输入岗位编码模糊查询"
               clearable
               @keyup.enter="handleQuery"
               style="width: 240px"
-              v-model="state.queryParams.postCode"
+              v-model="state.queryParams.jobCode"
           />
         </el-form-item>
-        <el-form-item label="岗位名称" prop="postName">
+        <el-form-item label="岗位名称" prop="name">
           <el-input
               placeholder="请输入岗位名称模糊查询"
               clearable
               @keyup.enter="handleQuery"
               style="width: 240px"
-              v-model="state.queryParams.postName"
+              v-model="state.queryParams.jobName"
           />
         </el-form-item>
-        <el-form-item label="状态" prop="status">
-          <el-select
-              v-model="state.queryParams.status"
-              placeholder="岗位状态"
+        <el-form-item label="部门" prop="departmentId">
+          <el-input
+              v-model="state.queryParams.departmentId"
+              placeholder="请输入部门编码模糊查询"
               clearable
               style="width: 240px"
           >
-            <el-option
-                v-for="dict in state.statusOptions"
-                :key="dict.dictValue"
-                :label="dict.dictLabel"
-                :value="dict.dictValue"
-            />
-          </el-select>
+          </el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" plain @click="handleQuery">
@@ -96,23 +90,76 @@
           @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" align="center"/>
-        <el-table-column label="岗位编号" align="center" prop="postId"/>
-        <el-table-column label="岗位编码" align="center" prop="postCode"/>
-        <el-table-column label="岗位名称" align="center" prop="postName"/>
-        <el-table-column label="岗位排序" align="center" prop="sort"/>
+        <el-table-column label="岗位编号" align="center" prop="id" sortable />
+        <el-table-column label="部门" align="center" prop="department_id" sortable />
+        <el-table-column label="岗位名称" align="center" prop="name">
+          <template #default="{row}">
+            {{ JSON.parse(row.name).zh_CN || JSON.parse(row.name).en_US }}
+          </template>
+        </el-table-column>
+        <el-table-column label="岗位排序" align="center" prop="sequence" sortable/>
+        <!-- <el-table-column label="岗位介绍" align="center" prop="job_details"/> -->
+        <el-table-column label="期望招聘人数/人" align="center" prop="no_of_recruitment" sortable/>
+        <el-table-column label="在岗员工/人" align="center" prop="no_of_employee" sortable>
+          <template #default="scope">
+            {{ scope.row?.no_of_employee  ?  scope.row.no_of_employee: 0 }}
+          </template>
+        </el-table-column>
+        <el-table-column label="岗位配置/人" align="center" prop="expected_employees" sortable>
+          <template #default="scope">
+            {{ scope.row?.expected_employees  ?  scope.row.expected_employees: 0 }}
+          </template>
+        </el-table-column>
+        <!-- <el-table-column label="申请投递/人" align="center" prop="expected_employees" sortable>
+          <template #default="scope">
+            {{ scope.row?.no_of_hired_employee  ?  scope.row.no_of_hired_employee: 0 }}
+          </template>
+        </el-table-column> -->
+        <el-table-column label="已雇佣/人" align="center" prop="no_of_hired_employee" sortable>
+          <template #default="scope">
+            {{ scope.row?.no_of_hired_employee  ?  scope.row.no_of_hired_employee: 0 }}
+          </template>
+        </el-table-column>
+        <el-table-column label="招聘类型" align="center" prop="contract_type_id" sortable>
+          <template #default="scope">
+            {{ scope.row?.contract_type_id  ?  scope.row.contract_type_id: 0 }}
+          </template>
+        </el-table-column>
         <el-table-column
-            label="状态"
+            label="发布"
             align="center"
-            prop="status"
+            prop="is_published"
         >
           <template #default="scope">
             <el-tag
-                :type="scope.row.status === '1' ? 'danger' : 'success'"
+                effect="dark" size="large"
+                :type="scope.row.is_published === true ? 'success' : scope.row.is_published === false ? 'danger' : 'warning' " 
                 disable-transitions
-            >{{ statusFormat(scope.row) }}
+            >{{ scope.row.is_published === true ? "已发布": "暂未发布" }}
             </el-tag>
           </template>
         </el-table-column>
+        <el-table-column
+            label="状态"
+            align="center"
+            prop="active"
+        >
+          <template #default="scope">
+            <el-tag
+                effect="dark" size="large"
+                :type="scope.row.active === true ? 'success' : scope.row.active === false ? 'danger' : 'warning' " 
+                disable-transitions
+            >{{ scope.row.active === true ? "在招": "取消" }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="发布人" align="center" prop="user_id" sortable />
+        <el-table-column label="发布日期" align="center" prop="create_date">
+          <template #default="scope">
+               <span>{{ dayjs(scope.row.create_date).format('YYYY-MM-DD HH:mm:ss')}}</span>
+            </template>
+        </el-table-column>
+
         <el-table-column
             label="操作"
             align="center"
@@ -123,6 +170,12 @@
               <template #reference>
                 <el-button type="primary" circle ><SvgIcon name="elementStar"/></el-button>
               </template>
+              <div>
+                <el-button text type="primary" v-auth="'system:post:edit'" @click="onPublish(scope.row)">
+                  <el-icon><Promotion /></el-icon>
+                  发布
+                </el-button>
+              </div>
               <div>
                 <el-button text type="primary" v-auth="'system:post:edit'" @click="onOpenEditModule(scope.row)">
                   <SvgIcon name="elementEdit"/>
@@ -168,9 +221,9 @@ import {
   onUnmounted,
 } from "vue";
 import {ElMessageBox, ElMessage} from "element-plus";
-import {listPost, delPost} from "@/api/system/post";
+import {listPost, delPost, publishPost} from "@/api/system/post";
 import EditModule from "./component/editModule.vue";
-
+import dayjs from 'dayjs';
 const {proxy} = getCurrentInstance() as any;
 const editModuleRef = ref();
 const state = reactive({
@@ -196,9 +249,9 @@ const state = reactive({
     pageNum: 1,
     // 每页大小
     pageSize: 10,
-    postCode: undefined,
-    postName: undefined,
-    status: undefined,
+    jobCode: undefined,
+    jobName: undefined,
+    departmentId: undefined,
   },
 });
 
@@ -206,16 +259,27 @@ const state = reactive({
 const handleQuery = () => {
   state.loading = true;
   listPost(state.queryParams).then((response) => {
+    console.log("岗位列表：",response.data.data);
     state.tableData = response.data.data;
     state.total = response.data.total;
     state.loading = false;
   });
 };
+// 名称
+const getDeptName = (dept: any) => {
+  // console.log('解析部门多名称=', dept);
+  try {
+    const nameObj = JSON.parse(dept.name)
+    return nameObj.zh_CN || nameObj.en_US || dept.name
+  } catch {
+    return dept.name
+  }
+}
 /** 重置按钮操作 */
 const resetQuery = () => {
-  state.queryParams.postName = undefined;
-  state.queryParams.postCode = undefined;
-  state.queryParams.status = undefined;
+  state.queryParams.jobName = undefined;
+  state.queryParams.jobCode = undefined;
+  state.queryParams.departmentId = undefined;
   handleQuery();
 };
 
@@ -228,9 +292,9 @@ const handleSizeChange = (val: number) => {
   handleQuery()
 }
 
-const statusFormat = (row: any) => {
-  return proxy.selectDictLabel(state.statusOptions, row.status);
-};
+
+// 判断岗位招满还是取消
+// const isFinish = ()
 
 // 打开新增岗位弹窗
 const onOpenAddModule = () => {
@@ -241,6 +305,31 @@ const onOpenAddModule = () => {
 const onOpenEditModule = (row: object) => {
   state.title = "修改岗位";
   editModuleRef.value.openDialog(row);
+};
+/** 发布按钮操作 */
+const onPublish = (row: any) => {
+  console.log(row.id);
+  
+  // const postIds = row.id || state.ids;
+  ElMessageBox({
+    message: '确认发布岗位编号为"' + row.id + '"的招聘信息吗?',
+    title: "提示",
+    showCancelButton: true,
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning",
+  }).then(function () {
+    return publishPost(row.id).then((res:any) => {
+      console.log("发布=", res);
+      
+      if (res.code === 200){
+        handleQuery();
+        ElMessage.success("发布成功");
+      }else {
+        ElMessage.error("发布失败");
+      }
+    });
+  });
 };
 /** 删除按钮操作 */
 const onTabelRowDel = (row: any) => {

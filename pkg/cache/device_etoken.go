@@ -2,8 +2,9 @@ package cache
 
 import (
 	"context"
-	"github.com/PandaXGO/PandaKit/rediscli"
 	"time"
+
+	"github.com/PandaXGO/PandaKit/rediscli"
 )
 
 var RedisDb *rediscli.RedisDB
@@ -24,6 +25,7 @@ func DelDeviceEtoken(key string) error {
 }
 
 func ExistsDeviceEtoken(key string) bool {
-	exists, _ := RedisDb.Exists(RedisDb.Context(), key).Result()
+	//原代码为： exists, _ := RedisDb.Exists(RedisDb.Context(), key).Result()
+	exists, _ := RedisDb.Exists(context.Background(), key).Result()
 	return exists == 1
 }

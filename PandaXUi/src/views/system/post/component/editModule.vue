@@ -12,48 +12,52 @@
       >
         <el-row :gutter="35">
           <el-col :span="24" >
-            <el-form-item label="岗位名称" prop="postName">
+            <el-form-item label="岗位名称" prop="name">
               <el-input
-                v-model="state.ruleForm.postName"
+                v-model="state.ruleForm.name"
                 placeholder="请输入岗位名称"
               />
             </el-form-item>
           </el-col>
           <el-col :span="24" >
-            <el-form-item label="岗位编码" prop="postCode">
-              <el-input
-                v-model="state.ruleForm.postCode"
-                placeholder="请输入编码名称"
+            <el-form-item label="招聘类型" prop="contract_type_id">
+              <el-tree-select
+                v-model="state.ruleForm.contract_type_id"
+                placeholder="请选择招聘类型"
               />
             </el-form-item>
           </el-col>
           <el-col :span="24" >
-            <el-form-item label="岗位顺序" prop="sort">
+            <el-form-item label="招聘部门" prop="department_id">
+              <el-tree-select
+                v-model="state.ruleForm.department_id"
+                placeholder="请选择部门"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="24" >
+            <el-form-item label="岗位顺序" prop="sequence">
               <el-input-number
-                v-model="state.ruleForm.sort"
+                v-model="state.ruleForm.sequence"
                 controls-position="right"
                 :min="0"
               />
             </el-form-item>
           </el-col>
           <el-col :span="24" >
-            <el-form-item label="岗位状态" prop="status">
-              <el-radio-group v-model="state.ruleForm.status">
-                <el-radio
-                  v-for="dict in state.statusOptions"
-                  :key="dict.dictValue"
-                  :label="dict.dictValue"
-                  >{{ dict.dictLabel }}
-                </el-radio>
+            <el-form-item label="发布状态" prop="is_published">
+              <el-radio-group v-model="state.ruleForm.is_published">
+                <el-radio value="true" size="large">发布</el-radio>
+                <el-radio value="false" size="large">稍后</el-radio> 
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col :span="24" >
-            <el-form-item label="备注" prop="remark">
-              <el-input
-                v-model="state.ruleForm.remark"
-                type="textarea"
-                placeholder="请输入内容"
+            <el-form-item label="招聘人数" prop="no_of_recruitment">
+              <el-input-number
+                v-model="state.ruleForm.no_of_recruitment"
+                controls-position="right"
+                :min="0"
               />
             </el-form-item>
           </el-col>
@@ -89,12 +93,13 @@ const state = reactive({
   loading: false,
   // 岗位对象
   ruleForm: {
-    postId: 0, // 岗位ID
-    postName: "", // 岗位名称
-    postCode: "",// 岗位编码
-    sort: 0, // 岗位排序
-    status: "", //岗位状态
-    remark: "", // 备注
+    // postId: 0, // 岗位ID
+    name:"", // 岗位名称
+    department_id: 0,// 岗位编码
+    sequence: 0, // 岗位排序
+    no_of_recruitment: 0, //计划招聘人数
+    contract_type_id:0,//招聘类型
+    is_published: false, // 是否发布
   },
   // 岗位状态数据字典
   statusOptions: [],
@@ -102,15 +107,9 @@ const state = reactive({
   organizationOptions: [],
   // 表单校验
   ruleRules: {
-    postName: [
-      { required: true, message: "岗位名称不能为空", trigger: "blur" }
-    ],
-    postCode: [
-      { required: true, message: "岗位编码不能为空", trigger: "blur" }
-    ],
-    postSort: [
-      { required: true, message: "岗位顺序不能为空", trigger: "blur" }
-    ]
+    name: [{ required: true, message: "岗位名称不能为空", trigger: "blur" }],
+    no_of_recruitment: [{ required: true, message: "招聘人数不能为空", trigger: "blur" }],
+    // contract_type_id: [ { required: true, message: "招聘类型不能为空", trigger: "blur" }]
   },
 });
 // 打开弹窗
@@ -142,7 +141,8 @@ const onSubmit = () => {
   formWrap.validate((valid: boolean) => {
     if (valid) {
       state.loading = true;
-      if (state.ruleForm.postId != undefined && state.ruleForm.postId != 0) {
+      state.ruleForm.contract_type_id=4
+      if (state.ruleForm.contract_type_id != undefined && state.ruleForm.contract_type_id != 0) {
         updatePost(state.ruleForm).then((res:any) => {
           if (res.code == 200) {
             ElMessage.success("修改成功");

@@ -2,9 +2,104 @@
   <div class="system-menu-container">
     <el-dialog v-model="state.isShowDialog" width="769px" center>
       <template #header>
-        <div style="font-size: large" v-drag="['.system-menu-container .el-dialog', '.system-menu-container .el-dialog__header']">{{title}}</div>
+        <div style="font-size: large"
+          v-drag="['.system-menu-container .el-dialog', '.system-menu-container .el-dialog__header']">{{ title }}</div>
       </template>
-      <el-form
+      <!-- <el-form :model="state.ruleForm" label-width="100px"> -->
+      <el-row :gutter="20">
+        <!-- 左侧员工数据  :rules="ruleRules" -->
+        <el-col :span="12">
+          <el-card shadow="always" style="height: 100%;">
+            <h4>员工信息</h4>
+            <el-form :model="state.ruleForm.employee" ref="ruleFormRef" label-width="100px">
+              <!-- 等待修改 这里应该是选项 -->
+              <el-form-item label="员工姓名" prop="state.ruleForm.employee.name">
+                <el-input v-model="state.ruleForm.employee.name" placeholder="请输入员工姓名" maxlength="11" required />
+              </el-form-item>
+              <el-form-item label="相关用户" prop="state.ruleForm.employee.user_id">
+                <el-select v-model="state.ruleForm.employee.user_id" placeholder="请选择相关用户" maxlength="11" />
+              </el-form-item>
+              <!-- 应该有个专属功能来进行部门调动 -->
+              <el-form-item label="所属部门" prop="state.ruleForm.employee.department_id">
+                <!-- <el-select v-model="state.ruleForm.employee.department_id" placeholder="请选择所属部门" maxlength="11" /> -->
+                <el-tree-select
+                v-model="state.ruleForm.employee.department_id"
+                :data="deptOptions"
+                :props="{ value: 'id', label: 'label', children: 'children' }"
+                value-key="id"
+                placeholder="请选择归属部门"
+                check-strictly
+              />
+              </el-form-item>
+              <el-form-item label="工作岗位" prop="state.ruleForm.employee.job_id">
+                <el-select v-model="state.ruleForm.employee.job_id" placeholder="请选择工作岗位" maxlength="11" />
+              </el-form-item>
+              <el-form-item label="员工性别" prop="state.ruleForm.employee.gender">
+                <el-select v-model="state.ruleForm.employee.gender" placeholder="请选择员工性别" maxlength="11" />
+              </el-form-item>
+              <el-form-item label="员工类型" prop="state.ruleForm.employee.employee_type">
+                <el-select v-model="state.ruleForm.employee.employee_type" placeholder="请选择员工类型" maxlength="11" />
+              </el-form-item>
+              <el-form-item label="员工生日" prop="state.ruleForm.employee.birthday">
+                <el-date-picker v-model="state.ruleForm.employee.birthday" type="date" placeholder="请选择员工生日"
+                  maxlength="11" />
+              </el-form-item>
+              <el-form-item label="工作电话" prop="stateruleForm.employee.work_phone">
+                <el-input v-model="state.ruleForm.employee.work_phone" placeholder="请输入工作电话" maxlength="11" />
+              </el-form-item>
+              <el-form-item label="工作邮箱" prop="state.ruleForm.employee.work_email">
+                <el-input v-model="state.ruleForm.employee.work_email" placeholder="请输入工作邮箱" maxlength="11" required />
+              </el-form-item>
+              <el-form-item label="已辞职" prop="state.ruleForm.employee.resigned">
+                <el-select v-model="state.ruleForm.employee.resigned" placeholder="请输入辞职原因" maxlength="11" />
+              </el-form-item>
+              <el-form-item label="已解雇" prop="state.ruleForm.employee.fired">
+                <el-select v-model="state.ruleForm.employee.fired" placeholder="请输入解雇原因" maxlength="11" />
+              </el-form-item>
+            </el-form>
+            <template #footer>
+                <span class="dialog-footer">
+                  <el-button @click="onCancel">取 消</el-button>
+                  <el-button type="primary" @click="employeeSubmit" :loading="state.loading" style="margin-left: 50px;">保 存</el-button>
+                </span>
+              </template>
+          </el-card>
+        </el-col>
+        <!-- 右侧用户数据 :rules="userRules"-->
+        <el-col :span="12">
+          <el-card shadow="always" style="height: 100%;">
+            <h4>相关用户</h4>
+            <el-form :model="state.ruleForm.user" ref="ruleFormRef" label-width="100px">
+              <el-form-item label="登录名" prop="state.ruleForm.user.login">
+                <el-input v-model="state.ruleForm.user.login" placeholder="请输入登录名" maxlength="11" required />
+              </el-form-item>
+              <el-form-item label="所属公司" prop="state.ruleForm.user.company_id">
+                <!-- <el-input v-model="state.ruleForm.user.company_id" placeholder="请选择所属公司" maxlength="11" /> -->
+                <el-tree-select
+                v-model="state.ruleForm.user.company_id"
+                :data="compOptions"
+                :props="{ value: 'id', label: 'label', children: 'children' }"
+                value-key="id"
+                placeholder="请选择所属公司"
+                check-strictly
+              />
+              </el-form-item>
+              <el-form-item label="用户状态" prop="state.ruleForm.user.active">
+                <el-input v-model="state.ruleForm.user.active" placeholder="请输入用户状态" maxlength="11" />
+              </el-form-item>
+            </el-form>
+            <template #footer>
+                <span class="dialog-footer">
+                  <el-button @click="onCancel">取 消</el-button>
+                  <el-button type="primary" @click="userSubmit" :loading="state.loading" style="margin-left: 50px;">保 存</el-button>
+                </span>
+              </template>
+          </el-card>
+        </el-col>
+      </el-row>
+      <!-- </el-form> -->
+
+      <!-- <el-form
         ref="ruleFormRef"
         :model="state.ruleForm"
         :rules="state.ruleRules"
@@ -12,10 +107,10 @@
       >
         <el-row :gutter="35">
           <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" >
-            <el-form-item label="用户昵称" prop="nickName">
+            <el-form-item label="用户登录名" prop="login">
               <el-input
-                v-model="state.ruleForm.nickName"
-                placeholder="请输入用户昵称"
+                v-model="state.ruleForm.login"
+                placeholder="请输入用户登录名"
               />
             </el-form-item>
           </el-col>
@@ -140,14 +235,14 @@
             </el-form-item>
           </el-col>
         </el-row>
-      </el-form>
+      </el-form> -->
 
-      <template #footer>
+      <!-- <template #footer>
         <span class="dialog-footer">
           <el-button @click="onCancel">取 消</el-button>
           <el-button type="primary" @click="onSubmit" :loading="state.loading">保 存</el-button>
         </span>
-      </template>
+      </template> -->
     </el-dialog>
   </div>
 </template>
@@ -155,8 +250,9 @@
 <script lang="ts" setup>
 import { reactive, ref, unref, getCurrentInstance } from "vue";
 import { treeselect } from "@/api/system/organization";
-import { updateUser, addUser, getUser, getUserInit } from "@/api/system/user";
+import { updateUser, addUser, getUser, getUserInit, updateEmployee, deptTreeSelect, compTreeSelect } from "@/api/system/user";
 import { ElMessage } from "element-plus";
+import { spawn } from "child_process";
 
 const props = defineProps({
   title: {
@@ -167,6 +263,8 @@ const props = defineProps({
 
 const { proxy } = getCurrentInstance() as any;
 const ruleFormRef = ref<HTMLElement | null>(null);
+const deptOptions = ref(undefined);
+const compOptions = ref(undefined);
 const state = reactive({
   // 是否显示弹出层
   isShowDialog: false,
@@ -183,22 +281,32 @@ const state = reactive({
   // 岗位选项
   postOptions: [],
   ruleForm: {
-    userId: undefined, // 用戶ID
-    username: "", // 用戶名称
-    nickName: "", // 用戶昵称
-    organizationId: "", // 组织ID
-    roleId: "", // 角色ID
-    postId: "", // 岗位ID
-    phone: "", // 手机号
-    email: "", // 邮箱
-    status: "", //用户状态
-    password: "", // 用户密码
-    avatar: "", // 用户头像
-    sex: "", // 性别
-    remark: "", // 备注
-    postIds: [],
-    roleIds: [],
+    user: {
+      id: "", //用户编号
+      login: "", // 用戶登录名
+      active: "", //用户状态
+      company_id: "", // 所属公司
+    },
+    employee: {
+      id: "", // 员工编号
+      name: "", // 员工名称
+      department_id: "", // 部门ID
+      user_id: "", // 相关用户
+      job_id: "", // 岗位ID
+      employee_type: "",// 员工类型
+      work_phone: "", // 手机号
+      work_email: "", // 邮箱
+      birthday: "", //用户状态
+      // avatar: "", // 用户头像
+      gender: "", // 性别
+      marital: "", // 婚姻状态
+      fired: "", // 解聘
+      resigned: "", // 辞职
+      // postIds: [], //odoo中好像只能绑定一个工作岗位
+    },
+    // roleIds: [],
   },
+
   // 显示状态数据字典
   isHideOptions: [],
   // 菜单类型数据字典
@@ -208,30 +316,32 @@ const state = reactive({
   // 菜单树选项
   menuOptions: [],
   // 表单校验
+  userRules: {
+    login: [
+      { required: true, message: "登录名不能为空", trigger: "blur" },
+    ],
+  },
   ruleRules: {
-    username: [
-      { required: true, message: "用户名称不能为空", trigger: "blur" },
+    name: [
+      { required: true, message: "员工名称不能为空", trigger: "blur" },
     ],
-    nickName: [
-      { required: true, message: "用户昵称不能为空", trigger: "blur" },
-    ],
-    password: [
-      { required: true, message: "用户密码不能为空", trigger: "blur" },
-    ],
-    organizationId: [
-      { required: true, message: "所属组织不能为空", trigger: "blur" },
-    ],
-    roleIds: [
-      { required: true, message: "所属角色不能为空", trigger: "blur" },
-    ],
-    email: [
+    // login: [
+    //   { required: true, message: "登录名不能为空", trigger: "blur" },
+    // ],
+    // department_id: [
+    //   { required: true, message: "所属部门不能为空", trigger: "blur" },
+    // ],
+    // roleIds: [
+    //   { required: true, message: "所属角色不能为空", trigger: "blur" },
+    // ],
+    work_email: [
       {
         type: "email",
         message: "'请输入正确的邮箱地址",
         trigger: ["blur", "change"],
       },
     ],
-    phone: [
+    work_phone: [
       {
         pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
         message: "请输入正确的手机号码",
@@ -244,27 +354,29 @@ const state = reactive({
 const openDialog = (row: any) => {
   if (row && row.userId && row.userId != undefined && row.userId != 0) {
     getUser(row.userId).then((response: any) => {
-      state.ruleForm = response.data.data;
+      state.ruleForm.employee = response.data.data.employee;
+      state.ruleForm.user = response.data.data.user;
       state.postOptions = response.data.posts;
       state.roleOptions = response.data.roles;
       //state.organizationOptions = response.data.organizations;
-
-      state.ruleForm.postIds = response.data.postIds.split(",").map((item: string)=>{
-        return Number(item)
-      });
-      state.ruleForm.roleIds = response.data.roleIds.split(",").map((item: string)=>{
-        return Number(item)
-      });
-      state.ruleForm.password = ""
+      // state.ruleForm.postIds = response.data.postIds.split(",").map((item: string)=>{
+      //   return Number(item)
+      // });
+      // state.ruleForm.roleIds = response.data.roleIds.split(",").map((item: string)=>{
+      //   return Number(item)
+      // });
+      // state.ruleForm.password = ""
     });
   } else {
     getUserInit().then(response => {
       state.postOptions = response.data.posts
       state.roleOptions = response.data.roles
     })
-    state.ruleForm = JSON.parse(JSON.stringify(row));
+    state.ruleForm.employee = JSON.parse(JSON.stringify(row));
   }
   getTreeselect();
+  getCompTree();
+  getDeptTree();
   state.isShowDialog = true;
   state.loading = false;
   // 查询显示性別数据字典
@@ -291,28 +403,72 @@ const getTreeselect = async () => {
     state.organizationOptions = response.data;
   });
 };
+/** 查询部门下拉树结构 */
+const getDeptTree=() =>{
+  deptTreeSelect().then((response) => {
+    deptOptions.value = response.data;
+  });
+}
+/** 查询公司下拉树结构 */
+const getCompTree=() =>{
+  compTreeSelect().then((response) => {
+    compOptions.value = response.data;
+  });
+}
 
 /** 提交按钮 */
+const employeeSubmit = () => {
+  // 更新员工
+  updateEmployee(state.ruleForm.employee).then((res: any) => {
+            if (res.code == 200) {
+              ElMessage.success("修改成功");
+              // closeDialog(); // 关闭弹窗
+            }
+            // state.loading = false;
+          })
+
+}
+
+const userSubmit = () => {
+  // 更新用户
+  updateUser(state.ruleForm.user).then((res: any) => {
+          if (res.code == 200) {
+            ElMessage.success("修改成功");
+            // closeDialog(); // 关闭弹窗
+          }
+          // state.loading = false;
+        })
+}
 const onSubmit = () => {
   const formWrap = unref(ruleFormRef) as any;
   if (!formWrap) return;
   formWrap.validate((valid: boolean) => {
     if (valid) {
-      state.ruleForm.postId = state.ruleForm.postIds[0]
-      state.ruleForm.roleId = state.ruleForm.roleIds[0]
-      state.ruleForm.postIds = state.ruleForm.postIds.join(',')
-      state.ruleForm.roleIds = state.ruleForm.roleIds.join(',')
+      // state.ruleForm.employee.job_id = state.ruleForm.employee.postIds[0]
+      // state.ruleForm.roleId = state.ruleForm.roleIds[0]
+      // state.ruleForm.postIds = state.ruleForm.postIds.join(',')
+      // state.ruleForm.roleIds = state.ruleForm.roleIds.join(',')
       state.loading = true;
-      if (state.ruleForm.userId != undefined) {
-        updateUser(state.ruleForm).then((res:any) => {
+      if (state.ruleForm.employee.user_id != undefined) {
+        // 更新用户
+        updateUser(state.ruleForm.user).then((res: any) => {
           if (res.code == 200) {
             ElMessage.success("修改成功");
-            closeDialog(); // 关闭弹窗
+            // closeDialog(); // 关闭弹窗
           }
-          state.loading = false;
-        });
+          // state.loading = false;
+        }),
+          // 更新员工
+          updateEmployee(state.ruleForm.employee).then((res: any) => {
+            if (res.code == 200) {
+              ElMessage.success("修改成功");
+              closeDialog(); // 关闭弹窗
+            }
+            state.loading = false;
+          }
+          )
       } else {
-        addUser(state.ruleForm).then((res:any) => {
+        addUser(state.ruleForm.employee).then((res: any) => {
           if (res.code == 200) {
             ElMessage.success("新增成功");
             closeDialog(); // 关闭弹窗
@@ -374,5 +530,8 @@ defineExpose({
   margin: 8px;
   border-radius: 4px;
   display: block;
+}
+.dialog-footer {
+  margin-left: 60px;
 }
 </style>

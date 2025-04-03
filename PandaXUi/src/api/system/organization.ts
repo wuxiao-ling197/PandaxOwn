@@ -25,6 +25,14 @@ export function treeselect() {
 	})
 }
 
+// 查询部门组织下拉树结构
+export function departmentTree() {
+	return request({
+		url: '/system/organization/departmentTree',
+		method: 'get'
+	})
+}
+
 // 根据角色ID查询组织树结构
 export function roleOrganizationTreeselect(roleId: number) {
 	return request({

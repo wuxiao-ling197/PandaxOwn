@@ -28,6 +28,9 @@ export function addPost(data:any) {
 
 // 修改岗位
 export function updatePost(data:any) {
+	delete data.write_uid
+	delete data.write_date
+	console.log("修改岗位信息传参：",data);
 	return request({
 		url: '/system/post',
 		method: 'put',
@@ -40,5 +43,15 @@ export function delPost(postId: string) {
 	return request({
 		url: '/system/post/' + postId,
 		method: 'delete'
+	})
+}
+
+// 发布岗位招聘
+export function publishPost(data:any) {
+	console.log('data=',data);
+	
+	return request({
+		url: '/system/post/publish/'+data,
+		method: 'get'
 	})
 }

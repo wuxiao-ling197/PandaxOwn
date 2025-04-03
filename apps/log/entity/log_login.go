@@ -1,8 +1,9 @@
 package entity
 
 import (
-	"github.com/PandaXGO/PandaKit/model"
 	"time"
+
+	"github.com/PandaXGO/PandaKit/model"
 )
 
 type LogLogin struct {

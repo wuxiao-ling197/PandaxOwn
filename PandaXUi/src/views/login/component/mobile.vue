@@ -33,7 +33,7 @@
 import { reactive } from 'vue';
 const state = reactive({
 	ruleForm: {
-		userName: '',
+		username: '',
 		code: '',
 	},
 });

@@ -2,12 +2,10 @@ package services
 
 import (
 	"fmt"
-	"log"
 
 	// "pandax/apps/develop/entity"
 	"pandax/apps/shared/entity"
 	"pandax/pkg/global"
-	"pandax/pkg/tool"
 	"testing"
 )
 
@@ -75,21 +73,24 @@ func TestService(t *testing.T) {
 	// fmt.Printf("%+v", i)
 
 	// 9、测试 分页列表 cg
-	// r, n, _ := model.FindListPage(1, 15, entity.ResUsers{})
+	// r, n, _ := model.FindListPage(1, 15, entity.ResUsersPage{})
 	// fmt.Printf("FindListPage = %+v\n,total=%v", r, n)
 
 	hrmodel := &hrDepartmentModelImpl{}
 	// 10、部门测试 FindList cg
 	// result, _ := hrmodel.FindList(entity.HrDepartment{})
 	// fmt.Printf("FindList=%+v\n", result)
+	// r, _ := hrmodel.FindListDepartment(entity.HrDepartment{})
+	// fmt.Printf("FindListDepartment=%+v\n", r)
 
 	// 11、部门测试 FindOne cg
 	// result, _ := hrmodel.FindOne(10)
 	// fmt.Printf("FindOne=%+v\n", result)
 
 	// 12、部门测试 Delete
-	// data := []int64{10, 2}
-	// result := hrmodel.Delete(data)
+	// data := []int64{3, 23, 25}
+	// users := []int64{10, 14, 15, 35}
+	// result := hrmodel.Delete(users, data, 22)
 	// fmt.Printf("Delete=%+v\n", result)
 
 	// 13、部门测试 Update cg
@@ -111,29 +112,49 @@ func TestService(t *testing.T) {
 	// r, n, _ := hrmodel.FindListPage(2, 4, entity.HrDepartment{})
 	// fmt.Printf("FindListPage = %+v\n,total=%v", r, n)
 
-	// 15、部门测试 组织书树
-	list, err := hrmodel.FindList(entity.HrDepartment{})
-	if err != nil {
-		fmt.Print("查询失败\n")
-	}
-	// fmt.Printf("通过方法获取的数据：%T\n", *list)
+	// 15、部门测试 组织树
+	// company, _ := hrmodel.FindList(entity.HrDepartment{})
+	// department, _ := hrmodel.FindListDepartment(entity.HrDepartment{})
+	// re, _ := tool.BuildFullOrganizationTree(*company, *department)
+	// fmt.Printf("组织树结构 = %+v\n", re)
 
-	// sd := make([]entity.HrDepartment, 0)
-	li := *list //[]entity.CompanyWithDepatment
-	for j := 0; j < len(li); j++ {
-		lip := li[j]
-		// fmt.Printf("取出结果中的ResCompanyB数据：%T\n", lip.ResCompanyB) //entity.ResCompanyB
-		// fmt.Printf("取出结果中的Departments数据：%T\n", lip.Departments) //[]entity.HrDepartment
-		// fmt.Printf("谁的数据？：%+v\n", li[j]) //公司数据
-		for i := 0; i < len(lip.Departments); i++ {
-			if li[i].ParentId != 0 {
-				continue
-			}
-			// info := DiguiA(list, li[i])
+	// jobModel := &hrJobModelImpl{}
+	// 16、岗位测试  FindList cg
+	// result, _ := jobModel.FindList(entity.HrJob{})
+	// fmt.Printf("FindList=%+v\n", result)
 
-			// sd = append(sd, info)
-		}
-	}
+	// 17、岗位测试  FindOne cg
+	// result, _ := jobModel.FindOne(8)
+	// fmt.Printf("FindOne=%+v\n", result)
+
+	// 18、岗位测试  Delete cg
+	// data := []int64{11, 3}
+	// result := jobModel.Delete(data)
+	// fmt.Printf("Delete=%+v\n", result)
+
+	// 19、岗位测试  Update cg
+	// data := entity.HrJob{
+	// 	Id:           11,
+	// 	DepartmentId: 25,
+	// 	// ContractTypeId: 11,
+	// }
+	// result := jobModel.Update(data)
+	// fmt.Printf("Update=%+v\n", result)
+
+	// 20、岗位测试  Insert cg
+	// data := entity.HrJob{
+	// 	Name: "后端测试",
+	// }
+	// result, _ := jobModel.Insert(data)
+	// fmt.Printf("Update=%+v\n", result)
+
+	// 21、岗位测试  FindListPage cg
+	// r, n, _ := jobModel.FindListPage(1, 5, entity.HrJob{})
+	// fmt.Printf("FindListPage = %+v\n,total=%v", r, n)
+
+	// 22、岗位测试  FindList cg
+	// r, _ := jobModel.FindList(entity.HrJob{})
+	// fmt.Printf("FindList = %+v\n", r)
 }
 
 func TestPassword(t *testing.T) {
@@ -151,10 +172,17 @@ func TestPassword(t *testing.T) {
 	// 	log.Printf("Wanted User: %+v\n", user)
 	// }
 
-	pwd := tool.HashPwd("odoo18")
-	log.Print(pwd)
-	rr := tool.VerifyPwd("odoo18", "$pbkdf2-sha512$600000$xvj/n9M659y7t7YWYizl/A$2YVgLexC1dsO1tTou90r13u7KBbHNsMEcIuP27Syy2FWKMqVVXrDddt/ZaalrBDRFOGAp2Pu2LMGeutvvByAgg")
-	fmt.Printf("%v", rr)
+	// pwd := tool.HashPwd("odoo18")
+	// log.Print(pwd)
+	// rr := tool.VerifyPwd("odoo18", "$pbkdf2-sha512$600000$xvj/n9M659y7t7YWYizl/A$2YVgLexC1dsO1tTou90r13u7KBbHNsMEcIuP27Syy2FWKMqVVXrDddt/ZaalrBDRFOGAp2Pu2LMGeutvvByAgg")
+	// fmt.Printf("%v", rr)
+
+	// status := "false"
+	// fmt.Println(status == "true")
+
+	// s := &config.Server{}
+	// fmt.Println(s.Port)
+
 }
 
 func TestOdooList(t *testing.T) {
@@ -163,7 +191,7 @@ func TestOdooList(t *testing.T) {
 	// er := global.HrDb.Table("res_users").Where("login = ?", "create").First(&user).Error
 	// fmt.Printf("查询结果：%+v\n, %+v", user.ID, er)
 
-	////简单查询 只查询了单个表中对象
+	// 简单查询 只查询了单个表中对象
 	// user := new(entity.ResUsers)
 	// err := global.HrDb.Table("res_users").Where("login = ? ", "odoo18").Find(user).Error
 	// if err != nil {
@@ -180,14 +208,14 @@ func TestOdooList(t *testing.T) {
 	// 	log.Printf("Odoo User: %+v\n", user)
 	// }
 
-	////复杂查询，1对1，1对多，多对多查询，联合查询，条件查询
+	// 复杂查询，1对1，1对多，多对多查询，联合查询，条件查询
 	// 1.cg 输出完整的用户+员工数据
-	// employee := make([]entity.ResUsersView, 0)
-	// err := global.HrDb.Preload("HrEmployee").Find(&employee).Error
-	// if err != nil {
-	// 	t.Fatalf("Error querying users: %+v", err)
-	// }
-	// fmt.Printf("获取员工用户：%+v", len(employee))
+	employee := make([]entity.ResUsersPage, 0)
+	err := global.HrDb.Preload("Employee").Find(&employee).Error
+	if err != nil {
+		t.Fatalf("Error querying users: %+v", err)
+	}
+	fmt.Printf("获取员工用户：%+v", employee)
 
 	//2.cg  只有预加载的时候才会存储employee的数据 而且这里new的模型实体必须在该结构体对应的模型实体中有外键指向 preload的是ResUsersPage中定义的对象
 	// // 输出的是没有关联到员工的用户
@@ -238,20 +266,20 @@ func TestOdooList(t *testing.T) {
 	// }
 	// fmt.Printf("查询指定员工用户：%+v", ue)
 
-	// 5.修改单项数据 cg
+	//5.修改单项数据 cg
 	// result := global.HrDb.Model(&entity.ResUsers{}).Where("id = ?", 37).Update("active", false)
 	// fmt.Print(result)
 
-	// 6.修改多项数据
+	//6.修改多项数据 cg
 	// params := map[string]interface{}{
 	// 	"login":         "多项数据修改",
 	// 	"pandax_secret": "false",
 	// }
 	// result := global.HrDb.Model(&entity.ResUsers{}).Where("id = ?", 37).Updates(params)
-	result := global.HrDb.Model(&entity.ResUsers{}).Where("id = ?", 37).Updates(entity.ResUsersB{
-		PandaxSecret: "",
-	})
-	fmt.Print(result.Error)
+	// result := global.HrDb.Model(&entity.ResUsers{}).Where("id = ?", 37).Updates(entity.ResUsersB{
+	// 	PandaxSecret: "",
+	// })
+	// fmt.Print(result.Error)
 }
 
 func TestDepCom(t *testing.T) {

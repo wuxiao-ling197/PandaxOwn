@@ -6,21 +6,16 @@
         <el-card shadow="hover" header="个人信息">
           <div class="personal-user">
             <div class="personal-user-left">
-              <el-upload
-                class="h100 personal-user-left-upload"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                multiple
-                :limit="1"
-              >
+              <el-upload class="h100 personal-user-left-upload" action="https://jsonplaceholder.typicode.com/posts/"
+                multiple :limit="1">
                 <img :src="getUserInfos.photo" />
               </el-upload>
             </div>
             <div class="personal-user-right">
               <el-row>
-                <el-col :span="24" class="personal-title mb18"
-                  >{{ currentTime }}，{{
-                    getUserInfos.username || "匿名"
-                  }}，生活变的再糟糕，也不妨碍我变得更好！
+                <el-col :span="24" class="personal-title mb18">{{ currentTime }}，{{
+                  getUserInfos.username || "匿名"
+                }}，生活变的再糟糕，也不妨碍我变得更好！
                 </el-col>
                 <el-col :span="24">
                   <el-row>
@@ -70,7 +65,7 @@
               <li v-for="(v, k) in state.newsInfoList" :key="k" class="personal-info-li">
                 <a :href="v.link" target="_block" class="personal-info-li-title">{{
                   v.title
-                }}</a>
+                  }}</a>
               </li>
             </ul>
           </div>
@@ -81,12 +76,7 @@
       <el-col :span="24">
         <el-card shadow="hover" class="mt15" header="精通语言">
           <el-row :gutter="15" class="personal-recommend-row">
-            <el-col
-              :sm="6"
-              v-for="(v, k) in state.recommendList"
-              :key="k"
-              class="personal-recommend-col"
-            >
+            <el-col :sm="6" v-for="(v, k) in state.recommendList" :key="k" class="personal-recommend-col">
               <div class="personal-recommend" :style="{ 'background-color': v.bg }">
                 <SvgIcon :name="v.icon" :style="{ color: v.iconColor }" />
                 <div class="personal-recommend-auto">
@@ -107,51 +97,49 @@
             <el-row :gutter="35">
               <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
                 <el-form-item label="昵称">
-                  <el-input
-                    v-model="personalForm.name"
-                    placeholder="请输入昵称"
-                    clearable
-                  ></el-input>
+                  <el-input v-model="personalForm.username" placeholder="请输入昵称" clearable></el-input>
                 </el-form-item>
               </el-col>
               <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
                 <el-form-item label="邮箱">
-                  <el-input
-                    v-model="personalForm.email"
-                    placeholder="请输入邮箱"
-                    clearable
-                  ></el-input>
+                  <el-input v-model="personalForm.workEmail" placeholder="请输入邮箱" clearable></el-input>
                 </el-form-item>
               </el-col>
               <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
-                <el-form-item label="签名">
-                  <el-input
-                    v-model="personalForm.autograph"
-                    placeholder="请输入签名"
-                    clearable
-                  ></el-input>
+                <el-form-item label="类型">
+                  <el-select v-model="personalForm.employeeType" placeholder="请选择员工类型" clearable class="w100">
+                    <el-option label="全职" value="Full-Time"></el-option>
+                    <el-option label="永久" value="Permanent"></el-option>
+                    <el-option label="临时工" value="Temporary"></el-option>
+                    <el-option label="实习" value="Intern"></el-option>
+                    <el-option label="员工" value="employee"></el-option>
+                  </el-select>
                 </el-form-item>
               </el-col>
               <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
                 <el-form-item label="手机">
-                  <el-input
-                    v-model="personalForm.phone"
-                    placeholder="请输入手机"
-                    clearable
-                  ></el-input>
+                  <el-input v-model="personalForm.workPhone" placeholder="请输入手机" clearable></el-input>
                 </el-form-item>
               </el-col>
-              <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="mb20">
-                <el-form-item label="性别">
-                  <el-select
-                    v-model="personalForm.sex"
-                    placeholder="请选择性别"
-                    clearable
-                    class="w100"
-                  >
-                    <el-option label="男" value="1"></el-option>
-                    <el-option label="女" value="2"></el-option>
-                  </el-select>
+              <el-col class="mb20" :sm="12">
+                <el-form-item label="签名">
+                  <!-- <el-input
+                    type="textarea"
+                    v-model="personalForm.signature"
+                    placeholder="请输入签名"
+                    clearable/> -->
+                  <el-input type="textarea" v-model="htmlContent" placeholder="请输入签名" clearable
+                    @change="handleHtmlChange"></el-input>
+                  <!-- 预览效果 -->
+                  <!-- <div class="preview" v-html="displayHtml"></div> -->
+                  <!-- 解析后的纯文本展示 -->
+                  <!-- <el-input type="textarea" v-model="plainText" placeholder="纯文本内容" @change="handlePlainTextChange"></el-input> -->
+                </el-form-item>
+              </el-col>
+              <el-col class="mb20" :sm="12">
+                <el-form-item>
+                  <!-- 解析后的纯文本展示 -->
+                  <el-input type="textarea" v-model="plainText" placeholder="纯文本内容" @change="handlePlainTextChange"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="4">
@@ -174,9 +162,7 @@
                 <div class="personal-edit-safe-item-left-value">当前密码强度：强</div>
               </div>
               <div class="personal-edit-safe-item-right">
-                <el-button text type="primary" @click="handler('password', true)"
-                  >立即修改</el-button
-                >
+                <el-button text type="primary" @click="handleResetPwd">立即修改</el-button>
               </div>
             </div>
           </div>
@@ -209,7 +195,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-dialog v-model="state.dialogVisiblePassWord" title="密码修改" width="650px">
+    <!-- <el-dialog v-model="state.dialogVisiblePassWord" title="密码修改" width="650px">
       <el-form :model="state.password" label-width="80px">
         <el-form-item label="旧密码" prop="oldPassword">
           <el-input v-model="state.password.oldPassword" placeholder="请输入旧密码" />
@@ -224,16 +210,12 @@
           <el-button type="primary" @click="updatePassword">确认修改</el-button>
         </span>
       </template>
-    </el-dialog>
+    </el-dialog> -->
 
     <el-dialog v-model="state.dialogVisibleRole" title="切换角色" width="650px">
       <el-select v-model="state.roleId" placeholder="请选择">
-        <el-option
-          v-for="item in state.roleOptions"
-          :key="item.roleId"
-          :label="item.roleName"
-          :value="item.roleId"
-        ></el-option>
+        <el-option v-for="item in state.roleOptions" :key="item.roleId" :label="item.roleName"
+          :value="item.roleId"></el-option>
       </el-select>
       <template #footer>
         <span class="dialog-footer">
@@ -245,12 +227,8 @@
 
     <el-dialog v-model="state.dialogVisiblePost" title="切换岗位" width="650px">
       <el-select v-model="state.postId" placeholder="请选择">
-        <el-option
-          v-for="item in state.postOptions"
-          :key="item.postId"
-          :label="item.postName"
-          :value="item.postId"
-        ></el-option>
+        <el-option v-for="item in state.postOptions" :key="item.postId" :label="item.postName"
+          :value="item.postId"></el-option>
       </el-select>
       <template #footer>
         <span class="dialog-footer">
@@ -263,46 +241,78 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs, reactive, computed, onMounted } from "vue";
+import { toRefs, reactive, computed, onMounted, ref } from "vue";
 import { formatAxis } from "@/utils/formatTime";
 
 import { useUserInfosState } from "@/stores/userInfos";
 import { newsInfoList, recommendList } from "./mock";
-import { updateUserPwd, getRoPo, updateUser } from "@/api/system/user";
+import { updateUserPwd, getRoPo, updateUser, resetUserPwd } from "@/api/system/user";
 import { ElMessage } from "element-plus";
 import { Session } from "@/utils/storage";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 const router = useRouter();
 const { t } = useI18n();
-
 const userInfos = useUserInfosState();
+
+// 解析签名
+import DOMPurify from 'dompurify'
+const htmlContent = ref(userInfos.userInfos.signature)
+const plainText = ref('')
+const displayHtml = ref('')
+// 从HTML提取纯文本
+const extractPlainText = (html: any) => {
+  const div = document.createElement('div')
+  div.innerHTML = html
+  return div.textContent || div.innerText || ''
+}
+
+// 初始化
+plainText.value = extractPlainText(htmlContent.value)
+displayHtml.value = DOMPurify.sanitize(htmlContent.value)
+
+// 监听HTML内容变化
+const handleHtmlChange = (value: any) => {
+  plainText.value = extractPlainText(value)
+  displayHtml.value = DOMPurify.sanitize(value)
+  // 这里可以触发父组件更新或API调用
+  console.log('HTML内容已更新:', value)
+}
+
+// 监听纯文本变化
+const handlePlainTextChange = (value: any) => {
+  // 如果修改纯文本，可以重建HTML结构
+  htmlContent.value = `<span data-o-mail-quote="1">-- <br data-o-mail-quote="1">${value}</span>`
+  displayHtml.value = DOMPurify.sanitize(htmlContent.value)
+}
+
+
 const state = reactive({
   newsInfoList,
   recommendList,
-  dialogVisiblePassWord: false,
+  // dialogVisiblePassWord: false,
   dialogVisiblePost: false,
   dialogVisibleRole: false,
-  password: {
-    newPassword: "",
-    oldPassword: "",
-  },
+  // password: {
+  //   newPassword: "",
+  //   oldPassword: "",
+  // },
   roleId: "",
   postId: "",
   roleOptions: [],
   postOptions: [],
   personalForm: {
-    name: "",
-    email: "",
-    autograph: "",
-    phone: "",
-    sex: "",
+    signature: "",
+    workPhone: "",
+    workEmail: "",
+    username: "",
+    employeeType: "",
   },
 });
 const { personalForm } = toRefs(state);
 // 当前时间提示语
 const currentTime = computed(() => {
-  return formatAxis(new Date());bito
+  return formatAxis(new Date());
 });
 // 获取用户信息 vuex
 const getUserInfos = computed(() => {
@@ -310,9 +320,9 @@ const getUserInfos = computed(() => {
 });
 const handler = (ty: string, bl: boolean) => {
   switch (ty) {
-    case "password":
-      state.dialogVisiblePassWord = bl;
-      break;
+    // case "password":
+    //   state.dialogVisiblePassWord = bl;
+    //   break;
     case "role":
       state.dialogVisibleRole = bl;
       break;
@@ -321,13 +331,19 @@ const handler = (ty: string, bl: boolean) => {
       break;
   }
 };
-
-const updatePassword = async () => {
-  updateUserPwd(state.password).then((res: any) => {
-    ElMessage.success("密码修改成功");
-    state.dialogVisiblePassWord = false;
+/** 重置密码按钮操作 */
+const handleResetPwd = async () => {
+  resetUserPwd(userInfos.userInfos.userId).then((res: any) => {
+    ElMessage.success("重置密码邮件已发送，请注意查收！！！");
   });
 };
+
+// const updatePassword = async () => {
+//   updateUserPwd(state.password).then((res: any) => {
+//     ElMessage.success("密码修改成功");
+//     state.dialogVisiblePassWord = false;
+//   });
+// };
 const updateRole = async () => {
   updateUser({
     userId: userInfos.userInfos.userId,
@@ -353,6 +369,10 @@ const updatePost = async () => {
     state.dialogVisiblePost = false;
   });
 };
+const formattedContent = () => {
+  // 可以在这里添加额外的处理逻辑
+  return userInfos.userInfos.signature
+}
 onMounted(() => {
   getRoPo().then((res: any) => {
     state.roleOptions = res.data.roles;
@@ -360,29 +380,39 @@ onMounted(() => {
   });
   state.roleId = userInfos.userInfos.roleId;
   state.postId = userInfos.userInfos.postId;
+  state.personalForm.username = userInfos.userInfos.username
+  state.personalForm.workEmail = userInfos.userInfos.workEmail
+  state.personalForm.workPhone = userInfos.userInfos.workPhone
+  state.personalForm.employeeType = userInfos.userInfos.employeeType
+  state.personalForm.signature = userInfos.userInfos.signature
 });
 </script>
 
 <style scoped lang="scss">
 @import "../../theme/mixins/mixins.scss";
+
 .personal {
   .personal-user {
     height: 130px;
     display: flex;
     align-items: center;
+
     .personal-user-left {
       width: 100px;
       height: 100px;
       border-radius: 3px;
+
       ::v-deep(.el-upload) {
         height: 100%;
       }
+
       .personal-user-left-upload {
         img {
           width: 100%;
           height: 100%;
           border-radius: 3px;
         }
+
         &:hover {
           img {
             animation: logoAnimation 0.3s ease-in-out;
@@ -390,51 +420,63 @@ onMounted(() => {
         }
       }
     }
+
     .personal-user-right {
       flex: 1;
       padding: 0 15px;
+
       .personal-title {
         font-size: 18px;
         @include text-ellipsis(1);
       }
+
       .personal-item {
         display: flex;
         align-items: center;
         font-size: 13px;
+
         .personal-item-label {
           color: var(--el-text-color-secondary);
           @include text-ellipsis(1);
         }
+
         .personal-item-value {
           @include text-ellipsis(1);
         }
       }
     }
   }
+
   .personal-info {
     .personal-info-more {
       float: right;
       color: var(--el-text-color-secondary);
       font-size: 13px;
+
       &:hover {
         color: var(--color-primary);
         cursor: pointer;
       }
     }
+
     .personal-info-box {
       height: 130px;
       overflow: hidden;
+
       .personal-info-ul {
         list-style: none;
+
         .personal-info-li {
           font-size: 13px;
           padding-bottom: 10px;
+
           .personal-info-li-title {
             display: inline-block;
             @include text-ellipsis(1);
             color: var(--el-text-color-secondary);
             text-decoration: none;
           }
+
           & a:hover {
             color: var(--color-primary);
             cursor: pointer;
@@ -443,6 +485,7 @@ onMounted(() => {
       }
     }
   }
+
   .personal-recommend-row {
     .personal-recommend-col {
       .personal-recommend {
@@ -452,6 +495,7 @@ onMounted(() => {
         border-radius: 3px;
         overflow: hidden;
         cursor: pointer;
+
         &:hover {
           i {
             right: 0px !important;
@@ -459,6 +503,7 @@ onMounted(() => {
             transition: all ease 0.3s;
           }
         }
+
         i {
           position: absolute;
           right: -10px;
@@ -467,11 +512,13 @@ onMounted(() => {
           transform: rotate(-30deg);
           transition: all ease 0.3s;
         }
+
         .personal-recommend-auto {
           padding: 15px;
           position: absolute;
           left: 0;
           top: 5%;
+
           .personal-recommend-msg {
             font-size: 12px;
             margin-top: 10px;
@@ -480,11 +527,13 @@ onMounted(() => {
       }
     }
   }
+
   .personal-edit {
     .personal-edit-title {
       position: relative;
       padding-left: 10px;
       color: var(--el-text-color-regular);
+
       &::after {
         content: "";
         width: 2px;
@@ -496,21 +545,26 @@ onMounted(() => {
         background: var(--color-primary);
       }
     }
+
     .personal-edit-safe-box {
       border-bottom: 1px solid var(--el-border-color-light, #ebeef5);
       padding: 15px 0;
+
       .personal-edit-safe-item {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .personal-edit-safe-item-left {
           flex: 1;
           overflow: hidden;
+
           .personal-edit-safe-item-left-label {
             color: var(--el-text-color-regular);
             margin-bottom: 5px;
           }
+
           .personal-edit-safe-item-left-value {
             color: var(--el-text-color-secondary);
             @include text-ellipsis(1);
@@ -518,6 +572,7 @@ onMounted(() => {
           }
         }
       }
+
       &:last-of-type {
         padding-bottom: 0;
         border-bottom: none;
