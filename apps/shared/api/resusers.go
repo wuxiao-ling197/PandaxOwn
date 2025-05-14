@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"log"
 	logEntity "pandax/apps/log/entity"
 	logServices "pandax/apps/log/services"
 	"pandax/apps/shared/entity"
@@ -15,10 +16,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/PandaXGO/PandaKit/captcha"
 	"github.com/PandaXGO/PandaKit/model"
 	"github.com/PandaXGO/PandaKit/token"
-	"github.com/emicklei/go-restful/v3"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/kakuilan/kgo"
 	"github.com/mssola/user_agent"
@@ -41,10 +40,10 @@ type UserApi struct {
 }
 
 // GenerateCaptcha 获取验证码
-func (u *UserApi) GenerateCaptcha(request *restful.Request, response *restful.Response) {
-	id, image, _ := captcha.Generate()
-	response.WriteEntity(vo.CaptchaVo{Base64Captcha: image, CaptchaId: id})
-}
+// func (u *UserApi) GenerateCaptcha(request *restful.Request, response *restful.Response) {
+// 	id, image, _ := captcha.Generate()
+// 	response.WriteEntity(vo.CaptchaVo{Base64Captcha: image, CaptchaId: id})
+// }
 
 // GenerateTOTP 获取并激活TOTP 用户管理页面
 func (u *UserApi) GenerateTOTP(rc *restfulx.ReqCtx) {
@@ -278,8 +277,8 @@ func (u *UserApi) Auth(rc *restfulx.ReqCtx) {
 	// 把角色写死
 	permis, _ := u.RoleMenuApp.GetPermis(1)
 	menus, _ := u.MenuApp.SelectMenuRole("admin")
-	global.Log.Infof("验证用户权限-获取前端权限数据= %v,菜单权限=%v", permis, menus)
-	global.Log.Infof("验证用户权限-上下文数据= %v", rc.LogInfo)
+	global.Log.Infof("Auth验证用户权限-获取前端菜单路由权限=%v", menus)
+	// global.Log.Infof("验证用户权限-上下文数据= %v", rc.LogInfo)
 
 	rc.ResData = vo.AuthVoB{
 		User: *userData,
@@ -329,9 +328,12 @@ func (u *UserApi) GetSysUserList(rc *restfulx.ReqCtx) {
 	user.Employee.DepartmentId = kgo.KConv.Str2Int64(departmentId)
 	// user.OrganizationId = int64(organizationId)
 
+	// log.Println("发送数据库请求————请求api: ", )
+	tt := time.Now()
 	list, total, err := u.UserApp.FindListPage(pageNum, pageSize, user)
 	// fmt.Printf("后端api获取user查询参数= %+v\n", user)
 	biz.ErrIsNil(err, "查询用户分页列表失败")
+	log.Println("发送数据库请求————耗时: ", time.Since(tt))
 	rc.ResData = model.ResultPage{
 		Total:    total,
 		PageNum:  int64(pageNum),
@@ -352,7 +354,8 @@ func (u *UserApi) GetSysUserProfile(rc *restfulx.ReqCtx) {
 	//岗位列表
 	postList, _ := u.HrJobApp.FindList(entity.HrJob{Id: rc.LoginAccount.PostId})
 	//获取组织列表
-	organizationList, _ := u.HrDepartmentApp.FindList(entity.HrDepartment{ID: rc.LoginAccount.OrganizationId})
+	// organizationList, _ := u.HrDepartmentApp.FindList(entity.HrDepartment{ID: rc.LoginAccount.OrganizationId})
+	organizationList, _ := u.HrDepartmentApp.FindOne(rc.LoginAccount.OrganizationId)
 
 	postIds := make([]int64, 0)
 	postIds = append(postIds, rc.LoginAccount.PostId)

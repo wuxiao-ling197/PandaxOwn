@@ -123,8 +123,8 @@ func (u *UserApi) Auth(rc *restfulx.ReqCtx) {
 	//前端权限
 	permis, _ := u.RoleMenuApp.GetPermis(role.RoleId)
 	menus, _ := u.MenuApp.SelectMenuRole(role.RoleKey)
-	global.Log.Infof("验证用户权限-获取前端权限数据= %v,菜单权限=%v", permis, menus)
-	global.Log.Infof("验证用户权限-上下文数据= %v", rc.LogInfo)
+	// global.Log.Infof("验证用户权限-获取前端权限数据= %v,菜单权限=%v", permis, menus)
+	// global.Log.Infof("验证用户权限-上下文数据= %v", rc.LogInfo)
 
 	rc.ResData = vo.AuthVo{
 		User:        *userData,

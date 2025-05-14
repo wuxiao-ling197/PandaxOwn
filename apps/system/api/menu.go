@@ -1,12 +1,13 @@
 package api
 
 import (
-	"github.com/PandaXGO/PandaKit/biz"
-	"github.com/PandaXGO/PandaKit/restfulx"
-	"github.com/PandaXGO/PandaKit/utils"
 	"pandax/apps/system/api/vo"
 	entity "pandax/apps/system/entity"
 	services "pandax/apps/system/services"
+
+	"github.com/PandaXGO/PandaKit/biz"
+	"github.com/PandaXGO/PandaKit/restfulx"
+	"github.com/PandaXGO/PandaKit/utils"
 )
 
 type MenuApi struct {
@@ -68,6 +69,7 @@ func (m *MenuApi) GetMenuList(rc *restfulx.ReqCtx) {
 		biz.ErrIsNil(err, "查询菜单列表失败")
 		rc.ResData = data
 	}
+	// log.Printf("菜单列表：%+v\n", rc.ResData)
 }
 
 func (m *MenuApi) GetMenu(rc *restfulx.ReqCtx) {

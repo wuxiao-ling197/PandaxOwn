@@ -164,6 +164,7 @@ func (m *resUsersModelImpl) FindListPage(page, pageSize int, data entity.ResUser
 	var total int64 = 0
 	offset := pageSize * (page - 1)
 	// db := global.HrDb.Debug()
+	// tt := time.Now()
 	db := global.HrDb.Preload("Employee").
 		Joins("left join hr_employee on res_users.id = hr_employee.user_id")
 	// Joins("left join hr_department on hr_department.id = hr_employee.department_id").
@@ -189,12 +190,10 @@ func (m *resUsersModelImpl) FindListPage(page, pageSize int, data entity.ResUser
 	// if data.RoleId != 0 {
 	// 	db = db.Where("role_id = ?", data.RoleId)
 	// }
-	// if data.OrganizationId != 0 {
-	// 	db = db.Where("organization_id = ?", data.OrganizationId)
-	// }
 	// if data.PostId != 0 {
 	// 	db = db.Where("post_id = ?", data.PostId)
 	// }
+	// tt = time.Now()
 	err := global.HrDb.Table("res_users").Count(&total).Error
 	err = db.
 		Where("res_users.active = ?", data.Active).

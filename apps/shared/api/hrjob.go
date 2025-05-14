@@ -20,7 +20,6 @@ type HrJobApp struct {
 
 // GetPostList 职位列表数据
 func (p *HrJobApp) GetPostList(rc *restfulx.ReqCtx) {
-
 	pageNum := restfulx.QueryInt(rc, "pageNum", 1)
 	pageSize := restfulx.QueryInt(rc, "pageSize", 10)
 	jobName := restfulx.QueryParam(rc, "jobName")

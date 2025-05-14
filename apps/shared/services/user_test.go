@@ -78,10 +78,10 @@ func TestService(t *testing.T) {
 
 	hrmodel := &hrDepartmentModelImpl{}
 	// 10、部门测试 FindList cg
-	// result, _ := hrmodel.FindList(entity.HrDepartment{})
-	// fmt.Printf("FindList=%+v\n", result)
-	// r, _ := hrmodel.FindListDepartment(entity.HrDepartment{})
-	// fmt.Printf("FindListDepartment=%+v\n", r)
+	result, _ := hrmodel.FindListDepartment(entity.HrDepartment{})
+	fmt.Printf("FindList=%+v\n", result)
+	r, _ := hrmodel.FindListDepartment(entity.HrDepartment{})
+	fmt.Printf("FindListDepartment=%+v\n", r)
 
 	// 11、部门测试 FindOne cg
 	// result, _ := hrmodel.FindOne(10)
@@ -187,9 +187,9 @@ func TestPassword(t *testing.T) {
 
 func TestOdooList(t *testing.T) {
 	// 只返回指定字符 cg
-	// user := new(entity.ResUsersId)
-	// er := global.HrDb.Table("res_users").Where("login = ?", "create").First(&user).Error
-	// fmt.Printf("查询结果：%+v\n, %+v", user.ID, er)
+	user := new(entity.ResUsersId)
+	er := global.HrDb.Table("res_users").Where("login = ?", "create").First(&user).Error
+	fmt.Printf("查询结果：%+v\n, %+v", user.ID, er)
 
 	// 简单查询 只查询了单个表中对象
 	// user := new(entity.ResUsers)
@@ -210,12 +210,12 @@ func TestOdooList(t *testing.T) {
 
 	// 复杂查询，1对1，1对多，多对多查询，联合查询，条件查询
 	// 1.cg 输出完整的用户+员工数据
-	employee := make([]entity.ResUsersPage, 0)
-	err := global.HrDb.Preload("Employee").Find(&employee).Error
-	if err != nil {
-		t.Fatalf("Error querying users: %+v", err)
-	}
-	fmt.Printf("获取员工用户：%+v", employee)
+	// employee := make([]entity.ResUsersPage, 0)
+	// err := global.HrDb.Preload("Employee").Find(&employee).Error
+	// if err != nil {
+	// 	t.Fatalf("Error querying users: %+v", err)
+	// }
+	// fmt.Printf("获取员工用户：%+v", employee)
 
 	//2.cg  只有预加载的时候才会存储employee的数据 而且这里new的模型实体必须在该结构体对应的模型实体中有外键指向 preload的是ResUsersPage中定义的对象
 	// // 输出的是没有关联到员工的用户

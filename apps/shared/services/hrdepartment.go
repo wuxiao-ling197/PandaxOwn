@@ -2,7 +2,6 @@ package services
 
 import (
 	"encoding/json"
-	"fmt"
 	"pandax/apps/shared/entity"
 	odoorpc "pandax/pkg/device_rpc"
 	"pandax/pkg/global"
@@ -18,8 +17,8 @@ type (
 		FindEmployee(Id int64) (*entity.HrDepartment, error)
 		// 分页查询 携带员工数据
 		FindListPage(page, pageSize int, data entity.HrDepartment) (*[]entity.HrDepartment, int64, error)
-		// 常见公司信息+部门数据
-		FindList(data entity.HrDepartment) (*[]entity.ResCompanyB, error)
+		// 公司信息+下属部门
+		FindCompanyList(data entity.ResCompanyB) (*[]entity.ResCompanyB, error)
 		// 只加载部门数据
 		FindListDepartment(data entity.HrDepartment) (*[]entity.HrDepartment, error)
 		// 修改部门数据
@@ -29,7 +28,7 @@ type (
 		// 部门归档 没有所属员工
 		DeleteNoEmployee(Ids []int64) odoorpc.ResultData
 		//
-		SelectOrganization(data entity.HrDepartment) ([]entity.ResCompanyB, error)
+		SelectOrganization(data entity.HrDepartment) ([]entity.HrDepartment, error)
 		//
 		SelectOrganizationLable(data entity.HrDepartment) ([]entity.DepartmentLable, error)
 		//
@@ -57,9 +56,10 @@ func (m *hrDepartmentModelImpl) Insert(data entity.HrDepartment) (odoorpc.Result
 
 func (m *hrDepartmentModelImpl) FindOne(Id int64) (*entity.CompanyWithDepatment, error) {
 	resData := new(entity.CompanyWithDepatment)
-	err := global.HrDb.Preload("Departments").
-		Joins("left join hr_department on res_company.id = hr_department.company_id").
-		Where("id = ?", Id).First(&resData).Error
+	err := global.HrDb.Table("hr_department").
+		// Preload("Departments").
+		// Joins("left join hr_department on res_company.id = hr_department.company_id").
+		Where("hr_department.id = ?", Id).First(&resData).Error
 	return resData, err
 }
 
@@ -74,21 +74,21 @@ func (m *hrDepartmentModelImpl) FindListPage(page, pageSize int, data entity.HrD
 	list := make([]entity.HrDepartment, 0)
 	var total int64 = 0
 	offset := pageSize * (page - 1)
-	db := global.HrDb.Preload("Employees")
+	db := global.HrDb.Debug().Preload("Employees")
 	if data.ID != 0 {
-		db = db.Where("hr_department.id = ?", data.ID)
+		db = db.Where("id = ?", data.ID)
 	}
-	if data.Name != "" {
-		db = db.Where("hr_department.name like ?", "%"+data.Name+"%")
-	}
+	// if data.Name != "" {
+	// 	db = db.Where("name like ?", "%"+data.Name+"%")
+	// }
 	if data.CompleteName != "" {
-		db = db.Where("hr_department.complete_name like ?", "%"+data.CompleteName+"%")
+		db = db.Where("complete_name like ?", "%"+data.Name+"%")
 	}
 	if data.ParentId != 0 {
-		db = db.Where("hr_department.parent_id = ?", data.ParentId)
+		db = db.Where("parent_id = ?", data.ParentId)
 	}
 	if data.ManagerId != 0 {
-		db = db.Where("hr_department.manager_id = ?", data.ManagerId)
+		db = db.Where("manager_id = ?", data.ManagerId)
 	}
 	err := global.HrDb.Table("hr_department").Count(&total).Error
 	err = db.Limit(pageSize).Offset(offset).Find(&list).Error
@@ -151,27 +151,33 @@ FindList=&[
         Children:[]
         Departments:[]}]
 */
-func (m *hrDepartmentModelImpl) FindList(data entity.HrDepartment) (*[]entity.ResCompanyB, error) {
+func (m *hrDepartmentModelImpl) FindCompanyList(data entity.ResCompanyB) (*[]entity.ResCompanyB, error) {
 	list := make([]entity.ResCompanyB, 0)
-	db := global.HrDb.Preload("Departments").Preload("Children").Preload("Departments.Children").
-		Joins("left join hr_department on res_company.id = hr_department.company_id")
-	// 此处填写 where参数判断
+	db := global.HrDb.Where("parent_id IS NULL").Preload("Children")
 	if data.ID != 0 {
-		db = db.Where("hr_department.id = ?", data.ID)
+		db = db.Where("id = ?", data.ID)
 	}
-	if data.CompleteName != "" {
-		db = db.Where("hr_department.complete_name like ?", "%"+data.CompleteName+"%")
+	if data.ParentId != 0 {
+		db = db.Where("parent_id = ?", data.ParentId)
 	}
-	// if data.Active != "" {
-	// 	db = db.Where("status = ?", data.Status)
-	// }
-	err := db.Order("res_company.id").Select("DISTINCT res_company.*").Find(&list).Error
+	if data.Name != "" {
+		db = db.Where("name like ?", "%"+data.Name+"%")
+	}
+	if data.Email != "" {
+		db = db.Where("email like ?", "%"+data.Email+"%")
+	}
+	if data.Phone != "" {
+		db = db.Where("phone like ?", "%"+data.Phone+"%")
+	}
+	err := db.Find(&list).Error
 	return &list, err
 }
 
 // 查询所有部门
 func (m *hrDepartmentModelImpl) FindListDepartment(data entity.HrDepartment) (*[]entity.HrDepartment, error) {
 	list := make([]entity.HrDepartment, 0)
+	// 只查询顶级部门 (parent_id IS NULL 或 parent_id = 0)
+	// db.Where("parent_id IS NULL").Preload("Children").Find(&departments)
 	db := global.HrDb.Preload("Children")
 	// 此处填写 where参数判断
 	if data.ID != 0 {
@@ -180,10 +186,8 @@ func (m *hrDepartmentModelImpl) FindListDepartment(data entity.HrDepartment) (*[
 	if data.CompleteName != "" {
 		db = db.Where("complete_name like ?", "%"+data.CompleteName+"%")
 	}
-	// if data.Active != "" {
-	// 	db = db.Where("status = ?", data.Status)
-	// }
-	err := db.Order("hr_department.id").Select("DISTINCT hr_department.*").Find(&list).Error
+	// db = db.Where("active = ?", data.Active)
+	err := db.Order("hr_department.id").Find(&list).Error
 	return &list, err
 }
 
@@ -248,20 +252,20 @@ func (m *hrDepartmentModelImpl) Delete(users []int64, Ids []int64, transferDepId
 }
 
 // 个人组织树 处理代码 公司-子公司-部门-子部门
-func (m *hrDepartmentModelImpl) SelectOrganization(data entity.HrDepartment) ([]entity.ResCompanyB, error) {
-	list, err := m.FindList(data)
+func (m *hrDepartmentModelImpl) SelectOrganization(data entity.HrDepartment) ([]entity.HrDepartment, error) {
+	list, err := m.FindListDepartment(data)
 	if err != nil {
 		return nil, err
 	}
-	sd := make([]entity.ResCompanyB, 0)
+	sd := make([]entity.HrDepartment, 0)
 	li := *list
 	// 开始根据公司遍历
 	for j := 0; j < len(li); j++ {
 		lip := li[j] //进入每一个公司下
-		fmt.Printf("进入每一个公司下:%+v\n", lip)
+		// fmt.Printf("进入每一个公司下:%+v\n", lip)
 		// 开始遍历公司下属部门
-		for i := 0; i < len(lip.Departments); i++ {
-			dep := lip.Departments[i]
+		for i := 0; i < len(lip.Children); i++ {
+			dep := lip.Children[i]
 			if dep.ParentId != 0 {
 				continue
 			}
@@ -281,7 +285,7 @@ func (m *hrDepartmentModelImpl) SelectOrganization(data entity.HrDepartment) ([]
 }
 
 func (m *hrDepartmentModelImpl) SelectOrganizationLable(data entity.HrDepartment) ([]entity.DepartmentLable, error) {
-	organizationlist, err := m.FindList(data)
+	organizationlist, err := m.FindListDepartment(data)
 	// organizationlist := make([]entity.HrDepartment, 0)
 	// err := global.HrDb.Find(&organizationlist).Error
 	if err != nil {
@@ -326,33 +330,33 @@ func (m *hrDepartmentModelImpl) SelectOrganizationIds(data entity.HrDepartment) 
 }
 
 // menu 指定父组织的信息,递归过程中，menu会不断被修改，最终构成完整的组织层级结构。
-func Digui(organizationlist *[]entity.ResCompanyB, menu entity.ResCompanyB) entity.ResCompanyB {
+func Digui(organizationlist *[]entity.HrDepartment, menu entity.HrDepartment) entity.HrDepartment {
 	list := *organizationlist
-	min := make([]entity.ResCompanyB, 0)
+	min := make([]entity.HrDepartment, 0)
 	for j := 0; j < len(list); j++ {
 		// 检查当前遍历的组织是否是当前节点的子组织，如果不是continue跳出循环
 		if menu.ID != list[j].ParentId {
 			continue
 		}
-		mi := entity.ResCompanyB{}
+		mi := entity.HrDepartment{}
 		mi.ID = list[j].ID
 		mi.ParentId = list[j].ParentId
 		mi.ParentPath = list[j].ParentPath
 		mi.Name = list[j].Name
 		mi.Active = list[j].Active
-		mi.Email = list[j].Email
-		mi.Phone = list[j].Phone
+		// mi.Email = list[j].Email
+		// mi.Phone = list[j].Phone
 		// 开始接收公司下属部门 完成公司下部门组织树构建
 		department := make([]entity.HrDepartment, 0)
-		for i := 0; i < len(list[j].Departments); i++ {
+		for i := 0; i < len(list[j].Children); i++ {
 			dep := entity.HrDepartment{}
-			dep.ManagerId = list[j].Departments[i].ManagerId
-			dep.ParentId = list[j].Departments[i].ParentId
-			dep.ParentPath = list[j].Departments[i].ParentPath
-			dep.ID = list[j].Departments[i].ID
-			dep.Name = list[j].Departments[i].Name
-			dep.Active = list[j].Departments[i].Active
-			dep.CreateDate = list[j].Departments[i].CreateDate
+			dep.ManagerId = list[j].Children[i].ManagerId
+			dep.ParentId = list[j].Children[i].ParentId
+			dep.ParentPath = list[j].Children[i].ParentPath
+			dep.ID = list[j].Children[i].ID
+			dep.Name = list[j].Children[i].Name
+			dep.Active = list[j].Children[i].Active
+			dep.CreateDate = list[j].Children[i].CreateDate
 			dep.Children = []entity.HrDepartment{} // 初始化该部门子组织列表
 
 			department = append(department, dep)
@@ -364,7 +368,7 @@ func Digui(organizationlist *[]entity.ResCompanyB, menu entity.ResCompanyB) enti
 		// mi.CreateDate = list[j].CreateDate
 		// mi.WriteDate = list[j].WriteDate
 
-		mi.Children = []entity.ResCompanyB{}
+		mi.Children = []entity.HrDepartment{}
 		// 递归调用，构建当前子组织的子树
 		ms := Digui(organizationlist, mi)
 		// 将构建好的子树添加到当前节点的子组织列表
@@ -374,7 +378,7 @@ func Digui(organizationlist *[]entity.ResCompanyB, menu entity.ResCompanyB) enti
 	return menu
 }
 
-func DiguiOrganizationLable(organizationlist *[]entity.ResCompanyB, organization entity.DepartmentLable) entity.DepartmentLable {
+func DiguiOrganizationLable(organizationlist *[]entity.HrDepartment, organization entity.DepartmentLable) entity.DepartmentLable {
 	list := *organizationlist
 	min := make([]entity.DepartmentLable, 0)
 	for j := 0; j < len(list); j++ {

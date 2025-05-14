@@ -38,7 +38,7 @@ func InitResUserRouter(container *restful.Container) {
 	// 获取登录用户信息
 	// ws.Route(ws.Get("/getLoginUser").To(s.GetSysUser()))
 
-	ws.Route(ws.GET("/getCaptcha").To(s.GenerateCaptcha).Doc("获取验证码"))
+	// ws.Route(ws.GET("/getCaptcha").To(s.GenerateCaptcha).Doc("获取验证码"))
 
 	// 系统外重启获取TOTP cg
 	ws.Route(ws.POST("/enableTotp").To(func(request *restful.Request, response *restful.Response) {

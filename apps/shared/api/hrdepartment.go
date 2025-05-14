@@ -7,10 +7,10 @@ import (
 	"pandax/apps/shared/services"
 	pservices "pandax/apps/system/services"
 	"pandax/pkg/global"
-	"pandax/pkg/tool"
 	"strconv"
 
 	"github.com/PandaXGO/PandaKit/biz"
+	"github.com/PandaXGO/PandaKit/model"
 	"github.com/PandaXGO/PandaKit/restfulx"
 	"github.com/PandaXGO/PandaKit/utils"
 	"github.com/kakuilan/kgo"
@@ -43,24 +43,50 @@ type HrDepartmentApi struct {
 
 // 部门列表 实际需要公司+部门完整组织数据
 func (a *HrDepartmentApi) GetOrganizationList(rc *restfulx.ReqCtx) {
+	pageNum := restfulx.QueryInt(rc, "pageNum", 1)
+	pageSize := restfulx.QueryInt(rc, "pageSize", 10)
 	departmentName := restfulx.QueryParam(rc, "departmentName")
 	status := restfulx.QueryParam(rc, "active")
 	departmentId := restfulx.QueryInt(rc, "departmentId", 0)
-	organization := entity.HrDepartment{Name: departmentName, Active: status == "true", ID: int64(departmentId)}
-	if organization.Name == "" {
-		data, err := a.HrDepartmentApp.SelectOrganization(organization)
-		biz.ErrIsNil(err, "查询组织树失败")
-		rc.ResData = data
-	} else {
-		data, err := a.HrDepartmentApp.FindList(organization)
-		biz.ErrIsNil(err, "查询组织列表失败")
-		rc.ResData = data
+	companyId := restfulx.QueryInt(rc, "companyId", 0)
+	organization := entity.HrDepartment{Name: departmentName, Active: status == "true", ID: int64(departmentId), CompanyId: int64(companyId)}
+	// log.Printf("组织列表解析参数：%+v\n", organization)
+	// if organization.Name == "" {
+	// 	data, err := a.HrDepartmentApp.FindListPage(pageNum, pageSize, organization)
+	// 	biz.ErrIsNil(err, "查询部门列表失败")
+	// 	rc.ResData = model.ResultPage{
+	// 		Total:    total,
+	// 		PageNum:  int64(pageNum),
+	// 		PageSize: int64(pageSize),
+	// 		Data:     data,
+	// 	}
+	// } else {
+	// data, err := a.HrDepartmentApp.FindListPage(organization)
+	// biz.ErrIsNil(err, "查询组织列表失败")
+	// rc.ResData = data
+	data, total, err := a.HrDepartmentApp.FindListPage(pageNum, pageSize, organization)
+	biz.ErrIsNil(err, "查询部门列表失败")
+	rc.ResData = model.ResultPage{
+		Total:    total,
+		PageNum:  int64(pageNum),
+		PageSize: int64(pageSize),
+		Data:     data,
+		// }
 	}
 }
 
-func (a *HrDepartmentApi) GetOrdinaryOrganizationList(rc *restfulx.ReqCtx) {
-	var organization entity.HrDepartment
-	data, err := a.HrDepartmentApp.FindList(organization)
+func (a *HrDepartmentApi) GetCompanyList(rc *restfulx.ReqCtx) {
+	var organization entity.ResCompanyB
+	name := restfulx.QueryParam(rc, "name")
+	email := restfulx.QueryParam(rc, "email")
+	phone := restfulx.QueryParam(rc, "phone")
+	id := restfulx.QueryInt(rc, "id", 0)
+	// manager := restfulx.QueryInt(rc, "manager", 0)
+	organization.ID = int64(id)
+	organization.Name = name
+	organization.Phone = phone
+	organization.Email = email
+	data, err := a.HrDepartmentApp.FindCompanyList(organization)
 	biz.ErrIsNil(err, "查询组织列表失败")
 	rc.ResData = data
 }
@@ -71,12 +97,12 @@ func (a *HrDepartmentApi) GetOrganizationTree(rc *restfulx.ReqCtx) {
 	status := kgo.KConv.Str2Bool(restfulx.QueryParam(rc, "status"))
 	organizationId := restfulx.QueryInt(rc, "organizationId", 0)
 	organization := entity.HrDepartment{Name: organizationName, Active: status, ID: int64(organizationId)}
-	// data, err := a.HrDepartmentApp.SelectOrganization(organization)
-	company, e := a.HrDepartmentApp.FindList(organization)
-	biz.ErrIsNil(e, "数据库查询失败.")
-	department, r := a.HrDepartmentApp.FindListDepartment(organization)
-	biz.ErrIsNil(r, "数据库查询失败..")
-	data, err := tool.BuildFullOrganizationTree(*company, *department)
+	data, err := a.HrDepartmentApp.SelectOrganization(organization)
+	// company, e := a.HrDepartmentApp.FindListDepartment(organization)
+	// biz.ErrIsNil(e, "数据库查询失败.")
+	// department, r := a.HrDepartmentApp.FindListDepartment(organization)
+	// biz.ErrIsNil(r, "数据库查询失败..")
+	// data, err := tool.BuildFullOrganizationTree(*company, *department)
 	biz.ErrIsNil(err, "查询组织树失败")
 	rc.ResData = data
 }
@@ -93,6 +119,7 @@ func (a *HrDepartmentApi) GetDepartmentTree(rc *restfulx.ReqCtx) {
 	rc.ResData = department
 }
 
+// 查询指定部门数据
 func (a *HrDepartmentApi) GetOrganization(rc *restfulx.ReqCtx) {
 	organizationId := restfulx.PathParamInt(rc, "organizationId")
 	data, err := a.HrDepartmentApp.FindOne(int64(organizationId))

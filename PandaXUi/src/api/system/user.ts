@@ -109,14 +109,6 @@ export function updateUserPwd(data:any) {
 	})
 }
 
-// 创建TOTP记录
-// export function createTotp(userId: any) {
-// 	return request({
-// 	  url: '/auth/totp/enable/'+ userId,
-// 	  method: 'get'
-// 	})
-//   }
-
 // 启用用户TOTP cg
 export function enableTotp(params: any) {
 	const id = params.value.id

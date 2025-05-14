@@ -64,8 +64,8 @@ type UserProfileVoB struct {
 	PostIds []int64 `json:"postIds"`
 	RoleIds []int64 `json:"roleIds"`
 	// Roles        []entity.SysRole         `json:"roles"`
-	Posts      []rentity.HrJob       `json:"posts"`
-	Department []rentity.ResCompanyB `json:"department"`
+	Posts      []rentity.HrJob              `json:"posts"`
+	Department rentity.CompanyWithDepatment `json:"department"`
 }
 
 type UserVo struct {

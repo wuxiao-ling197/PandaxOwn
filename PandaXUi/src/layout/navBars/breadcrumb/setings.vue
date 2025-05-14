@@ -521,10 +521,10 @@
             {{ $t("message.layout.fourIsWartermark") }}
           </div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
+            <!-- <el-switch
               v-model="getThemeConfig.isWartermark"
               @change="onWartermarkChange"
-            ></el-switch>
+            ></el-switch> -->
           </div>
         </div>
         <div class="layout-breadcrumb-seting-bar-flex mt14">
@@ -532,11 +532,11 @@
             {{ $t("message.layout.fourWartermarkText") }}
           </div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-input
+            <!-- <el-input
               v-model="getThemeConfig.wartermarkText"
               style="width: 100px"
               @input="onWartermarkTextInput($event)"
-            ></el-input>
+            ></el-input> -->
           </div>
         </div>
 
@@ -662,7 +662,7 @@ import { useThemeConfigStateStore } from "@/stores/themeConfig";
 import { getLightColor } from "@/utils/theme";
 import { verifyAndSpace } from "@/utils/toolsValidate";
 import { Local } from "@/utils/storage";
-import Watermark from "@/utils/wartermark";
+// import Watermark from "@/utils/wartermark";
 import commonFunction from "@/utils/commonFunction";
 import other from "@/utils/other";
 export default defineComponent({
@@ -825,20 +825,20 @@ export default defineComponent({
       else body.setAttribute("data-theme", "");
     };
     // 4、界面显示 --> 开启水印
-    const onWartermarkChange = () => {
-      getThemeConfig.value.isWartermark
-        ? Watermark.set(getThemeConfig.value.wartermarkText)
-        : Watermark.del();
-      setLocalThemeConfig();
-    };
-    // 4、界面显示 --> 水印文案
-    const onWartermarkTextInput = (val: string) => {
-      getThemeConfig.value.wartermarkText = verifyAndSpace(val);
-      if (getThemeConfig.value.wartermarkText === "") return false;
-      if (getThemeConfig.value.isWartermark)
-        Watermark.set(getThemeConfig.value.wartermarkText);
-      setLocalThemeConfig();
-    };
+    // const onWartermarkChange = () => {
+    //   getThemeConfig.value.isWartermark
+    //     ? Watermark.set(getThemeConfig.value.wartermarkText)
+    //     : Watermark.del();
+    //   setLocalThemeConfig();
+    // };
+    // // 4、界面显示 --> 水印文案
+    // const onWartermarkTextInput = (val: string) => {
+    //   getThemeConfig.value.wartermarkText = verifyAndSpace(val);
+    //   if (getThemeConfig.value.wartermarkText === "") return false;
+    //   if (getThemeConfig.value.isWartermark)
+    //     Watermark.set(getThemeConfig.value.wartermarkText);
+    //   setLocalThemeConfig();
+    // };
     // 5、布局切换
     const onSetLayout = (layout: string) => {
       Local.set("oldLayout", layout);
@@ -937,7 +937,7 @@ export default defineComponent({
           // 深色模式
           if (getThemeConfig.value.isIsDark) onAddDarkChange();
           // 开启水印
-          onWartermarkChange();
+          // onWartermarkChange();
           // 语言国际化
           if (Local.get("themeConfig"))
             proxy.$i18n.locale = Local.get("themeConfig").globalI18n;
@@ -965,8 +965,8 @@ export default defineComponent({
       onDrawerClose,
       onAddFilterChange,
       onAddDarkChange,
-      onWartermarkChange,
-      onWartermarkTextInput,
+      // onWartermarkChange,
+      // onWartermarkTextInput,
       onSetLayout,
       setLocalThemeConfig,
       onClassicSplitMenuChange,

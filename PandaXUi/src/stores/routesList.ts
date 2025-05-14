@@ -1,3 +1,4 @@
+import { listMenu } from '@/api/system/menu';
 import { defineStore } from 'pinia';
 import { RoutesListState } from 'storeInterface';
 export const useRoutesListStore = defineStore('routesList', {

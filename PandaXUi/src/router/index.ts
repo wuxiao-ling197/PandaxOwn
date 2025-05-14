@@ -43,8 +43,9 @@ export async function initBackEndControlRoutes() {
 		return false
 	}
 	let menuRoute = Session.get('menus')
+	
 	if (!menuRoute) {
-		await userInfos.setUserInfos(); // 触发初始化用户信息
+		await userInfos.setUserInfos(); // 触发初始化用户信息,获取菜单路由数据
 		menuRoute = Session.get('menus')
 	}
 	let drs = [
@@ -83,6 +84,10 @@ export async function initBackEndControlRoutes() {
 	formatTwoStageRoutes(formatFlatteningRoutes(drs)).forEach((route: any) => {
 		router.addRoute((route as unknown) as RouteRecordRaw);
 	});
+	// add 2025-4-27
+	// routesList.updateMenu()
+
+	// 渲染路由菜单
 	routesList.setRoutesList(drs[0].children);
 	// 添加到 pinia setTagsViewRoutes 中
 	tagsViewRoutes.setTagsViewRoutes(formatTwoStageRoutes(formatFlatteningRoutes(drs))[0].children);

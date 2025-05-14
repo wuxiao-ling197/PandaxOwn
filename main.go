@@ -12,8 +12,10 @@ import (
 	"pandax/pkg/initialize"
 	"pandax/pkg/middleware"
 	"syscall"
+	"time"
 
 	"github.com/PandaXGO/PandaKit/restfulx"
+	"github.com/robfig/cron/v3"
 
 	vault "github.com/hashicorp/vault/api"
 	"github.com/spf13/cobra"
@@ -89,6 +91,30 @@ var rootCmd = &cobra.Command{
 		app := initialize.InitRouter()
 		global.Log.Info("路由初始化完成")
 		app.Start(context.TODO())
+		// 2025-4-14 开启租约监控
+		ctx, cancel := context.WithCancel(context.Background())
+		// go global.MonitorLease(ctx)
+		go func() {
+			for {
+				select {
+				case <-ctx.Done():
+					return
+				default:
+					// 添加定时任务（Cron 表达式）
+					c := cron.New(cron.WithLocation(time.Local)) // 设置本地时区
+					_, err := c.AddFunc("35 11 * * 2", func() {  // 每周五 23:59
+						global.RevokeLease()
+					})
+					if err != nil {
+						panic("定时任务配置错误: " + err.Error())
+					}
+					c.Start()
+					defer c.Stop()
+
+					global.MonitorLease(ctx) // 监控循环可自动重启
+				}
+			}
+		}()
 		//开启IOTHUB
 		go iothub.InitIothub()
 		stop := make(chan os.Signal, 1)
@@ -98,6 +124,8 @@ var rootCmd = &cobra.Command{
 			log.Fatalf("fatal app stop: %s", err)
 			os.Exit(-3)
 		}
+		// 优雅关闭
+		cancel()
 	},
 }
 

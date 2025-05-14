@@ -25,7 +25,7 @@ export function roleMenuTreeselect(roleId: number) {
 }
 
 // 查询菜单列表
-export function listMenu(query: Array<object>) {
+export function listMenu(query: Array<object>) {	
 	return request({
 		url: '/system/menu/list',
 		method: 'get',

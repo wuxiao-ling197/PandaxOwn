@@ -11,7 +11,7 @@
 <script lang="ts">
 import { computed, getCurrentInstance } from 'vue';
 import {useThemeConfigStateStore} from '@/stores/themeConfig'
-import logo from '@/assets/logo.png'
+import logo from '@/assets/iot.png'
 export default {
 	name: 'layoutLogo',
 	setup() {

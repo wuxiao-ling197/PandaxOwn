@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"database/sql"
 	"fmt"
 	"pandax/pkg/global"
 	"testing"
@@ -9,6 +10,8 @@ import (
 	"github.com/casbin/casbin/v2"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	_ "github.com/lib/pq"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 func TestAdapter(t *testing.T) {
@@ -42,4 +45,16 @@ func TestAdapter(t *testing.T) {
 	} else {
 		fmt.Println("Permission denied")
 	}
+}
+
+func TestGromPG(t *testing.T) {
+	pg, err := sql.Open("postgres", "postgresql://v-root-pAdmin-dvCNXuxBQrC6lhVZzRWo-1744076990:eA7X-l1alSUo79Qz6Wqi@192.168.0.30:5432/odoo18?sslmode=disable")
+	if err != nil {
+		fmt.Println("错误：", err)
+	}
+	ormConfig := &gorm.Config{}
+	gormDb, err := gorm.Open(postgres.New(postgres.Config{
+		Conn: pg,
+	}), ormConfig)
+	fmt.Println("连接成功：", gormDb)
 }

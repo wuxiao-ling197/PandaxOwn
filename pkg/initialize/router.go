@@ -12,6 +12,8 @@ import (
 
 	devRouter "pandax/apps/develop/router"
 	deviceRouter "pandax/apps/device/router"
+	dicmRouter "pandax/apps/dicm/router"
+	ipamRouter "pandax/apps/ipam/router"
 	jobRouter "pandax/apps/job/router"
 	logRouter "pandax/apps/log/router"
 	sharedRouter "pandax/apps/shared/router"
@@ -60,6 +62,8 @@ func InitRouter() *transport.HttpServer {
 		sharedRouter.InitResUserRouter(container) //初始化共享用户的路由
 		sharedRouter.InitHrJobRouter(container)
 		sharedRouter.InitHeDepartmentRouter(container)
+		dicmRouter.InitDicmRack(container)
+		dicmRouter.InitDicmSite(container)
 
 		sysRouter.InitNoticeRouter(container)
 		//本地图片上传接口
@@ -85,6 +89,10 @@ func InitRouter() *transport.HttpServer {
 		deviceRouter.InitDeviceRouter(container)
 		deviceRouter.InitDeviceAlarmRouter(container)
 		deviceRouter.InitDeviceCmdLogRouter(container)
+	}
+	//IP管理 add 2025-4-27
+	{
+		ipamRouter.InitIpamRouter(container)
 	}
 	{
 		jobRouter.InitJobRouter(container)

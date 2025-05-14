@@ -28,6 +28,7 @@ type Postgresql struct {
 	MaxOpenConns int    `mapstructure:"max-open-conns" json:"maxOpenConns" yaml:"max-open-conns"`
 }
 
+// 返回连接字符串
 func (m *Postgresql) PgDsn() string {
 	return fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", m.Host, m.Port, m.Username, m.Password, m.Dbname)
 }

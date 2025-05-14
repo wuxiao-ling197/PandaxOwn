@@ -9,6 +9,15 @@ export function listOrganization(query : any) {
 	})
 }
 
+//查询公司信息
+export function listCompany(query : any) {
+	return request({
+		url: '/system/organization/company',
+		method: 'get',
+		params: query
+	})
+}
+
 // 查询组织详细
 export function getOrganization(organizationId: number) {
 	return request({
@@ -37,6 +46,13 @@ export function departmentTree() {
 export function roleOrganizationTreeselect(roleId: number) {
 	return request({
 		url: '/system/organization/roleOrganizationTreeSelect/' + roleId,
+		method: 'get'
+	})
+}
+
+export function searchOrganization(organizationId: number) {
+	return request({
+		url: '/system/organization/'+organizationId,
 		method: 'get'
 	})
 }

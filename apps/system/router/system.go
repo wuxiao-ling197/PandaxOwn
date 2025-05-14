@@ -1,8 +1,9 @@
 package router
 
 import (
-	"github.com/emicklei/go-restful/v3"
 	"pandax/apps/system/api"
+
+	"github.com/emicklei/go-restful/v3"
 )
 
 func InitSystemRouter(container *restful.Container) {

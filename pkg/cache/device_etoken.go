@@ -9,6 +9,16 @@ import (
 
 var RedisDb *rediscli.RedisDB
 
+// 存储数据库凭证
+func SetDatabaseCredential(key string, value any, duration time.Duration) error {
+	return RedisDb.Set(key, value, duration)
+}
+
+// 获取数据库凭证
+// func GetDatabaseCredential(key string, value any) error {
+// 	return RedisDb.Get(key, value)
+// }
+
 // SetDeviceEtoken key 是设备的时候为token， 是子设备的时候为设备编码
 func SetDeviceEtoken(key string, value any, duration time.Duration) error {
 	return RedisDb.Set(key, value, duration)

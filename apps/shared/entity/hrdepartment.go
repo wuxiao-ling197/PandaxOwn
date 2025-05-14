@@ -8,7 +8,11 @@ type ResCompanyB struct {
 	ParentPath  string         `gorm:"column:parent_path" json:"parent_path,omitempty"`
 	Email       string         `gorm:"column:email" json:"email,omitempty"`
 	Phone       string         `gorm:"column:phone" json:"phone,omitempty"`
+	PartnerId   int64          `gorm:"column:partner_id;NOT NULL" json:"partner_id,omitempty"`
 	Active      bool           `gorm:"column:active" json:"active,omitempty"`
+	Sequence    int64          `gorm:"column:sequence" json:"sequence,omitempty"`
+	CreateDate  string         `gorm:"column:create_date" json:"create_date,omitempty"`
+	CurrencyId  int64          `gorm:"column:currency_id;NOT NULL" json:"currency_id,omitempty"`
 	Children    []ResCompanyB  `gorm:"foreignKey:ParentId;references:ID" json:"children,omitempty"`
 	Departments []HrDepartment `gorm:"foreignKey:CompanyId;" json:"departments" response:"departments" request:"departments,omitempty"` //json:"departments,omitempty"  references:ID json:"id,omitempty"
 }
@@ -17,10 +21,10 @@ type ResCompany struct {
 	ResCompanyB
 	// ID                     int64  `gorm:"primaryKey;column:id;default:nextval(res_company_id_seq::regclass);NOT NULL"`
 	// Name                   string `gorm:"column:name;NOT NULL" json:"name,omitempty"`
-	PartnerId  int64  `gorm:"column:partner_id;NOT NULL" json:"partner_id,omitempty"`
-	CurrencyId int64  `gorm:"column:currency_id;NOT NULL" json:"currency_id,omitempty"`
-	Sequence   int64  `gorm:"column:sequence" json:"sequence,omitempty"`
-	CreateDate string `gorm:"column:create_date" json:"create_date,omitempty"`
+	// PartnerId  int64  `gorm:"column:partner_id;NOT NULL" json:"partner_id,omitempty"`
+	// CurrencyId int64  `gorm:"column:currency_id;NOT NULL" json:"currency_id,omitempty"`
+	// Sequence   int64  `gorm:"column:sequence" json:"sequence,omitempty"`
+	// CreateDate string `gorm:"column:create_date" json:"create_date,omitempty"`
 	// ParentPath string `gorm:"column:parent_path" json:"parent_path,omitempty"`
 	// ParentId               int64  `gorm:"column:parent_id" json:"parent_id,omitempty"`
 	PaperformatId          int64 `gorm:"column:paperformat_id" json:"paperformat_id,omitempty"`
@@ -179,7 +183,7 @@ type HrDepartment struct {
 	ID                 int64          `gorm:"primaryKey;column:id;default:nextval(hr_department_id_seq::regclass);NOT NULL" json:"id,omitempty"`
 	CompanyId          int64          `gorm:"column:company_id;comment:'company'" json:"company_id,omitempty"`
 	ParentId           int64          `gorm:"column:parent_id;comment:'parent department'" json:"parent_id,omitempty"`
-	ManagerId          int64          `gorm:"column:manager_id;comment:'manager'" json:"manager_id,omitempty"`
+	ManagerId          int64          `gorm:"column:manager_id;comment:'manager'" json:"manager_id,omitempty" response:"manager_id" request:"manager_id,omitempty"`
 	Color              int64          `gorm:"column:color;comment:'color index'" json:"color,omitempty"`
 	MasterDepartmentId int64          `gorm:"column:master_department_id;comment:'master department'" json:"master_department_id,omitempty"`
 	CreateUid          string         `gorm:"column:create_uid;comment:'created by'" json:"create_uid,omitempty"`

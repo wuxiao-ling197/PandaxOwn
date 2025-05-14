@@ -12,15 +12,9 @@
           <div class="head-container">
             <span style="color:#7a7a7f;font-weight: 800;font-stretch: condensed;margin-bottom: 15px;">公司</span>
             <!-- 渲染公司结构 -->
-            <el-tree :data="state.companyOptions" 
-            :props="state.companyProps" 
-            node-key="id"
-              :expand-on-click-node="false" 
-              :filter-node-method="filterNode" 
-              ref="tree" 
-              default-expand-all
-              :highlight-current="true"
-              @node-click="handleCompanyClick" class="main-tree">
+            <el-tree :data="state.companyOptions" :props="state.companyProps" node-key="id"
+              :expand-on-click-node="false" :filter-node-method="filterNode" ref="tree" default-expand-all
+              :highlight-current="true" @node-click="handleCompanyClick" class="main-tree">
               <!-- :default-expanded-keys="state.defaultExpandedKeys"
               :default-checked-keys="state.defaultCheckedKeys" -->
               <!-- <template #default="{ node, data }">
@@ -47,10 +41,10 @@
                           <span class="node-type">部门</span>
                         </div>
                       </template>
-                    </el-tree>
-                  </div>
-                </div>
-              </template> -->
+</el-tree>
+</div>
+</div>
+</template> -->
             </el-tree>
           </div>
         </el-card>
@@ -59,8 +53,8 @@
           <div class="head-container">
             <!-- 渲染部门 :empty-text="departmentText" -->
             <el-tree :data="state.departmentOptions" :props="state.departmentProps" node-key="id"
-              :expand-on-click-node="false" :filter-node-method="filterNode" ref="tree" 
-              default-expand-all class="main-tree">
+              :expand-on-click-node="false" :filter-node-method="filterNode" ref="tree" default-expand-all
+              class="main-tree">
               <!-- <template #default="{ node, data }">
                 <div class="custom-tree-node">
                   公司/部门图标
@@ -158,10 +152,18 @@
             @selection-change="handleSelectionChange" style="width: 100%">
             <!-- 多选按钮 -->
             <el-table-column type="selection" width="45" align="center" />
-            <el-table-column label="用户编号" align="center" key="id" prop="id" />
+            <el-table-column label="用户编号" prop="id" align="center" />
             <el-table-column label="用户名" prop="login" show-overflow-tooltip></el-table-column>
             <el-table-column label="绑定员工" prop="employee.name" show-overflow-tooltip></el-table-column>
-            <el-table-column label="部门" prop="employee.department_id" show-overflow-tooltip>
+            <el-table-column label="部门" prop="employee.department_id" show-overflow-tooltip width="120">
+              <template #default="{ row }">
+                <el-link v-if="row.employee && row.employee.department_id" type="primary" :underline="false"
+                  @click="handleClick(row.employee.department_id)">
+                  <!-- {{ getDepartmentName(row.employee.department_id) }} -->
+                    所属部门 {{ row.employee.department_id }}
+                </el-link>
+                <span v-else>-无-</span>
+              </template>
             </el-table-column>
             <el-table-column label="员工类型" key="employee.employee_type" prop="employee.employee_type"
               show-overflow-tooltip>
@@ -176,7 +178,8 @@
             </el-table-column>
             <el-table-column label="用户性别" align="center" prop="employee.gender">
               <template #default="scope">
-                <span>{{ scope.row.employee?.gender === "male" ? "男性" : scope.row.employee?.gender === "female" ? "女性" : "未知" }}</span>
+                <span>{{ scope.row.employee?.gender === "male" ? "男性" : scope.row.employee?.gender === "female" ? "女性" :
+                  "未知" }}</span>
               </template></el-table-column>
             <el-table-column label="婚姻状态" align="center" prop="employee.marital" />
             <el-table-column label="工作岗位" align="center" prop="employee.job_title"></el-table-column>
@@ -184,7 +187,7 @@
             <el-table-column prop="employee.work_email" label="邮箱" show-overflow-tooltip></el-table-column>
             <el-table-column label="状态" align="center" key="active">
               <template #default="scope">
-                <span>{{scope.row.active === "false" ? "停用" : "正常"}}</span>
+                <span>{{ scope.row.active === "false" ? "停用" : "正常" }}</span>
               </template>
             </el-table-column>
             <el-table-column prop="create_date" label="创建时间" show-overflow-tooltip>
@@ -244,7 +247,6 @@
     </el-dialog>
     <!-- 添加或修改参数配置对话框 -->
     <EditModule ref="userFormRef" :title="state.title" />
-
   </div>
 </template>
 
@@ -267,13 +269,15 @@ import {
   resetUserPwd,
   enableTotp,
 } from "@/api/system/user";
-import { departmentTree, treeselect } from "@/api/system/organization";
+import { departmentTree, listCompany, searchOrganization, treeselect } from "@/api/system/organization";
 import { ElMessageBox, ElMessage, dayjs } from "element-plus";
 import { getDicts } from "@/api/system/dict/data";
 import MDInput from "@/components/panda/MDInput.vue";
 import EditModule from "./component/editModule.vue";
 import { letterAvatar } from '@/utils/string';
 import { handleFileError } from "@/utils/export";
+import { Row } from "element-plus/es/components/table-v2/src/components";
+import router from "@/router";
 
 const { proxy } = getCurrentInstance() as any;
 const userFormRef = ref();
@@ -291,14 +295,15 @@ const state: any = reactive({
   // 组织树选项
   // defaultCheckedKeys:[1],
   // defaultExpandedKeys:[1],
-  FindList: [], //api返回数据
+  deptList: [], //api返回数据
+
   companyProps: {
     children: "children",
     label: "name",
   }, //公司数据
   departmentProps: {
     label: (data: any) => getDeptName(data),
-    children: 'children' 
+    children: 'children'
   }, // 部门数据
   companyOptions: undefined, //接收公司数据
   departmentOptions: undefined,
@@ -346,13 +351,20 @@ const getList = async () => {
       if (response.code != 200) {
         state.loading = false;
       }
-      console.log('user-list=', response.data);
       state.tableData.data = response.data.data;
       state.tableData.total = response.data.total;
+      console.log('user-list=', state.tableData.data);
       state.loading = false;
     }
   );
 };
+
+const getDepartmentName= async(id:any)=>{
+  searchOrganization(id).then((response: any)=>{
+    console.log("查询指定部门数据：",JSON.parse(response.data.name).en_US);  
+      return JSON.parse(response.data.name).zh_CN || JSON.parse(response.data.name).en_US
+  })
+}
 // 多选框选中数据
 const handleSelectionChange = (selection: any) => {
   console.log("用户列表多选框传入数据=", selection);
@@ -387,32 +399,39 @@ const handleUpdate = (row: any) => {
   state.title = "修改用户";
   userFormRef.value.openDialog(row);
 };
+/** 添加部门id跳转部门表 */
+const handleClick = (id: any) => {
+  console.log("当前路由：", router.currentRoute.value);
+  router.push({path:'/system/organization', query: {department_id:id}})
+  console.log("用户表点击跳转部门表：", id);
+}
 
 /** 查询组织下拉树结构 */
 const getTreeselect = async () => {
-  treeselect().then((response) => {
+  listCompany(state.departmentName).then((response) => {
     // 公司数据
     state.companyOptions = response.data;
     departmentTree().then((response) => {
-      console.log('部门组织树结构=', response.data);
-    state.departmentOptions = response.data;
-  })
+      console.log('调用SelectOrganization部门组织树结构=', response.data);
+      state.departmentOptions = response.data;
+    })
   });
 };
 // 组织节点单击事件
 const handleCompanyClick = (data: any) => {
   state.queryParams.departmentId = data.departmentId;
+  if (data == "" || data == 0) state.currentCompany = 1
   state.currentCompany = data
   // 部门数据
   // console.log('当前点击公司节点的部门数据为=', state.currentCompany);
-    if (state.currentCompany || !state.currentCompany.departments) {
-      state.departmentProps=[]
-    }
-    const dept = state.currentCompany.departments
-    state.departmentOptions = dept
-    // console.log('部门树结构=', state.departmentOptions);
-    getList();
-    state.queryParams.departmentId = 0
+  if (state.currentCompany || !state.currentCompany.departments) {
+    state.departmentProps = []
+  }
+  const dept = state.currentCompany.departments
+  state.departmentOptions = dept
+  // console.log('部门树结构=', state.departmentOptions);
+  getList();
+  state.queryParams.departmentId = 0
 };
 // 处理部门的多语言名称
 const getDeptName = (dept: any) => {
@@ -426,7 +445,7 @@ const getDeptName = (dept: any) => {
 }
 // 组织树筛选节点
 const filterNode = (value: string, data: any) => {
-  console.log('filterNode数据传入=',value,data);
+  console.log('filterNode数据传入=', value, data);
   if (!value) return true;
   return data.name.includes(value);
 };
@@ -553,7 +572,6 @@ onMounted(() => {
   // proxy.getDicts("sys_user_sex").then((response: any) => {
   //   state.sexOptions = response.data;
   // });
-
   proxy.mittBus.on("onEditUserModule", (res: any) => {
     handleQuery();
   });

@@ -1,7 +1,7 @@
 package entity
 
 type HrJob struct {
-	Id                            int64  `gorm:"column:id;default:nextval(hr_job_id_seq::regclass);NOT NULL" json:"id,omitempty"`
+	Id                            int64  `gorm:"primaryKey;column:id;default:nextval(hr_job_id_seq::regclass);NOT NULL" json:"id,omitempty"`
 	Sequence                      int64  `gorm:"column:sequence" json:"sequence,omitempty"`
 	ExpectedEmployees             int64  `gorm:"column:expected_employees" json:"expected_employees,omitempty"`
 	NoOfEmployee                  int64  `gorm:"column:no_of_employee" json:"no_of_employee,omitempty"`
