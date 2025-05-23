@@ -45,6 +45,14 @@ export function updateRacks(data:any) {
 	})
 }
 
+// 机柜归档
+export function deleteRacks(data:any) {
+    return request({
+        url: '/dicm/racks/'+data,
+        method: 'put',
+    })
+}
+
 // 查看机柜详情
 export function listRackInfo(name:any) {
     return request({
@@ -52,3 +60,4 @@ export function listRackInfo(name:any) {
         method: 'get',
     })
 }
+

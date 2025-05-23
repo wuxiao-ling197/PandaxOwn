@@ -653,7 +653,6 @@ const handleUpdate = (row: any) => {
         res.data && res.data.map((item) => {
           apiKes.push("p:" + item.path + "m:" + item.method)
         })
-        console.log("apiKes", apiKes)
         const formWrap = unref(apiRef) as any;
         formWrap.setCheckedKeys(apiKes);
       })

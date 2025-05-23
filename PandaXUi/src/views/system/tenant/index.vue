@@ -166,14 +166,6 @@ const handleQuery = () => {
     state.loading = false;
   });
 };
-/** 重置按钮操作 */
-const resetQuery = () => {
-  state.queryParams.expireTime = undefined;
-  state.queryParams.tenantName = undefined;
-  state.queryParams.id = undefined;
-  handleQuery();
-};
-
 const handleCurrentChange = (val:number) => {
   state.queryParams.pageNum = val
   handleQuery()

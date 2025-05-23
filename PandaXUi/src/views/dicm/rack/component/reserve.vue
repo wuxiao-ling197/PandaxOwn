@@ -4,44 +4,56 @@
       <el-card>
         <!-- 表格顶部搜索筛选按钮 -->
         <div class="row" style="display: flex; justify-content: flex-end; margin-bottom: 3px;">
-          <el-input class="search_input" v-model="search" style="width: 30%;margin-right: 10px;" placeholder="请输入搜索数据"
+          <el-input class="search_input" v-model="searchContent" style="width: 30%;margin-right: 10px;" placeholder="请输入搜索数据"
             clearable>
             <template #prepend>
-              <el-select v-model="colData" placeholder="搜  索" style="width: 80px">
-                <el-option v-for="item in colData" :key="item.title" :label="item.title" :value="item.title" />
+              <el-select v-model="searchFiled" placeholder="搜  索" style="width: 80px">
+                <el-option v-for="item in colData" :v-if="item.isSearch" :key="item.title" :label="item.title" :value="item.value" />
               </el-select>
             </template>
             <template #append>
               <!--  搜索按钮 -->
-              <el-button><el-icon>
+              <el-button @click="SearchTable()"><el-icon>
                   <Search />
                 </el-icon></el-button>
             </template></el-input>
+          <el-button type="warning"><el-icon style="margin-right: 5px;">
+              <MagicStick />
+            </el-icon>收藏</el-button>
+          <el-button type="primary" @click="handleUpdate()"><el-icon style="margin-right: 5px;">
+              <EditPen />
+            </el-icon>编辑</el-button>
+          <el-button type="info" @click="handleUpdate()"><el-icon style="margin-right: 5px;">
+              <ArrowLeftBold />
+            </el-icon>
+            返回</el-button>
           <!-- 表格筛选列 -->
-          <!-- <el-popover placement="right-start" title="筛选列" :width="40" trigger="click">
+          <el-popover placement="right-start" title="筛选列" :width="40" trigger="click">
                             <template #reference>
                                 <el-button><el-icon>
                                         <Grid />
                                     </el-icon></el-button>
                             </template>
-                            <div>
-                                <el-checkbox v-for="col in colData" :key="col.title" v-model="col.istrue"
+                            <div class="scrollable-checkbox-list">
+                                <el-checkbox v-for="col in colData" :key="col.value" v-model="col.istrue"
                                     :label="col.title" style="display: block; margin-bottom: 5px;"></el-checkbox>
                             </div>
-                        </el-popover> -->
+                        </el-popover>
         </div>
         <!--数据表格-->
         <el-table v-loading="state.loading" :data="state.tableData.data" row-key="id" border default-expand-all>
-          <!-- <el-table-column prop="id" label="编码" width="100" fixed /> -->
-          <el-table-column prop="units" label="单位" width="100" />
-          <el-table-column prop="rack_id" label="相关机柜" width="100" />
-          <el-table-column prop="tenant_id" label="租户" width="100" />
-          <el-table-column prop="user_id" label="用户" width="100" />
-          <el-table-column prop="custom_field_data" label="自定义配置数据" width="150" />
-          <el-table-column prop="description" label="描述" width="150" />
-          <el-table-column prop="comments" label="评价" width="150" />
-          <el-table-column prop="created" label="添加" width="180" />
-          <el-table-column prop="last_updated" label="更新" width="180" />
+          <el-table-column prop="id" label="编码" width="40" fixed type="selection"
+                            :selectable="selectable"/>
+          <el-table-column prop="tenant_id" label="租户" width="100" v-if="colData[1].istrue"/>
+          <el-table-column prop="rack_id" label="相关机柜" width="100" v-if="colData[2].istrue"/>
+          <el-table-column prop="units" label="预留单元" width="100" v-if="colData[3].istrue"/>
+          <el-table-column prop="custom_field_data" label="自定义配置数据" width="150" v-if="colData[4].istrue"/>
+          <el-table-column prop="user_id" label="用户" width="100" v-if="colData[5].istrue"/>
+          <el-table-column prop="comments" label="评价" width="150" v-if="colData[6].istrue"/>
+          <el-table-column prop="description" label="描述" width="150" v-if="colData[7].istrue"/>
+          <el-table-column prop="created" label="创建" width="180" v-if="colData[8].istrue"/>
+          <el-table-column prop="last_updated" label="更新" width="180" v-if="colData[9].istrue"/>
+          <el-table-column prop="deleted" label="归档" width="180" v-if="colData[10].istrue"/>
           <!-- <template #default="scope">
             <el-tag :type="scope.row.active === 'online' ? 'success' : 'danger'" disable-transitions>{{ scope.row.active ?
               "在线" : "已停用" }}
@@ -94,17 +106,22 @@
 import { onMounted, reactive, ref } from 'vue';
 import { listRackReserve } from '@/api/dicm/rack';
 
-var search = ref()
+const selectable = ref()//表格多选
+var searchFiled = ref() //顶端搜索字段
+var searchContent = ref() //顶端搜索内容// colData中列出表格中的每一列，默认都展示
 // colData中列出表格中的每一列，默认都展示
 const colData = reactive([
-  { title: "编码", istrue: true, value: "id" },
-  { title: "租户", istrue: true, value: "tenant_id" },
-  { title: "相关机柜", istrue: true, value: "rack_id" },
-  { title: "单位", istrue: true, value: "units" },
-  { title: "自定义配置数据", istrue: true, value: "custom_field_data" },
-  { title: "评价", istrue: true, value: "comments" },
-  { title: "用户", istrue: true, value: "user_id" },
-  { title: "描述", istrue: true, value: "description" },
+  { title: "编码", istrue: true, value: "id", isSearch: true },
+  { title: "租户", istrue: true, value: "tenant_id", isSearch: true },
+  { title: "相关机柜", istrue: true, value: "rack_id", isSearch: true },
+  { title: "预留单元", istrue: true, value: "units", isSearch: true },
+  { title: "自定义配置数据", istrue: true, value: "custom_field_data", isSearch: true },
+  { title: "用户", istrue: true, value: "user_id", isSearch: true },
+  { title: "评价", istrue: true, value: "comments", isSearch: true },
+  { title: "描述", istrue: true, value: "description", isSearch: true },
+  { title: "添加时间", istrue: false, value: "created", isSearch: false },
+  { title: "更新时间", istrue: false, value: "last_updated", isSearch: false },
+  { title: "归档时间", istrue: false, value: "deleted", isSearch: false },
 ])
 const state = reactive({
   // 遮罩层
@@ -138,13 +155,33 @@ const rackreserveList = () => {
     if (response.code != 200) {
       state.loading = false;
     }
-    console.log("机柜列表数据：", response.data);
+    console.log("机柜预留列表数据：", response.data);
     state.tableData.data = response.data.data;
     state.tableData.total = response.data.total;
-    // console.log("机柜列表数据：", state.tableData.data);
     state.loading = false;
   })
 }
+
+// 表格上方单元格搜索
+const SearchTable = () => {
+    // console.log("搜索内容：", searchFiled.value, searchContent.value);
+    const data = {
+        [searchFiled.value]: searchContent.value.trim()
+    };
+    listRackReserve(data).then((res: any) => {
+        if (res.code != 200) {
+            state.loading = false;
+        }
+        state.tableData.data = res.data.data;
+        state.tableData.total = res.data.total;
+        state.loading = false;
+    })
+}
+
+const handleUpdate = () => {
+
+}
+
 
 // 分页改变 size
 const onHandleSizeChange = (val: number) => {

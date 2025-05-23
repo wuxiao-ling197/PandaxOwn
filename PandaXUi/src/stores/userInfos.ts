@@ -43,7 +43,6 @@ export const useUserInfosState = defineStore('userInfos', {
 			const userName = Cookies.get('userName');			
 
 			let response = await authUser({"username": userName})
-			console.log("设置用户信息userInfo State= ",response.data);
 			
 			let loginRes = response.data
 			Session.set("menus", loginRes.menus);

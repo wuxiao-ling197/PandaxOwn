@@ -1,7 +1,6 @@
 package initialize
 
 import (
-	"log"
 	"net/http"
 	"pandax/apps/job/jobs"
 	ruleRouter "pandax/apps/rule/router"
@@ -24,9 +23,7 @@ import (
 func InitRouter() *transport.HttpServer {
 	// server配置
 	serverConfig := global.Conf.Server
-	// log.Printf("初始化路由：%+v\n", serverConfig.GetPort())
 	server := transport.NewHttpServer(serverConfig.GetPort()) //设置http 服务器地址
-	log.Println("后端服务", server.Addr)
 
 	container := server.Container
 	// 防止XSS
@@ -64,6 +61,8 @@ func InitRouter() *transport.HttpServer {
 		sharedRouter.InitHeDepartmentRouter(container)
 		dicmRouter.InitDicmRack(container)
 		dicmRouter.InitDicmSite(container)
+		dicmRouter.InitTenantSite(container)
+		dicmRouter.InitDicmLocation(container)
 
 		sysRouter.InitNoticeRouter(container)
 		//本地图片上传接口

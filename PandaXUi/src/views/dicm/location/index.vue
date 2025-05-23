@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <!-- <div style="margin: 3px;">
+        <div style="margin: 3px;">
             <el-button-group>
                 <el-button type="primary" @click="currentView = 'List'" round><el-icon style="margin-right: 3px;">
                         <Menu />
@@ -14,85 +14,92 @@
                 <el-button type="primary" @click="currentView = '3D'" round><el-icon style="margin-right: 3px;">
                         <OfficeBuilding />
                     </el-icon> 立体视图</el-button>
-                <el-button type="primary" @click="currentView = 'Edit'" round><el-icon style="margin-right: 3px;">
+                <!-- <el-button type="primary" @click="currentView = 'Edit'" round><el-icon style="margin-right: 3px;">
                         <EditPen />
-                    </el-icon>编辑</el-button>
+                    </el-icon>编辑</el-button> -->
             </el-button-group>
-        </div> -->
+        </div>
         <div style="margin: 3px;">
-            <el-card>
-                <!-- 表格顶部搜索筛选按钮 -->
-                <div class="row" style="display: flex; justify-content: flex-end; margin-bottom: 3px;">
-                    <!-- <el-popover placement="left-start" :width="600">
+            <Reserve v-if="currentView === 'Reserve'"></Reserve>
+            <Role v-else-if="currentView === 'Role'"></Role>
+            <List v-else-if="currentView === '3D'"></List>
+            <Info v-else-if="currentView === 'Info'" ref="editFormRef"></Info>
+            <!-- ref="state.rowData" -->
+            <Editt v-else-if="currentView === 'Editt'"></Editt>
+            <div v-else>
+                <el-card>
+                    <!-- 表格顶部搜索筛选按钮 -->
+                    <div class="row" style="display: flex; justify-content: flex-end; margin-bottom: 3px;">
+                        <!-- <el-popover placement="left-start" :width="600">
                             <template #reference> -->
-                    <el-input class="search_input" v-model="search" placeholder="请输入搜索数据" clearable>
-                        <template #prepend>
-                            <el-select v-model="colData" placeholder="搜  索" style="width: 80px">
-                                <el-option v-for="item in colData" :key="item.title" :label="item.title"
-                                    :value="item.title" />
-                            </el-select>
-                        </template>
-                        <template #append>
-                            <!--  搜索按钮 -->
-                            <el-button><el-icon>
-                                    <Search />
-                                </el-icon></el-button>
-                        </template></el-input>
-                    <!-- 新建按钮 @click="currentView = 'Editt'"-->
-                    <el-button type="primary" @click="handleAdd()"><el-icon style="margin-right: 3px;">
-                            <EditPen />
-                        </el-icon>添加实例</el-button>
-                    <!-- </template>
+                        <el-input class="search_input" v-model="search" placeholder="请输入搜索数据" clearable>
+                            <template #prepend>
+                                <el-select v-model="colData" placeholder="搜  索" style="width: 80px">
+                                    <el-option v-for="item in colData" :key="item.title" :label="item.title"
+                                        :value="item.title" />
+                                </el-select>
+                            </template>
+                            <template #append>
+                                <!--  搜索按钮 -->
+                                <el-button><el-icon>
+                                        <Search />
+                                    </el-icon></el-button>
+                            </template></el-input>
+                        <!-- 新建按钮 @click="currentView = 'Editt'"-->
+                        <el-button type="primary" @click="handleAdd()"><el-icon style="margin-right: 3px;">
+                                <EditPen />
+                            </el-icon>添加实例</el-button>
+                        <!-- </template>
                         </el-popover> -->
-                    <!-- 表格筛选列 -->
-                    <el-popover placement="right-start" title="筛选列" :width="40" trigger="click">
-                        <template #reference>
-                            <el-button><el-icon>
-                                    <Grid />
-                                </el-icon></el-button>
-                        </template>
-                        <div class="scrollable-checkbox-list">
-                            <el-checkbox v-for="col in colData" :key="col.value" v-model="col.istrue" :label="col.title"
-                                style="display: block; margin-bottom: 5px;"></el-checkbox>
-                        </div>
-                    </el-popover>
-                </div>
-                <!--数据表格-->
-                <el-table v-loading="state.loading" :key="reload" :data="state.tableData.data" row-key="id" border
-                    default-expand-all>
-                    <el-table-column prop="id" label="编码" width="40" fixed type="selection" :selectable="selectable" />
-                    <el-table-column prop="name" label="名称" width="100" v-if="colData[1].istrue" fixed>
-                        <template #default="{ row }">
-                            <el-link :type="nameButton(row.deleted)" :underline="false" @click="handleClick(row.name)"
-                                style="font-weight: 600;">
-                                {{ row.name }}
-                            </el-link>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="site_id" label="站点" width="100" v-if="colData[2].istrue">
-                        <template #default="{ row }">
-                            <el-link type="primary" :underline="false" @click="handle2Site(row.site_id)"
-                                style="font-weight: 600;">
-                                {{ row.site_id === null ? '-----' : row.site_id }}</el-link>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="slug" label="标识符" width="100" v-if="colData[3].istrue" />
-                    <el-table-column prop="status" label="状态" width="100" v-if="colData[4].istrue" >
-                        <template #default="scope">
+                        <!-- 表格筛选列 -->
+                        <el-popover placement="right-start" title="筛选列" :width="40" trigger="click">
+                            <template #reference>
+                                <el-button><el-icon>
+                                        <Grid />
+                                    </el-icon></el-button>
+                            </template>
+                            <div class="scrollable-checkbox-list">
+                                <el-checkbox v-for="col in colData" :key="col.value" v-model="col.istrue"
+                                    :label="col.title" style="display: block; margin-bottom: 5px;"></el-checkbox>
+                            </div>
+                        </el-popover>
+                    </div>
+                    <!--数据表格-->
+                    <el-table v-loading="state.loading" :key="reload" :data="state.tableData.data" row-key="id" border
+                        default-expand-all>
+                        <el-table-column prop="id" label="编码" width="40" fixed type="selection"  :selectable="selectable"/>
+                        <el-table-column prop="name" label="名称" width="100" v-if="colData[1].istrue" fixed>
+                            <template #default="{ row }">
+                                <el-link :type="nameButton(row.deleted)" :underline="false" @click="handleClick(row.name)"
+                                    style="font-weight: 600;">
+                                    {{ row.name }}
+                                </el-link>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="site_id" label="站点" width="100" v-if="colData[2].istrue">
+                            <template #default="{ row }">
+                                <el-link type="primary" :underline="false" @click="handle2Site(row.site_id)"
+                                    style="font-weight: 600;">
+                                    {{ row.site_id === null ? '-----' : row.site_id }}</el-link>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="slug" label="标识符" width="100" v-if="colData[3].istrue" />
+                        <el-table-column prop="status" label="状态" width="100" v-if="colData[4].istrue" >
+                            <template #default="scope">
                                 <el-tag :type="scope.row.status === 'abandon' ? 'danger' : 'success'"
                                     disable-transitions>{{ scope.row.status }}
                                 </el-tag>
                             </template>
-                    </el-table-column>
-                    <el-table-column prop="tenant_id" label="租户" width="100" v-if="colData[5].istrue">
-                        <template #default="{ row }">
-                            <el-link type="primary" :underline="false" @click="handle2Tenant(row.tenant_id)"
-                                style="font-weight: 600;">{{ row.tenant_id === null ? '-----' : row.tenant_id
-                                }}</el-link>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="tree_id" label="tree_id" width="100" v-if="colData[6].istrue">
-                        <!-- <template #header>
+                        </el-table-column>
+                        <el-table-column prop="tenant_id" label="租户" width="100" v-if="colData[5].istrue">
+                            <template #default="{ row }">
+                                <el-link type="primary" :underline="false" @click="handle2Tenant(row.tenant_id)"
+                                    style="font-weight: 600;">{{ row.tenant_id === null ? '-----' : row.tenant_id
+                                    }}</el-link>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="tree_id" label="tree_id" width="100" v-if="colData[6].istrue">
+                            <!-- <template #header>
                                 <span>U高度
                                     <el-tooltip content="机架单元高度（垂直）,单位：U（1U=1.75英寸）,例如：42U表示标准机柜高度为42个机架单元"
                                         placement="top">
@@ -102,9 +109,9 @@
                                     </el-tooltip>
                                 </span>
                             </template> -->
-                    </el-table-column>
-                    <el-table-column prop="parent_id" label="上级" width="150" v-if="colData[7].istrue">
-                        <!-- <template #header>
+                        </el-table-column>
+                        <el-table-column prop="parent_id" label="上级" width="150" v-if="colData[7].istrue">
+                            <!-- <template #header>
                                 <span>起始U位
                                     <el-tooltip content="标识设备在机柜中安装的起始U位置（从下往上计数）。例如：设备从第5U开始安装，占用u_height=2，则占据5U-6U。"
                                         placement="top">
@@ -114,14 +121,14 @@
                                     </el-tooltip>
                                 </span>
                             </template> -->
-                        <template #default="{ row }">
-                            <el-link type="primary" :underline="false" @click="handleClick(row.name)"
-                                style="font-weight: 600;">
-                                {{ row.parent_id === null ? '-----' : row.parent_id }}</el-link>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="lft" label="lft" width="100" v-if="colData[8].istrue">
-                        <!-- <template #header>
+                            <template #default="{ row }">
+                                <el-link type="primary" :underline="false" @click="handleClick(row.name)"
+                                    style="font-weight: 600;">
+                                    {{ row.parent_id === null ? '-----' : row.parent_id }}</el-link>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="lft" label="lft" width="100" v-if="colData[8].istrue">
+                            <!-- <template #header>
                                 <span>安装深度
                                     <el-tooltip content="设备在机柜中的安装深度（如前后导轨间距），单位需与外部尺寸单位一致。" placement="top">
                                         <el-icon>
@@ -130,9 +137,9 @@
                                     </el-tooltip>
                                 </span>
                             </template> -->
-                    </el-table-column>
-                    <el-table-column prop="rght" label="rght" width="100" v-if="colData[9].istrue">
-                        <!-- <template #header>
+                        </el-table-column>
+                        <el-table-column prop="rght" label="rght" width="100" v-if="colData[9].istrue">
+                            <!-- <template #header>
                                 <span>外部深度
                                     <el-tooltip content="机柜整体的物理宽度（如标准19英寸机柜宽度通常为600mm）。" placement="top">
                                         <el-icon>
@@ -141,10 +148,10 @@
                                     </el-tooltip>
                                 </span>
                             </template> -->
-                    </el-table-column>
-                    <el-table-column prop="level" label="级别" width="100" v-if="colData[10].istrue" />
-                    <el-table-column prop="facility" label="设备" width="100" v-if="colData[11].istrue" />
-                    <!-- <el-table-column label="站点" align="center" prop="site_id" width="100" v-if="colData[17].istrue">
+                        </el-table-column>
+                        <el-table-column prop="level" label="级别" width="100" v-if="colData[10].istrue" />
+                        <el-table-column prop="facility" label="设备" width="100" v-if="colData[11].istrue" />
+                        <!-- <el-table-column label="站点" align="center" prop="site_id" width="100" v-if="colData[17].istrue">
                             <template #default="{ row }">
                                 <el-button size="small" type="info" @click="handleClick(row.site_id)">
                                     站点
@@ -152,21 +159,22 @@
                                 </el-button>
                             </template>
                         </el-table-column> -->
-                    <el-table-column prop="custom_field_data" label="自定义配置数据" width="150" v-if="colData[12].istrue" />
-                    <el-table-column prop="created" label="添加时间" width="180" v-if="colData[13].istrue">
-                        <template #default="{ row }">
-                            {{ dayjs(row.created).format('YYYY-MM-DD HH:mm:ss') }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="last_updated" label="更新时间" width="180" v-if="colData[14].istrue">
-                        <template #default="{ row }">{{ dayjs(row.last_updated).format('YYYY-MM-DD HH:mm:ss')
-                            }}</template>
-                    </el-table-column>
-                    <el-table-column prop="deleted" label="归档时间" width="180" v-if="colData[15].istrue">
-                        <template #default="{ row }">{{ dayjs(row.deleted).format('YYYY-MM-DD HH:mm:ss')
-                            }}</template>
-                    </el-table-column>
-                    <!-- <el-table-column fixed label="操作" align="center" class-name="small-padding fixed-width">
+                        <el-table-column prop="custom_field_data" label="自定义配置数据" width="150"
+                            v-if="colData[12].istrue" />
+                        <el-table-column prop="created" label="添加时间" width="180" v-if="colData[13].istrue">
+                            <template #default="{ row }">
+                                {{ dayjs(row.created).format('YYYY-MM-DD HH:mm:ss') }}
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="last_updated" label="更新时间" width="180" v-if="colData[14].istrue">
+                            <template #default="{ row }">{{ dayjs(row.last_updated).format('YYYY-MM-DD HH:mm:ss')
+                                }}</template>
+                        </el-table-column>
+                        <el-table-column prop="deleted" label="归档时间" width="180" v-if="colData[15].istrue">
+                            <template #default="{ row }">{{ dayjs(row.deleted).format('YYYY-MM-DD HH:mm:ss')
+                                }}</template>
+                        </el-table-column>
+                        <!-- <el-table-column fixed label="操作" align="center" class-name="small-padding fixed-width">
                             <template #default="scope">--!
                                 <el-popover placement="left">
                                     <template #reference>
@@ -199,17 +207,21 @@
                                 </el-popover>
                             </template>
                         </el-table-column> -->
-                </el-table>
-            </el-card>
-            <!-- 分页组件 -->
-            <div v-show="state.tableData.total > 0">
-                <el-divider></el-divider>
-                <el-pagination background :total="state.tableData.total" :page-sizes="[10, 20, 30, 50, 100]"
-                    :current-page="state.queryParams.pageNum" :page-size="state.queryParams.pageSize"
-                    layout="total, sizes, prev, pager, next, jumper" @size-change="onHandleSizeChange"
-                    @current-change="onHandleCurrentChange" />
+                    </el-table>
+                </el-card>
+                <!-- 分页组件 -->
+                <div v-show="state.tableData.total > 0">
+                    <el-divider></el-divider>
+                    <el-pagination background :total="state.tableData.total" :page-sizes="[10, 20, 30, 50, 100]"
+                        :current-page="state.queryParams.pageNum" :page-size="state.queryParams.pageSize"
+                        layout="total, sizes, prev, pager, next, jumper" @size-change="onHandleSizeChange"
+                        @current-change="onHandleCurrentChange" />
+                </div>
             </div>
+
         </div>
+
+
     </div>
 </template>
 <script setup lang="ts">
@@ -221,7 +233,7 @@ import { ElMessage, type ComponentSize, dayjs } from 'element-plus'
 // import Reserve from './component/reserve.vue';
 // import Role from './component/role.vue';
 // import Editt from './component/edit.vue';
-const selectable = ref()
+const selectable=ref()
 
 let currentView = ref<'List' | 'Info' | '3D' | 'Reserve' | 'Role' | 'Editt'>('List');
 import router from '@/router';
@@ -365,8 +377,7 @@ const handleClick = (id: any) => {
 
 // 添加数据
 const handleAdd = () => {
-    // 跳转到新的页面，不仅仅只是在弹出框中实现
-    console.log("添加");
+    state.title="添加站点实例"
 
 }
 

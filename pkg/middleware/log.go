@@ -28,7 +28,6 @@ func LogHandler(rc *restfulx.ReqCtx) error {
 
 	req := rc.Request.Request
 	lfs[req.Method] = req.URL.Path
-	global.Log.Infof("000000000000 rc= %v\n, lfs=%v", rc.LogInfo, lfs)
 
 	if err := rc.Err; err != nil {
 		global.Log.WithFields(lfs).Error(getErrMsg(rc, err))

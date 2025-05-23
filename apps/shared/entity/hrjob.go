@@ -20,7 +20,7 @@ type HrJob struct {
 	AliasId                       int64  `gorm:"column:alias_id;NOT NULL" json:"alias_id,omitempty"`
 	AddressId                     int64  `gorm:"column:address_id" json:"address_id,omitempty"`
 	ManagerId                     int64  `gorm:"column:manager_id" json:"manager_id,omitempty"`
-	UserID                        int64  `gorm:"column:user_id,comment:'recuiter'" json:"user_id,omitempty"`
+	UserID                        int64  `gorm:"column:user_id;comment:'recuiter'" json:"user_id,omitempty"`
 	Color                         int64  `gorm:"column:color" json:"color,omitempty"`
 	IndustryId                    int64  `gorm:"column:industry_id" json:"industry_id,omitempty"`
 	NoOfHiredEmployee             int64  `gorm:"column:no_of_hired_employee" json:"no_of_hired_employee,omitempty"`

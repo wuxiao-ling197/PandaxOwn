@@ -277,7 +277,7 @@ func (u *UserApi) Auth(rc *restfulx.ReqCtx) {
 	// 把角色写死
 	permis, _ := u.RoleMenuApp.GetPermis(1)
 	menus, _ := u.MenuApp.SelectMenuRole("admin")
-	global.Log.Infof("Auth验证用户权限-获取前端菜单路由权限=%v", menus)
+	// global.Log.Infof("Auth验证用户权限-获取前端菜单路由权限=%v", menus)
 	// global.Log.Infof("验证用户权限-上下文数据= %v", rc.LogInfo)
 
 	rc.ResData = vo.AuthVoB{
